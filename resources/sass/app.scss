@@ -1,8 +1,17 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url("https://fonts.bunny.net/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+$banner-image: "{{ asset('/images/banner-abstract-shape.svg') }}";
+$background-image: "{{ asset('/images/home-default-abstract-faqs.png') }}";
+$map-image: "{{ asset('/images/map_bg_light_xl.png') }}";
+$pricing-bg: "{{ asset('/images/Pricing_Bg.svg') }}";
+$circle-thumbs: "{{ asset('/images/map_bg_white.png') }}";
+$stats-img-abstract: "{{ asset('/images/round_abstract_bg.svg') }}";
+$portfolio-contact-form: "{{ asset('/images/portfolio/portfolio_contact_form.jpg') }}";
+$img-abstract: "{{ asset('/images/faqs_shape.svg') }}";
+$loader-item: "{{ asset('/images/favicon.svg') }}";
