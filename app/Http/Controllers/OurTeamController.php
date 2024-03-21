@@ -21,12 +21,10 @@ class OurTeamController extends Controller
     public function create()
     {
         return view('ourteams.create');
-
     }
     public function details()
     {
         return view('ourteams.details');
-
     }
 
     /**
@@ -51,7 +49,6 @@ class OurTeamController extends Controller
     public function edit(OurTeam $ourTeam)
     {
         return view('ourteams.edit');
-
     }
 
     /**
