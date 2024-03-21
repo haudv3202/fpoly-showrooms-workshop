@@ -11,7 +11,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client1.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client1.png')}}"
                             alt
                         />
                     </div>
@@ -19,7 +19,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client2.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client2.png')}}"
                             alt
                         />
                     </div>
@@ -27,7 +27,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client3.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client3.png')}}"
                             alt
                         />
                     </div>
@@ -35,7 +35,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client4.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client4.png')}}"
                             alt
                         />
                     </div>
@@ -43,7 +43,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client5.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client5.png')}}"
                             alt
                         />
                     </div>
@@ -51,7 +51,7 @@
                 <div class="item">
                     <div class="img-partner">
                         <img
-                            src="{{asset('/images/partner/img-client6.png')}}"
+                            src="{{asset('theme/client/assets/images/partner/img-client6.png')}}"
                             alt
                         />
                     </div>
@@ -62,7 +62,7 @@
     <section class="section-spacing home-ideas-wrap">
         <div class="container pos-rel">
             <div class="square-top">
-                <img src="{{asset('/images/square_large.svg')}}" alt />
+                <img src="{{asset('theme/client/assets/images/square_large.svg')}}" alt />
             </div>
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-md-6">
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div class="video-bg-off wow fadeInUp">
-                        <img src="{{asset('/images/video_bg_off.png')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/video_bg_off.png')}}" alt />
                         <div class="video-play-btn">
                             <a
                                 class="popup-video"
@@ -259,7 +259,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-xl-7 wow slideInLeft">
-                    <img src="{{asset('/images/tabbing_img.png')}}" alt />
+                    <img src="{{asset('theme/client/assets/images/tabbing_img.png')}}" alt />
                 </div>
                 <div class="col-lg-6 col-xl-5 col-sm-12">
                     <div class="section-title text-start mb-4">
@@ -378,7 +378,7 @@
                 </div>
                 <div class="stats-img-abstract">&nbsp;</div>
                 <div class="stats-img wow slideInRight">
-                    <img src="{{asset('/images/stats_img.png')}}" class alt />
+                    <img src="{{asset('theme/client/assets/images/stats_img.png')}}" class alt />
                 </div>
             </div>
         </div>
@@ -413,11 +413,11 @@
                         <div class="item-img">
                             <div class="portfolio-img-gallery">
                                 <a
-                                    href="{{asset('/images/portfolio/portfolio_img_1.jpg')}}"
+                                    href="{{asset('theme/client/assets/images/portfolio/portfolio_img_1.jpg')}}"
                                     class="portfolio-img-gallery"
                                     title="Title Come here"
                                     ><img
-                                        src="{{asset('/images/portfolio/portfolio_img_1.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/portfolio/portfolio_img_1.jpg')}}"
                                         class="rounded"
                                         alt
                                 /></a>
@@ -453,11 +453,11 @@
                         <div class="item-img">
                             <div class="portfolio-img-gallery">
                                 <a
-                                    href="{{asset('/images/portfolio/portfolio_img_2.jpg')}}"
+                                    href="{{asset('theme/client/assets/images/portfolio/portfolio_img_2.jpg')}}"
                                     class="portfolio-img-gallery"
                                     title="Title Come here"
                                     ><img
-                                        src="{{asset('/images/portfolio/portfolio_img_2.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/portfolio/portfolio_img_2.jpg')}}"
                                         class="rounded"
                                         alt
                                 /></a>
@@ -493,11 +493,11 @@
                         <div class="item-img">
                             <div class="portfolio-img-gallery">
                                 <a
-                                    href="{{asset('/images/portfolio/portfolio_img_3.jpg')}}"
+                                    href="{{asset('theme/client/assets/images/portfolio/portfolio_img_3.jpg')}}"
                                     class="portfolio-img-gallery"
                                     title="Title Come here"
                                     ><img
-                                        src="{{asset('/images/portfolio/portfolio_img_3.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/portfolio/portfolio_img_3.jpg')}}"
                                         class="rounded"
                                         alt
                                 /></a>
@@ -538,7 +538,7 @@
                     <div class="home-default-faqs-counter-wrap">
                         <div class="text-center">
                             <img
-                                src="{{asset('/images/home-default-faqs.png')}}"
+                                src="{{asset('theme/client/assets/images/home-default-faqs.png')}}"
                                 alt
                             />
                         </div>
@@ -969,7 +969,7 @@
                             <div class="testimonial-box">
                                 <div class="thumb-img">
                                     <img
-                                        src="{{asset('/images/thumb_1.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/thumb_1.jpg')}}"
                                         alt
                                     />
                                 </div>
@@ -1007,7 +1007,7 @@
                             <div class="testimonial-box">
                                 <div class="thumb-img">
                                     <img
-                                        src="{{asset('/images/thumb_2.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/thumb_2.jpg')}}"
                                         alt
                                     />
                                 </div>
@@ -1045,7 +1045,7 @@
                             <div class="testimonial-box">
                                 <div class="thumb-img">
                                     <img
-                                        src="{{asset('/images/thumb_3.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/thumb_3.jpg')}}"
                                         alt
                                     />
                                 </div>
@@ -1083,7 +1083,7 @@
                             <div class="testimonial-box">
                                 <div class="thumb-img">
                                     <img
-                                        src="{{asset('/images/thumb_2.jpg')}}"
+                                        src="{{asset('theme/client/assets/images/thumb_2.jpg')}}"
                                         alt
                                     />
                                 </div>
@@ -1113,11 +1113,11 @@
                 <div class="col-xl-5 col-lg-6">
                     <div class="home-services-imgs">
                         <img
-                            src="{{asset('/images/home-default-img-1.png')}}"
+                            src="{{asset('theme/client/assets/images/home-default-img-1.png')}}"
                             alt
                         />
                         <img
-                            src="{{asset('/images/home-default-img-2.png')}}"
+                            src="{{asset('theme/client/assets/images/home-default-img-2.png')}}"
                             class="off-pattern"
                             alt
                         />

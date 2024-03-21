@@ -417,7 +417,7 @@
             </div>
             <div class="stats-img-abstract">&nbsp;</div>
             <div class="stats-img wow slideInRight">
-                <img src="{{asset('/images/stats_img.png')}}" class alt />
+                <img src="{{asset('theme/client/assets/images/stats_img.png')}}" class alt />
             </div>
         </div>
     </div>
@@ -442,7 +442,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_1.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_1.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -471,7 +471,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_2.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_2.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -500,7 +500,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_3.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_3.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -529,7 +529,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_4.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_4.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -558,7 +558,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_5.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_5.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -587,7 +587,7 @@
             <div class="item">
                 <div class="testimonial-shadow">
                     <div class="thumb-img">
-                        <img src="{{asset('/images/thumb_6.jpg')}}" alt />
+                        <img src="{{asset('theme/client/assets/images/thumb_6.jpg')}}" alt />
                     </div>
                     <h6 class="name">Rider Smith</h6>
                     <div class="post">
@@ -633,7 +633,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client1.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client1.png')}}"
                         alt
                     />
                 </div>
@@ -641,7 +641,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client2.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client2.png')}}"
                         alt
                     />
                 </div>
@@ -649,7 +649,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client3.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client3.png')}}"
                         alt
                     />
                 </div>
@@ -657,7 +657,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client4.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client4.png')}}"
                         alt
                     />
                 </div>
@@ -665,7 +665,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client5.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client5.png')}}"
                         alt
                     />
                 </div>
@@ -673,7 +673,7 @@
             <div class="col-xl-2 col-lg-4 col-sm-6 col-6 mb-0">
                 <div class="img-partner">
                     <img
-                        src="{{asset('/images/partner/img-client6.png')}}"
+                        src="{{asset('theme/client/assets/images/partner/img-client6.png')}}"
                         alt
                     />
                 </div>

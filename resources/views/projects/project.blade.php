@@ -52,11 +52,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_1.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_1.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_1.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_1.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -94,11 +94,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_2.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_2.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_2.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_2.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -137,11 +137,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_3.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_3.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_3.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_3.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -179,11 +179,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_4.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_4.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_4.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_4.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -222,11 +222,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_5.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_5.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_5.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_5.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -264,11 +264,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_6.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_6.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_6.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_6.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -306,11 +306,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_7.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_7.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_7.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_7.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -349,11 +349,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_8.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_8.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_8.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_8.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>
@@ -391,11 +391,11 @@
                     <div class="item-img">
                         <div class="portfolio-img-gallery">
                             <a
-                                href="{{asset('/images/portfolio/portfolio_img_9.jpg')}}"
+                                href="{{asset('theme/client/assets/images/portfolio/portfolio_img_9.jpg')}}"
                                 class="portfolio-img-gallery"
                                 title="Title Come here"
                                 ><img
-                                    src="{{asset('/images/portfolio/portfolio_img_9.jpg')}}"
+                                    src="{{asset('theme/client/assets/images/portfolio/portfolio_img_9.jpg')}}"
                                     class="rounded"
                                     alt
                             /></a>

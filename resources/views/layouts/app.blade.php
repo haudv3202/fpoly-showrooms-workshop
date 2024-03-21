@@ -22,7 +22,7 @@
     <link
         rel="shortcut icon"
         type="image/x-icon"
-        href="{{asset('/images/favicon.ico')}}"
+        href="{{asset('theme/client/assets/images/favicon.ico')}}"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -47,7 +47,7 @@
 <body>
     <div id="pageloader">
         <div class="loader-item">
-         <img src="{{asset('/images/tail-spin.svg')}}" width="80" alt />
+         <img src="{{asset('theme/client/assets/images/tail-spin.svg')}}" width="80" alt />
         </div>
     </div>
     <div class="home-default">
@@ -100,7 +100,7 @@
             <nav class="navbar navbar-expand-lg header-anim">
                 <div class="container">
                     <a class="navbar-brand" href="/"
-                        ><img src="{{asset('/images/logo_purple.svg')}}" alt
+                        ><img src="{{asset('theme/client/assets/images/logo_purple.svg')}}" alt
                     /></a>
                     <form
                         class="d-flex order-lg-last ms-3 align-items-center"
@@ -141,7 +141,7 @@
                         <div class="offcanvas-header">
                             <a class="navbar-brand" href="index.html"
                                 ><img
-                                    src="{{asset('/images/logo_dark.svg')}}"
+                                    src="{{asset('theme/client/assets/images/logo_dark.svg')}}"
                                     alt /></a
                             ><button
                                 class="navbar-toggler x collapsed"
@@ -185,10 +185,10 @@
             <div class="container pos-rel">
                 <div class="banner-abstract-shape"></div>
                 <div class="matrix-vertical">
-                    <img src="{{asset('/images/matrix_vertical.svg')}}" alt />
+                    <img src="{{asset('theme/client/assets/images/matrix_vertical.svg')}}" alt />
                 </div>
                 <div class="rectangle-small">
-                    <img src="{{asset('/images/rectangle_small.svg')}}"
+                    <img src="{{asset('theme/client/assets/images/rectangle_small.svg')}}"
                     alt />
                 </div>
                 <div class="row align-items-center">
@@ -235,7 +235,7 @@
                     <div class="col-lg-5">
                         <div class="banner-img">
                             <img
-                                src="{{asset('/images/home-default-banner-img.png')}}"
+                                src="{{asset('theme/client/assets/images/home-default-banner-img.png')}}"
                                 alt
                             />
                         </div>
@@ -325,7 +325,7 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="logo-footer">
                         <a href="index.html"
-                            ><img src="{{asset('/images/logo_light.svg')}}" alt
+                            ><img src="{{asset('theme/client/assets/images/logo_light.svg')}}" alt
                         /></a>
                     </div>
                 </div>

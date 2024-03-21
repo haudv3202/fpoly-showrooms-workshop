@@ -25,7 +25,7 @@
             <div class="col-lg-6 mb-0">
                 <div class="img-gradient">
                     <img
-                        src="{{asset('/images/services_single_img.jpg')}}"
+                        src="{{asset('theme/client/assets/images/services_single_img.jpg')}}"
                         alt
                     />
                 </div>
@@ -78,7 +78,7 @@
         <div class="row">
             <div class="col-xl-7 col-lg-7">
                 <div class="video-bg-off">
-                    <img src="{{asset('/images/video_bg_off.png')}}" alt />
+                    <img src="{{asset('theme/client/assets/images/video_bg_off.png')}}" alt />
                     <div class="video-play-btn">
                         <a
                             class="popup-video"
@@ -473,7 +473,7 @@
                 class="col-lg-5 pos-rel offset-lg-2 offset-md-4 col-md-8 mb-0"
             >
                 <img
-                    src="{{asset('/images/img-faqs.png')}}"
+                    src="{{asset('theme/client/assets/images/img-faqs.png')}}"
                     class="faqs-imgs"
                     alt
                 />
@@ -751,32 +751,32 @@
             <div class="col-xl-5 col-lg-6 text-center">
                 <div class="circle-thumbs">
                     <img
-                        src="{{asset('/images/thumb_1.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_1.jpg')}}"
                         alt
                         class="thumb one"
                     />
                     <img
-                        src="{{asset('/images/thumb_2.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_2.jpg')}}"
                         alt
                         class="thumb two"
                     />
                     <img
-                        src="{{asset('/images/thumb_3.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_3.jpg')}}"
                         alt
                         class="thumb three"
                     />
                     <img
-                        src="{{asset('/images/thumb_4.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_4.jpg')}}"
                         alt
                         class="thumb four"
                     />
                     <img
-                        src="{{asset('/images/thumb_5.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_5.jpg')}}"
                         alt
                         class="thumb five"
                     />
                     <img
-                        src="{{asset('/images/thumb_6.jpg')}}"
+                        src="{{asset('theme/client/assets/images/thumb_6.jpg')}}"
                         alt
                         class="thumb six"
                     />
@@ -866,7 +866,7 @@
                                 <div class="testimonial-box">
                                     <div class="thumb-img">
                                         <img
-                                            src="{{asset('/images/thumb_1.jpg')}}"
+                                            src="{{asset('theme/client/assets/images/thumb_1.jpg')}}"
                                             alt
                                         />
                                     </div>
@@ -919,7 +919,7 @@
                                 <div class="testimonial-box">
                                     <div class="thumb-img">
                                         <img
-                                            src="{{asset('/images/thumb_2.jpg')}}"
+                                            src="{{asset('theme/client/assets/images/thumb_2.jpg')}}"
                                             alt
                                         />
                                     </div>
@@ -971,7 +971,7 @@
                                 <div class="testimonial-box">
                                     <div class="thumb-img">
                                         <img
-                                            src="{{asset('/images/thumb_3.jpg')}}"
+                                            src="{{asset('theme/client/assets/images/thumb_3.jpg')}}"
                                             alt
                                         />
                                     </div>
@@ -1023,7 +1023,7 @@
                                 <div class="testimonial-box">
                                     <div class="thumb-img">
                                         <img
-                                            src="{{asset('/images/thumb_4.jpg')}}"
+                                            src="{{asset('theme/client/assets/images/thumb_4.jpg')}}"
                                             alt
                                         />
                                     </div>

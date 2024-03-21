@@ -23,7 +23,10 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('login');
+        return view('login.login');
+    }
+    public function register()
+    {
+        return view('login.register');
     }
 }
-a
