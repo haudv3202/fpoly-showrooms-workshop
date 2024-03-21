@@ -12,9 +12,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('projects.list');
+        return view('projects.project');
     }
-
+    public function projectDetail($id)
+    {
+        return view('projects.projectDetail', compact('id'));
+    }
     /**
      * Show the form for creating a new resource.
      */

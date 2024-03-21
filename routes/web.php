@@ -14,11 +14,18 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/', function () {
-   return view('welcome');
-});
 
-Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'index']);
+Route::get('/register', [App\Http\Controllers\LoginController::class, 'register'])->name('register');
+Route::post('/register', [App\Http\Controllers\LoginController::class, 'register']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/danhmuc', [App\Http\Controllers\ProjectController::class, 'index'])->name('product');
+Route::get('/projectDetail/{id}', [App\Http\Controllers\ProjectController::class, 'projectDetail'])->name('projectDetail');
+
+Route::get('/ourteam', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
