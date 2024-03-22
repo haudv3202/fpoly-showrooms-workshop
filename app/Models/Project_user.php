@@ -5,23 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Project_user extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'description',
-        'deploy_link',
-        'level_id',
-        'added_by',
-        'is_highlight',
-        'views',
-        'is_active',
-    ];
+    public $timestamps = false;
 
-    public function level()
+    protected $fillable = [
+        'project_id',
+        'author_id',
+    ];
+    public function project()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(Project::class);
     }
     public function user()
     {

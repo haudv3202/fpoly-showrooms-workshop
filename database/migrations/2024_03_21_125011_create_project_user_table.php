@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('our_teams', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('project_users', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Project::class)->constrained()->index('fk_projectUser_project');
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->index('fk_projectUser_user');
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('our_teams');
+        Schema::dropIfExists('project_user');
     }
 };
