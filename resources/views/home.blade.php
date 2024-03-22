@@ -383,9 +383,7 @@
             </div>
         </div>
     </section>
-    <section
-        class="section-spacing bg-light-blue section-padding home-case-study"
-    >
+    <section class="section-spacing bg-light-blue section-padding home-case-study">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-xl-5 mb-0">
