@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Project;
 
 return new class extends Migration
 {
@@ -11,9 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('project_domains', function (Blueprint $table) {
+            $table->foreignIdFor(Project::class)->constrained()->index('fk_projectDomain_project');
+            $table->foreignIdFor(\App\Models\Domain::class)->constrained()->index('fk_projectDomain_domain');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_domain');
     }
 };

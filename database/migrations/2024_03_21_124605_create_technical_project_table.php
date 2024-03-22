@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('technical_projects', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Project::class)->constrained()->index('fk_technicalProject_project');
+            $table->foreignIdFor(\App\Models\Technical::class)->constrained()->index('fk_technicalProject_technical');
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('technical_project');
     }
 };
