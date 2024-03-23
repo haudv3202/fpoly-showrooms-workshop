@@ -841,7 +841,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('directorys-list') }}">
+                            <a class="nav-link menu-link" href="{{ route('project-list') }}">
                                 <i class="ri-pages-line"></i> <span data-key="t-danh-mục">Danh mục</span>
                             </a>
                         </li>
