@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Level;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DirectoryController extends Controller
 {
@@ -12,14 +14,15 @@ class DirectoryController extends Controller
      */
     public function index()
     {
-        return view("directorys.list");
+        $directorys = Level::query()->get();
+        return view("directorys.list", compact('directorys'));
     }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Level $level)
     {
-        return view("directorys.create");
+        return view("directorys.create", compact('level'));
     }
 
     /**
@@ -27,13 +30,15 @@ class DirectoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        Level::query()->create($requestData);
+        return redirect()->route('directory.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Level $directory)
+    public function show(Level $level)
     {
         //
     }
@@ -41,11 +46,14 @@ class DirectoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Level $directory)
+    public function edit($level)
     {
-        return view("directorys.edit");
+
+        $directorys = Level::query()->select()->where('id', $level)->get();
+
+        return view("directorys.edit", compact('directorys', 'level'));
     }
-    public function details(Level $directory)
+    public function details(Level $level)
     {
         return view("directorys.details");
     }
@@ -53,16 +61,34 @@ class DirectoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Level $directory)
+    public function update(Request $request, Level $level)
     {
-        //
+        $requestData = $request->all();
+
+        // DB::enableQueryLog();
+        Level::query()->where('id', $requestData['id'])->update([
+            'name' => $requestData['name'],
+            'description' => $requestData['description'],
+            'updated_at' => $requestData['updated_at'],
+        ]);
+        // $queries = DB::getQueryLog();
+        // dd($queries);
+        return redirect()->route('directory.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Level $directory)
+    public function destroy($level)
     {
-        //
+        $count = Project::query()
+            ->where('id', $level)
+            ->count();
+        if ($count > 0) {
+            return redirect()->route('directory.index');
+        } else {
+            Level::query()->where('id', $level)->delete();
+            return redirect()->route('directory.index');
+        }
     }
 }

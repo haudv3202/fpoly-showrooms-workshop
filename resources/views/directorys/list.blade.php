@@ -1,17 +1,25 @@
 @extends('layouts.admin')
 @section('content')
+<style>
+    .table .sort::after {
+        display: none !important;
+    }      
+    .table .sort::before {
+        display: none !important;
+    }
+</style>
 <div class="container-fluid">
 
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Leads</h4>
+                <h4 class="mb-sm-0">directorys</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                        <li class="breadcrumb-item active">Leads</li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">directorys</a></li>
+                        {{-- <li class="breadcrumb-item active">Leads</li> --}}
                     </ol>
                 </div>
 
@@ -35,9 +43,10 @@
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
                                 <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <button type="button" class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasExample"><i class="ri-filter-3-line align-bottom me-1"></i> Fliters</button>
-                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Leads</button>
-                                <span class="dropdown">
+                               
+                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><a class="text-white" href="{{route('directory.create')}}">
+                                    <i class="ri-add-line align-bottom me-1"></i> Add directorys</a></button>
+                                {{-- <span class="dropdown">
                                     <button class="btn btn-soft-info btn-icon fs-14" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ri-settings-4-line"></i>
                                     </button>
@@ -48,7 +57,7 @@
                                         <li><a class="dropdown-item" href="#">Switch to common form view</a></li>
                                         <li><a class="dropdown-item" href="#">Reset form view to default</a></li>
                                     </ul>
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>
@@ -66,65 +75,50 @@
                                         </th>
 
                                         <th class="sort" data-sort="name">Name</th>
-                                        <th class="sort" data-sort="company_name">Company</th>
-                                        <th class="sort" data-sort="leads_score">Leads Score</th>
-                                        <th class="sort" data-sort="phone">Phone</th>
-                                        <th class="sort" data-sort="location">Location</th>
-                                        <th class="sort" data-sort="tags">Tags</th>
-                                        <th class="sort" data-sort="date">Create Date</th>
+                                        <th class="sort" data-sort="company_name">Description
+                                        </th>
+                                        <th class="sort" data-sort="leads_score">Created at</th>
+                                        <th class="sort" data-sort="phone">Updated at</th>
+                                       
                                         <th class="sort" data-sort="action">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="list form-check-all"><tr>
+                                <tbody class="list form-check-all">
+                                    @foreach($directorys as $directory)
+                                    <tr>
                                         <th scope="row">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
                                             </div>
                                         </th>
-                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img src="{{asset('theme/admin/assets/images/users/avatar-10.jpg')}}" alt="" class="avatar-xxs rounded-circle image_src object-fit-cover">
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 name">Tonya Noble</div>
+                                                <div class="flex-grow-1 ms-2 name">{{$directory->name}}</div>
                                             </div>
                                         </td>
-                                        <td class="company_name">Force Medicines</td>
-                                        <td class="leads_score">147</td>
-                                        <td class="phone">580-464-4694</td>
-                                        <td class="location">Los Angeles, USA</td>
-                                        <td class="tags">
-                                            <span class="badge bg-primary-subtle text-primary">Lead</span>
-                                            <span class="badge bg-primary-subtle text-primary">Partner</span>
-                                        </td>
-                                        <td class="date">07 Apr, 2021</td>
+                                        <td class="company_name">{{$directory->description}}</td>
+                                        <td class="leads_score">{{$directory->created_at}}</td>
+                                        <td class="phone">{{$directory->updated_at}}</td> 
                                         <td>
                                             <ul class="list-inline hstack gap-2 mb-0">
-                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Call" data-bs-original-title="Call">
-                                                    <a href="javascript:void(0);" class="text-muted d-inline-block">
-                                                        <i class="ri-phone-line fs-16"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Message" data-bs-original-title="Message">
-                                                    <a href="javascript:void(0);" class="text-muted d-inline-block">
-                                                        <i class="ri-question-answer-line fs-16"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
-                                                    <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
-                                                </li>
                                                 <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
-                                                    <a class="edit-item-btn" href="#showModal" data-bs-toggle="modal"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
+                                                    <a class="edit-item-btn" href="{{route('directory.edit',$directory->id)}}"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
                                                 </li>
                                                 <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
-                                                    <a class="remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
-                                                        <i class="ri-delete-bin-fill align-bottom text-muted"></i>
-                                                    </a>
+                                                    <form action="{{ route('directory.destroy',$directory->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Xác nhận xoá directory ?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="remove-item-btn" style="background: none; border: none; cursor: pointer;">
+                                                            <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                        </button>
+                                                    </form>
+                                                    
                                                 </li>
                                             </ul>
                                         </td>
-                                    </tr></tbody>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                             <div class="noresult" style="display: none">
                                 <div class="text-center">

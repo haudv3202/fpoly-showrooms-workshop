@@ -29,6 +29,8 @@ Route::get('/ourteam', [App\Http\Controllers\OurTeamController::class, 'index'])
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('directory', App\Http\Controllers\DirectoryController::class);
+Route::get('directory-update', [App\Http\Controllers\DirectoryController::class, 'update'])->name('directory-update');
+Route::post('directory-update',  [App\Http\Controllers\DirectoryController::class, 'update']);
 Route::resource('project', App\Http\Controllers\ProjectController::class);
 Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');;
 // Route::get('directorys-details', [App\Http\Controllers\DirectoryController::class, 'details'])->name('directorys-details');
