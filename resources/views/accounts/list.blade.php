@@ -35,20 +35,8 @@
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
                                 <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <button type="button" class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasExample"><i class="ri-filter-3-line align-bottom me-1"></i> Fliters</button>
-                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Leads</button>
-                                <span class="dropdown">
-                                    <button class="btn btn-soft-info btn-icon fs-14" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ri-settings-4-line"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">Copy</a></li>
-                                        <li><a class="dropdown-item" href="#">Move to pipline</a></li>
-                                        <li><a class="dropdown-item" href="#">Add to exceptions</a></li>
-                                        <li><a class="dropdown-item" href="#">Switch to common form view</a></li>
-                                        <li><a class="dropdown-item" href="#">Reset form view to default</a></li>
-                                    </ul>
-                                </span>
+                                <a href="{{route('accounts.create')}}"><button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Leads</button></a>
+
                             </div>
                         </div>
                     </div>
@@ -66,65 +54,58 @@
                                         </th>
 
                                         <th class="sort" data-sort="name">Name</th>
-                                        <th class="sort" data-sort="company_name">Company</th>
-                                        <th class="sort" data-sort="leads_score">Leads Score</th>
-                                        <th class="sort" data-sort="phone">Phone</th>
-                                        <th class="sort" data-sort="location">Location</th>
-                                        <th class="sort" data-sort="tags">Tags</th>
-                                        <th class="sort" data-sort="date">Create Date</th>
+                                        <th class="sort" data-sort="company_name">Id</th>
+                                        <th class="sort" data-sort="leads_score">Email</th>
+                                        <th class="sort" data-sort="phone">Role</th>
                                         <th class="sort" data-sort="action">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="list form-check-all"><tr>
-                                        <th scope="row">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                            </div>
-                                        </th>
-                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img src="{{asset('theme/admin/assets/images/users/avatar-10.jpg')}}" alt="" class="avatar-xxs rounded-circle image_src object-fit-cover">
+                                <tbody class="list form-check-all">
+                                    @foreach($accounts as $acn)
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="chk_child" value="{{$acn->id}}">
                                                 </div>
-                                                <div class="flex-grow-1 ms-2 name">Tonya Noble</div>
-                                            </div>
-                                        </td>
-                                        <td class="company_name">Force Medicines</td>
-                                        <td class="leads_score">147</td>
-                                        <td class="phone">580-464-4694</td>
-                                        <td class="location">Los Angeles, USA</td>
-                                        <td class="tags">
-                                            <span class="badge bg-primary-subtle text-primary">Lead</span>
-                                            <span class="badge bg-primary-subtle text-primary">Partner</span>
-                                        </td>
-                                        <td class="date">07 Apr, 2021</td>
-                                        <td>
-                                            <ul class="list-inline hstack gap-2 mb-0">
-                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Call" data-bs-original-title="Call">
-                                                    <a href="javascript:void(0);" class="text-muted d-inline-block">
-                                                        <i class="ri-phone-line fs-16"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Message" data-bs-original-title="Message">
-                                                    <a href="javascript:void(0);" class="text-muted d-inline-block">
-                                                        <i class="ri-question-answer-line fs-16"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
-                                                    <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
-                                                </li>
-                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
-                                                    <a class="edit-item-btn" href="#showModal" data-bs-toggle="modal"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
-                                                </li>
-                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
-                                                    <a class="remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
-                                                        <i class="ri-delete-bin-fill align-bottom text-muted"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr></tbody>
+                                            </th>
+                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="{{$acn->avatar}}" alt="" class="avatar-xxs rounded-circle image_src object-fit-cover">
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2 name">{{$acn->name}}</div>
+                                                </div>
+                                            </td>
+                                            <td class="company_name">#{{$acn->id}}</td>
+
+                                            <td class="leads_score">{{$acn->email}}</td>
+                                            <td class="phone">
+                                                @if($acn->role === 'admin')
+                                                    admin
+                                                @else
+                                                    athor
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline hstack gap-2 mb-0">
+{{--                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">--}}
+{{--                                                        <a href=""><i class="ri-eye-fill align-bottom text-muted"></i></a>--}}
+{{--                                                    </li>--}}
+                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                                        <a class="edit-item-btn" href="{{route('accounts.edit',$acn)}}" ><i class="ri-pencil-fill align-bottom text-muted"></i></a>
+                                                    </li>
+{{--                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">--}}
+{{--                                                        <a class="remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">--}}
+{{--                                                            <i class="ri-delete-bin-fill align-bottom text-muted"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    </li>--}}
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
                             </table>
                             <div class="noresult" style="display: none">
                                 <div class="text-center">
@@ -272,166 +253,6 @@
                     <!--end modal -->
 
 
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header bg-light">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Leads Fliters</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <!--end offcanvas-header-->
-                        <form action="" class="d-flex flex-column justify-content-end h-100">
-                            <div class="offcanvas-body">
-                                <div class="mb-4">
-                                    <label for="datepicker-range" class="form-label text-muted text-uppercase fw-semibold mb-3">Date</label>
-                                    <input type="date" class="form-control" id="datepicker-range" data-provider="flatpickr" data-range="true" placeholder="Select date">
-                                </div>
-                                <div class="mb-4">
-                                    <label for="country-select" class="form-label text-muted text-uppercase fw-semibold mb-3">Country</label>
-                                    <select class="form-control" data-choices="" data-choices-multiple-remove="true" name="country-select" id="country-select" multiple="">
-                                        <option value="">Select country</option>
-                                        <option value="Argentina">Argentina</option>
-                                        <option value="Belgium">Belgium</option>
-                                        <option value="Brazil" selected="">Brazil</option>
-                                        <option value="Colombia">Colombia</option>
-                                        <option value="Denmark">Denmark</option>
-                                        <option value="France">France</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="Mexico">Mexico</option>
-                                        <option value="Russia">Russia</option>
-                                        <option value="Spain">Spain</option>
-                                        <option value="Syria">Syria</option>
-                                        <option value="United Kingdom" selected="">United Kingdom</option>
-                                        <option value="United States of America">United States of America</option>
-                                    </select>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="status-select" class="form-label text-muted text-uppercase fw-semibold mb-3">Status</label>
-                                    <div class="row g-2">
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                                <label class="form-check-label" for="inlineCheckbox1">New Leads</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                                <label class="form-check-label" for="inlineCheckbox2">Old Leads</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                                <label class="form-check-label" for="inlineCheckbox3">Loss Leads</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                                                <label class="form-check-label" for="inlineCheckbox4">Follow Up</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="leadscore" class="form-label text-muted text-uppercase fw-semibold mb-3">Lead Score</label>
-                                    <div class="row g-2 align-items-center">
-                                        <div class="col-lg">
-                                            <input type="number" class="form-control" id="leadscore" placeholder="0">
-                                        </div>
-                                        <div class="col-lg-auto">
-                                            To
-                                        </div>
-                                        <div class="col-lg">
-                                            <input type="number" class="form-control" id="leadscore" placeholder="0">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="leads-tags" class="form-label text-muted text-uppercase fw-semibold mb-3">Tags</label>
-                                    <div class="row g-3">
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="marketing" value="marketing">
-                                                <label class="form-check-label" for="marketing">Marketing</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="management" value="management">
-                                                <label class="form-check-label" for="management">Management</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="business" value="business">
-                                                <label class="form-check-label" for="business">Business</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="investing" value="investing">
-                                                <label class="form-check-label" for="investing">Investing</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="partner" value="partner">
-                                                <label class="form-check-label" for="partner">Partner</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="lead" value="lead">
-                                                <label class="form-check-label" for="lead">Leads</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="sale" value="sale">
-                                                <label class="form-check-label" for="sale">Sale</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="owner" value="owner">
-                                                <label class="form-check-label" for="owner">Owner</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
-                                                <label class="form-check-label" for="banking">Banking</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
-                                                <label class="form-check-label" for="banking">Exiting</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
-                                                <label class="form-check-label" for="banking">Finance</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
-                                                <label class="form-check-label" for="banking">Fashion</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end offcanvas-body-->
-                            <div class="offcanvas-footer border-top p-3 text-center hstack gap-2">
-                                <button class="btn btn-light w-100">Clear Filter</button>
-                                <button type="submit" class="btn btn-success w-100">Filters</button>
-                            </div>
-                            <!--end offcanvas-footer-->
-                        </form>
-                    </div>
                     <!--end offcanvas-->
 
                 </div>

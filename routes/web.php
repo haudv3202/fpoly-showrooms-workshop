@@ -45,9 +45,8 @@ Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::
 // });
 
 
-Route::get('account-list', [App\Http\Controllers\AccountController::class, 'index'])->name('account-list');
-Route::get('account-edit', [App\Http\Controllers\AccountController::class, 'edit'])->name('account-edit');
-Route::get('account-create', [App\Http\Controllers\AccountController::class, 'create'])->name('account-create');
+Route::resource("accounts",\App\Http\Controllers\AccountController::class);
+Route::post('accounts/{account}', [\App\Http\Controllers\AccountController::class, 'update'])->name('accounts.update');
 
 Route::get('contact-list', [App\Http\Controllers\ContactController::class, 'index'])->name('contact-list');
 Route::get('contact-edit', [App\Http\Controllers\ContactController::class, 'edit'])->name('contact-edit');

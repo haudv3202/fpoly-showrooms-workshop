@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
@@ -12,7 +13,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view("accounts.list");
+        $accounts = User::query()->latest('id')->get();
+        return view("accounts.list",compact('accounts'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        return view("accounts.create");
     }
 
     /**
@@ -28,8 +30,30 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+        ]);
+
+        $data = $request->except('avatar');
+
+        if ($request->hasFile('image')){
+            $pathFile = Storage::putFile('accounts', $request->file('image'));
+            $data['avatar'] = 'storage/' . $pathFile;
+        } else {
+            $data['avatar'] = 'storage/accounts/user.png';
+        }
+
+        try {
+            User::create($data);
+            return redirect()->route('accounts.index');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Đã xảy ra lỗi khi thêm người dùng. Vui lòng thử lại.');
+        }
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -42,18 +66,41 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Account $account)
+    public function edit($id)
     {
-        //
+        $account = User::findOrFail($id);
+        return view('accounts.edit',compact('account'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Account $account)
+    public function update(Request $request, User $account)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $account->id,
+        ]);
+
+        $data = $request->except('avatar');
+
+        // Giữ nguyên ảnh cũ nếu không có ảnh mới được tải lên
+        if ($request->hasFile('image')) {
+            $pathFile = Storage::putFile('accounts', $request->file('image'));
+            $data['avatar'] = 'storage/' . $pathFile;
+        } else {
+            $data['avatar'] = $request->img_old;
+        }
+
+        try {
+            $account->update($data);
+            return redirect()->route('accounts.index')->with('success', 'Thông tin người dùng đã được cập nhật.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Đã xảy ra lỗi khi cập nhật thông tin người dùng. Vui lòng thử lại.');
+        }
     }
+
+
 
     /**
      * Remove the specified resource from storage.

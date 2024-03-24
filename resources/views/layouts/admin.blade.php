@@ -834,7 +834,7 @@
  <!-- end Dashboard Menu -->
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('account-list') }}">
+                            <a class="nav-link menu-link" href="{{ route('accounts.index') }}">
                                 <i class="ri-account-circle-line"></i> <span data-key="t-tài-khoản">Tài khoản</span>
                             </a>
 
