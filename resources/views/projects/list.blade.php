@@ -1,1228 +1,454 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid">
-
+    <style>
+        .table .sort::after {
+            display: none !important;
+        }      
+        .table .sort::before {
+            display: none !important;
+        }
+    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Project List</h4>
-
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                        <li class="breadcrumb-item active">Project List</li>
-                    </ol>
-                </div>
+                <h4 class="mb-sm-0">Danh mục</h4>
 
             </div>
         </div>
     </div>
     <!-- end page title -->
-
-    <div class="row g-4 mb-3">
-        <div class="col-sm-auto">
-            <div>
-                <a href="apps-projects-create.html" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Add New</a>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="d-flex justify-content-sm-end gap-2">
-                <div class="search-box ms-2">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <i class="ri-search-line search-icon"></i>
-                </div>
-
-                <select class="form-control w-md" data-choices="" data-choices-search-false="">
-                    <option value="All">All</option>
-                    <option value="Today">Today</option>
-                    <option value="Yesterday" selected="">Yesterday</option>
-                    <option value="Last 7 Days">Last 7 Days</option>
-                    <option value="Last 30 Days">Last 30 Days</option>
-                    <option value="This Month">This Month</option>
-                    <option value="Last Year">Last Year</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card card-height-100">
-                <div class="card-body">
-                    <div class="d-flex flex-column h-100">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <p class="text-muted mb-4">Updated 3hrs ago</p>
+        <div class="col-lg-12">
+            <div class="card" id="leadsList">
+                <div class="card-header border-0">
+
+                    <div class="row g-4 align-items-center">
+                        <div class="col-sm-3">
+                            <div class="search-box">
+                                <input type="text" class="form-control search" placeholder="Search for...">
+                                <i class="ri-search-line search-icon"></i>
                             </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <button type="button" class="btn avatar-xs mt-n1 p-0 favourite-btn">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
+                        </div>
+                        <div class="col-sm-auto ms-auto">
+                            <div class="hstack gap-2">
+                                <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                {{-- <button type="button" class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasExample"><i class="ri-filter-3-line align-bottom me-1"></i> Fliters</button> --}}
+                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><a class="text-white" href="{{route('project-create')}}">
+                                    <i class="ri-add-line align-bottom me-1"></i> Add Leads</a></button>
+                                {{-- <span class="dropdown">
+                                    <button class="btn btn-soft-info btn-icon fs-14" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ri-settings-4-line"></i>
                                     </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n2 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">Copy</a></li>
+                                        <li><a class="dropdown-item" href="#">Move to pipline</a></li>
+                                        <li><a class="dropdown-item" href="#">Add to exceptions</a></li>
+                                        <li><a class="dropdown-item" href="#">Switch to common form view</a></li>
+                                        <li><a class="dropdown-item" href="#">Reset form view to default</a></li>
+                                    </ul>
+                                </span> --}}
                             </div>
-                        </div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-shrink-0 me-3">
-                                <div class="avatar-sm">
-                                    <span class="avatar-title bg-warning-subtle rounded p-2">
-                                        <img src="{{ asset('theme/admin/assets/images/brands/slack.png') }}" alt="" class="img-fluid p-1">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-1 fs-15"><a href="apps-projects-overview.html" class="text-body">Slack brand logo design</a></h5>
-                                <p class="text-muted text-truncate-two-lines mb-3">Create a Brand logo design for a velzon admin.</p>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex mb-2">
-                                <div class="flex-grow-1">
-                                    <div>Tasks</div>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 18/42</div>
-                                </div>
-                            </div>
-                            <div class="progress progress-sm animated-progress">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100" style="width: 34%;"></div><!-- /.progress-bar -->
-                            </div><!-- /.progress -->
                         </div>
                     </div>
-
                 </div>
-                <!-- end card body -->
-                <div class="card-footer bg-transparent border-top-dashed py-2">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Darline Williams" data-bs-original-title="Darline Williams">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <div class="text-muted">
-                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 10 Jul, 2021
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- end card footer -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card card-height-100">
                 <div class="card-body">
-                    <div class="d-flex flex-column h-100">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <p class="text-muted mb-4">Last update : 08 May</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <button type="button" class="btn avatar-xs mt-n1 p-0 favourite-btn active">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n2 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
+                    <div>
+                        <div class="table-responsive table-card">
+                            <table class="table align-middle" id="customerTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col" style="width: 50px;">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                            </div>
+                                        </th>
 
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
+                                        <th class="sort"  data-sort="name">Name</th>
+                                        <th class="sort" data-sort="description">Description</th>
+                                        <th class="sort" data-sort="deploy_link">Deploy link</th>
+                                        <th class="sort" data-sort="level">Level</th>
+                                        <th class="sort" data-sort="added_by">Added</th>
+                                        <th class="sort" data-sort="is_highlight">Highlight</th>
+                                        <th class="sort" data-sort="is_active">Active</th>
+                                        <th class="sort" data-sort="date_create">Create</th>
+                                        <th class="sort" data-sort="date_update">Updated</th>
+                                        <th class="sort" data-sort="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list form-check-all">
+                                    @foreach($projects as $project)
+                                  
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                            </div>
+                                        </th>
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">1</a></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0"  style="display: none">
+                                                    <img src="{{asset('theme/admin/assets/images/users/avatar-10.jpg')}}" alt="" class="avatar-xxs rounded-circle image_src object-fit-cover">
+                                                </div>
+                                                <div class="flex-grow-1 ms-2 name">{{$project->name}}</div>
+                                            </div>
+                                        </td>
+                                        <td class="description">{{$project->description}}</td>
+                                        <td class="deploy_link">{{$project->deploy_link}}</td>
+                                        <td class="level">{{$project->level_name}}</td>
+                                        <td class="added_by">{{$project->added_by_name}}</td>
+                                        <td class="is_highlight">
+                                            {{$project->is_highlight}}
+                                        </td>
+                                        <td class="is_active">
+                                            {{$project->is_active}}
+                                        </td>
+                                        <td class="date_create">{{$project->created_at}}
+                                        </td>
+                                        <td class="date_update">{{$project->updated_at}}
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline hstack gap-2 mb-0"> 
+                                                {{-- <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
+                                                    <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
+                                                </li> --}}
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                                    <a class="edit-item-btn" href="{{ route('project-edit',$project ) }}">
+                                                        <i class="ri-pencil-fill align-bottom text-muted"></i>
+                                                    </a>
+                                                    
+                                                </li>
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
+                                                    
+                                                    <a class="remove-item-btn" href="{{ route('project-delete',$project ) }}" onclick="return confirm('Xác nhận xoá project ?');">
+                                                        <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                    </a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="noresult" style="display: none">
+                                <div class="text-center">
+                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                    <p class="text-muted mb-0">We've searched more than 150+ leads We did not find any leads for you search.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-shrink-0 me-3">
-                                <div class="avatar-sm">
-                                    <span class="avatar-title bg-danger-subtle rounded p-2">
-                                        <img src="{{ asset('theme/admin/assets/images/brands/dribbble.png') }}" alt="" class="img-fluid p-1">
-                                    </span>
-                                </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <div class="pagination-wrap hstack gap-2">
+                                <a class="page-item pagination-prev disabled" href="#">
+                                    Previous
+                                </a>
+                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li></ul>
+                                <a class="page-item pagination-next" href="#">
+                                    Next
+                                </a>
                             </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-1 fs-15"><a href="apps-projects-overview.html" class="text-body">Redesign - Landing page</a></h5>
-                                <p class="text-muted text-truncate-two-lines mb-3">Resign a landing page design. as per abc minimal design.</p>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex mb-2">
-                                <div class="flex-grow-1">
-                                    <div>Tasks</div>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 22/56</div>
-                                </div>
-                            </div>
-                            <div class="progress progress-sm animated-progress">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div><!-- /.progress-bar -->
-                            </div><!-- /.progress -->
                         </div>
                     </div>
 
-                </div>
-                <!-- end card body -->
-                <div class="card-footer bg-transparent border-top-dashed py-2">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Brent Gonzalez" data-bs-original-title="Brent Gonzalez">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle img-fluid">
+                    {{-- <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light p-3">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                                </div>
+                                <form class="tablelist-form" autocomplete="off">
+                                    <div class="modal-body">
+                                        <input type="hidden" id="id-field">
+                                        <div class="row g-3">
+                                            <div class="col-lg-12">
+                                                <div class="text-center" style="display: none">
+                                                    <div class="position-relative d-inline-block">
+                                                        <div class="position-absolute bottom-0 end-0">
+                                                            <label for="lead-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Select Image" data-bs-original-title="Select Image">
+                                                                <div class="avatar-xs cursor-pointer">
+                                                                    <div class="avatar-title bg-light border rounded-circle text-muted">
+                                                                        <i class="ri-image-fill"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                            <input class="form-control d-none" value="" id="lead-image-input" type="file" accept="image/png, image/gif, image/jpeg">
+                                                        </div>
+                                                        <div class="avatar-lg p-1">
+                                                            <div class="avatar-title bg-light rounded-circle">
+                                                                <img src="{{asset('theme/admin/assets/images/users/user-dummy-img.jpg')}}" id="lead-img" class="avatar-md rounded-circle object-fit-cover">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="fs-13 mt-3">Lead Image</h5>
+                                                </div>
+                                                <div>
+                                                    <label for="leadname-field" class="form-label">Name</label>
+                                                    <input type="text" id="leadname-field" class="form-control" placeholder="Enter Name" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="description-field" class="form-label">Description</label>
+                                                    <input type="text" id="description-field" class="form-control" placeholder="Enter description" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="deploy_link" class="form-label">Deploy link</label>
+                                                    <input type="text" id="deploy_link" class="form-control" placeholder="Enter deploy link" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="level-field" class="form-label">Level</label>
+                                                    <input type="text" id="level-field" class="form-control" placeholder="Enter level no" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="added_by-field" class="form-label">Added by</label>
+                                                    <input type="text" id="added_by-field" class="form-control" placeholder="Enter Added by" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="is_highlight-field" class="form-label">is_highlight</label>
+                                                    <input type="text" min="0" max="1" id="is_highlight-field" class="form-control" placeholder="Enter is highlight" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="is_active-field" class="form-label">is_active</label>
+                                                    <input type="text" min="0" max="1" id="is_active-field" class="form-control" placeholder="Enter is active" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="date_create-field" class="form-label">Created Date</label>
+                                                    <input type="datetime-local" id="date_create-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" placeholder="Select Date" required="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="date_update-field" class="form-label">Update Date</label>
+                                                    <input type="datetime-local" id="date_update-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" placeholder="Select Date" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                        <!--end row-->
                                     </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Sylvia Wright">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-secondary">
-                                            S
+                                    <div class="modal-footer">
+                                        <div class="hstack gap-2 justify-content-end">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success" id="add-btn">Add leads</button>
+                                            <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
                                         </div>
                                     </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Ellen Smith" data-bs-original-title="Ellen Smith">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
+                                </form>
                             </div>
                         </div>
-                        <div class="flex-shrink-0">
-                            <div class="text-muted">
-                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 18 May, 2021
-                            </div>
-                        </div>
+                    </div> --}}
+                    <!--end modal-->
 
+                    <!-- Modal -->
+                    <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-labelledby="deleteRecordLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                </div>
+                                <div class="modal-body p-5 text-center">
+                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
+                                    <div class="mt-4 text-center">
+                                        <h4 class="fs-semibold">You are about to delete a lead ?</h4>
+                                        <p class="text-muted fs-14 mb-4 pt-1">Deleting your lead will remove all of your information from our database.</p>
+                                        <div class="hstack gap-2 justify-content-center remove">
+                                            <button class="btn btn-link link-success fw-medium text-decoration-none" id="deleteRecord-close" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</button>
+                                            <button class="btn btn-danger" id="delete-record">Yes, Delete It!!</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
+                    <!--end modal -->
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header bg-light">
+                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Leads Fliters</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <!--end offcanvas-header-->
+                        <form action="" class="d-flex flex-column justify-content-end h-100">
+                            <div class="offcanvas-body">
+                                <div class="mb-4">
+                                    <label for="datepicker-range" class="form-label text-muted text-uppercase fw-semibold mb-3">Date</label>
+                                    <input type="date" class="form-control" id="datepicker-range" data-provider="flatpickr" data-range="true" placeholder="Select date">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="country-select" class="form-label text-muted text-uppercase fw-semibold mb-3">Country</label>
+                                    <select class="form-control" data-choices="" data-choices-multiple-remove="true" name="country-select" id="country-select" multiple="">
+                                        <option value="">Select country</option>
+                                        <option value="Argentina">Argentina</option>
+                                        <option value="Belgium">Belgium</option>
+                                        <option value="Brazil" selected="">Brazil</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="Denmark">Denmark</option>
+                                        <option value="France">France</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Russia">Russia</option>
+                                        <option value="Spain">Spain</option>
+                                        <option value="Syria">Syria</option>
+                                        <option value="United Kingdom" selected="">United Kingdom</option>
+                                        <option value="United States of America">United States of America</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="status-select" class="form-label text-muted text-uppercase fw-semibold mb-3">Status</label>
+                                    <div class="row g-2">
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">New Leads</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Old Leads</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox3">Loss Leads</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                                                <label class="form-check-label" for="inlineCheckbox4">Follow Up</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="leadscore" class="form-label text-muted text-uppercase fw-semibold mb-3">Lead Score</label>
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-lg">
+                                            <input type="number" class="form-control" id="leadscore" placeholder="0">
+                                        </div>
+                                        <div class="col-lg-auto">
+                                            To
+                                        </div>
+                                        <div class="col-lg">
+                                            <input type="number" class="form-control" id="leadscore" placeholder="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="leads-tags" class="form-label text-muted text-uppercase fw-semibold mb-3">Tags</label>
+                                    <div class="row g-3">
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="marketing" value="marketing">
+                                                <label class="form-check-label" for="marketing">Marketing</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="management" value="management">
+                                                <label class="form-check-label" for="management">Management</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="business" value="business">
+                                                <label class="form-check-label" for="business">Business</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="investing" value="investing">
+                                                <label class="form-check-label" for="investing">Investing</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="partner" value="partner">
+                                                <label class="form-check-label" for="partner">Partner</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="lead" value="lead">
+                                                <label class="form-check-label" for="lead">Leads</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sale" value="sale">
+                                                <label class="form-check-label" for="sale">Sale</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="owner" value="owner">
+                                                <label class="form-check-label" for="owner">Owner</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
+                                                <label class="form-check-label" for="banking">Banking</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
+                                                <label class="form-check-label" for="banking">Exiting</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
+                                                <label class="form-check-label" for="banking">Finance</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="banking" value="banking">
+                                                <label class="form-check-label" for="banking">Fashion</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end offcanvas-body-->
+                            <div class="offcanvas-footer border-top p-3 text-center hstack gap-2">
+                                <button class="btn btn-light w-100">Clear Filter</button>
+                                <button type="submit" class="btn btn-success w-100">Filters</button>
+                            </div>
+                            <!--end offcanvas-footer-->
+                        </form>
+                    </div>
+                    <!--end offcanvas-->
                 </div>
-                <!-- end card footer -->
             </div>
-            <!-- end card -->
         </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card card-height-100">
-                <div class="card-body">
-                    <div class="d-flex flex-column h-100">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <p class="text-muted mb-4">Updated 2hrs ago</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <button type="button" class="btn avatar-xs mt-n1 p-0 favourite-btn active">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n2 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-shrink-0 me-3">
-                                <div class="avatar-sm">
-                                    <span class="avatar-title bg-success-subtle rounded p-2">
-                                        <img src="{{ asset('theme/admin/assets/images/brands/mail_chimp.png') }}" alt="" class="img-fluid p-1">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-1 fs-15"><a href="apps-projects-overview.html" class="text-body">Chat Application</a></h5>
-                                <p class="text-muted text-truncate-two-lines mb-3">Create a Chat application for business messaging needs. Collaborate efficiently with secure direct messages and group chats.</p>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex mb-2">
-                                <div class="flex-grow-1">
-                                    <div>Tasks</div>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 14/20</div>
-                                </div>
-                            </div>
-                            <div class="progress progress-sm animated-progress">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div><!-- /.progress-bar -->
-                            </div><!-- /.progress -->
-                        </div>
-                    </div>
-
-                </div>
-                <!-- end card body -->
-                <div class="card-footer bg-transparent border-top-dashed py-2">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Jeffrey Salazar" data-bs-original-title="Jeffrey Salazar">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Mark Williams">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-warning">
-                                            M
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <div class="text-muted">
-                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 21 Feb, 2021
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- end card footer -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card card-height-100">
-                <div class="card-body">
-                    <div class="d-flex flex-column h-100">
-                        <div class="d-flex">
-                            <div class="flex-grow-1">
-                                <p class="text-muted mb-4">Last update : 21 Jun</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center">
-                                    <button type="button" class="btn avatar-xs mt-n1 p-0 favourite-btn">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n2 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-shrink-0 me-3">
-                                <div class="avatar-sm">
-                                    <span class="avatar-title bg-info-subtle rounded p-2">
-                                        <img src="{{ asset('theme/admin/assets/images/brands/dropbox.png') }}" alt="" class="img-fluid p-1">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-1 fs-15"><a href="apps-projects-overview.html" class="text-body">Project App</a></h5>
-                                <p class="text-muted text-truncate-two-lines mb-3">Create a project application for a project management and task management.</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-auto">
-                            <div class="d-flex mb-2">
-                                <div class="flex-grow-1">
-                                    <div>Tasks</div>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 20/34</div>
-                                </div>
-                            </div>
-                            <div class="progress progress-sm animated-progress">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%;"></div><!-- /.progress-bar -->
-                            </div><!-- /.progress -->
-                        </div>
-                    </div>
-
-                </div>
-                <!-- end card body -->
-                <div class="card-footer bg-transparent border-top-dashed py-2">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Kristin Turpin">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-info">
-                                            K
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Mary Leavitt">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-danger">
-                                            M
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <div class="text-muted">
-                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 03 Aug, 2021
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- end card footer -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
+        <!--end col-->
     </div>
-    <!-- end row -->
-
-    <div class="row">
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-danger-subtle rounded-top">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h5 class="mb-0 fs-14"><a href="apps-projects-overview.html" class="text-body">Multipurpose landing template</a></h5>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center my-n2">
-                                    <button type="button" class="btn avatar-xs p-0 favourite-btn active">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="py-3">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">18 Sep, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Donna Kline">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-danger">
-                                            D
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Lee Winton" data-bs-original-title="Lee Winton">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Johnny Shorter" data-bs-original-title="Johnny Shorter">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Progress</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>50%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                            </div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-warning-subtle rounded-top">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h5 class="mb-0 fs-14"><a href="apps-projects-overview.html" class="text-body">Dashboard UI</a></h5>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center my-n2">
-                                    <button type="button" class="btn avatar-xs p-0 favourite-btn active">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-success-subtle text-success fs-12">Completed</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14"> 10 Jun, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Bonnie Haynes" data-bs-original-title="Bonnie Haynes">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-7.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Della Wilson" data-bs-original-title="Della Wilson">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Progress</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>95%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-info-subtle rounded-top">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h5 class="mb-0 fs-14"><a href="apps-projects-overview.html" class="text-body">Vector Images</a></h5>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center my-n2">
-                                    <button type="button" class="btn avatar-xs p-0 favourite-btn">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">08 Apr, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Chet Diaz">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-info">
-                                            C
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Progress</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>41%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100" style="width: 41%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-success-subtle rounded-top">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h5 class="mb-0 fs-14"><a href="apps-projects-overview.html" class="text-body">Authentication</a></h5>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-1 align-items-center my-n2">
-                                    <button type="button" class="btn avatar-xs p-0 favourite-btn active">
-                                        <span class="avatar-title bg-transparent fs-15">
-                                            <i class="ri-star-fill"></i>
-                                        </span>
-                                    </button>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                        </button>
-
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                            <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">22 Nov, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Virginia Wall" data-bs-original-title="Virginia Wall">
-                                    <img src="{{ asset('theme/admin/assets/images/users/avatar-8.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Progress</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>35%</div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-    </div>
-    <!-- end row -->
-
-
-    <div class="row">
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-secondary-subtle rounded-top">
-                        <div class="d-flex gap-1 align-items-center justify-content-end my-n2">
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn active">
-                                <span class="avatar-title bg-transparent fs-15">
-                                    <i class="ri-star-fill"></i>
-                                </span>
-                            </button>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                    <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center pb-3">
-                            <img src="{{ asset('theme/admin/assets/images/brands/dribbble.png') }}" alt="" height="32">
-                        </div>
-                    </div>
-
-                    <div class="py-3">
-                        <h5 class="fs-14 mb-3"><a href="apps-projects-overview.html" class="text-body">Kanban Board</a></h5>
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">08 Dec, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Terry Moberly">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-danger">
-                                            T
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Ruby Miller" data-bs-original-title="Ruby Miller">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Tasks</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 17/20 </div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100" style="width: 71%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-light rounded-top">
-                        <div class="d-flex gap-1 align-items-center justify-content-end my-n2">
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn">
-                                <span class="avatar-title bg-transparent fs-15">
-                                    <i class="ri-star-fill"></i>
-                                </span>
-                            </button>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                    <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center pb-3">
-                            <img src="{{ asset('theme/admin/assets/images/brands/slack.png') }}" alt="" height="32">
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <h5 class="mb-3 fs-14"><a href="apps-projects-overview.html" class="text-body">Ecommerce app</a></h5>
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">20 Nov, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Irma Metz" data-bs-original-title="Irma Metz">
-                                    <img src="{{ asset('theme/admin/assets/images/users/avatar-9.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="James Clem" data-bs-original-title="James Clem">
-                                    <img src="{{ asset('theme/admin/assets/images/users/avatar-10.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Tasks</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>
-                                    <i class="ri-list-check align-bottom me-1 text-muted"></i> 11/45
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-primary-subtle rounded-top">
-                        <div class="d-flex gap-1 align-items-center justify-content-end my-n2">
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn">
-                                <span class="avatar-title bg-transparent fs-15">
-                                    <i class="ri-star-fill"></i>
-                                </span>
-                            </button>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                    <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center pb-3">
-                            <img src="{{ asset('theme/admin/assets/images/brands/dropbox.png') }}" alt="" height="32">
-                        </div>
-                    </div>
-
-                    <div class="py-3">
-                        <h5 class="mb-3 fs-14"><a href="apps-projects-overview.html" class="text-body">Redesign - Landing page</a></h5>
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-warning-subtle text-warning fs-12">Inprogress</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">10 Jul, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Brent Gonzalez" data-bs-original-title="Brent Gonzalez">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Sylvia Wright">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-secondary">
-                                            S
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Ellen Smith" data-bs-original-title="Ellen Smith">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Tasks</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>
-                                    <i class="ri-list-check align-bottom me-1 text-muted"></i> 13/26
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xxl-3 col-sm-6 project-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="p-3 mt-n3 mx-n3 bg-danger-subtle rounded-top">
-                        <div class="d-flex gap-1 align-items-center justify-content-end my-n2">
-                            <button type="button" class="btn avatar-xs p-0 favourite-btn active">
-                                <span class="avatar-title bg-transparent fs-15">
-                                    <i class="ri-star-fill"></i>
-                                </span>
-                            </button>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-muted p-1 mt-n1 py-0 text-decoration-none fs-15" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-sm"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="apps-projects-overview.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                                    <a class="dropdown-item" href="apps-projects-create.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#removeProjectModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center pb-3">
-                            <img src="{{ asset('theme/admin/assets/images/brands/mail_chimp.png') }}" alt="" height="32">
-                        </div>
-                    </div>
-
-                    <div class="py-3">
-                        <h5 class="mb-3 fs-14"><a href="apps-projects-overview.html" class="text-body">Multipurpose landing template</a></h5>
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Status</p>
-                                    <div class="badge bg-success-subtle text-success fs-12">Completed</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div>
-                                    <p class="text-muted mb-1">Deadline</p>
-                                    <h5 class="fs-14">18 Sep, 2021</h5>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center mt-3">
-                            <p class="text-muted mb-0 me-2">Team :</p>
-                            <div class="avatar-group">
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Donna Kline">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title rounded-circle bg-danger">
-                                            D
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Lee Winton" data-bs-original-title="Lee Winton">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Johnny Shorter" data-bs-original-title="Johnny Shorter">
-                                    <div class="avatar-xxs">
-                                        <img src="{{ asset('theme/admin/assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle img-fluid">
-                                    </div>
-                                </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
-                                    <div class="avatar-xxs">
-                                        <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                            +
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex mb-2">
-                            <div class="flex-grow-1">
-                                <div>Tasks</div>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>
-                                    <i class="ri-list-check align-bottom me-1 text-muted"></i> 25/32
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress progress-sm animated-progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
-                    </div>
-
-                </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-    </div>
-    <!-- end row -->
-
-    <div class="row g-0 text-center text-sm-start align-items-center mb-4">
-        <div class="col-sm-6">
-            <div>
-                <p class="mb-sm-0 text-muted">Showing <span class="fw-semibold">1</span> to <span class="fw-semibold">10</span> of <span class="fw-semibold text-decoration-underline">12</span> entries</p>
-            </div>
-        </div>
-        <!-- end col -->
-        <div class="col-sm-6">
-            <ul class="pagination pagination-separated justify-content-center justify-content-sm-end mb-sm-0">
-                <li class="page-item disabled">
-                    <a href="#" class="page-link">Previous</a>
-                </li>
-                <li class="page-item active">
-                    <a href="#" class="page-link">1</a>
-                </li>
-                <li class="page-item ">
-                    <a href="#" class="page-link">2</a>
-                </li>
-                <li class="page-item">
-                    <a href="#" class="page-link">3</a>
-                </li>
-                <li class="page-item">
-                    <a href="#" class="page-link">4</a>
-                </li>
-                <li class="page-item">
-                    <a href="#" class="page-link">5</a>
-                </li>
-                <li class="page-item">
-                    <a href="#" class="page-link">Next</a>
-                </li>
-            </ul>
-        </div><!-- end col -->
-    </div><!-- end row -->
+    <!--end row-->
 </div>
 @endsection
