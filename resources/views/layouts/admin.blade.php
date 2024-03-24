@@ -841,7 +841,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('project-list') }}">
+                            <a class="nav-link menu-link" href="{{ route('directory.index') }}">
                                 <i class="ri-pages-line"></i> <span data-key="t-danh-mục">Danh mục</span>
                             </a>
                         </li>
@@ -866,22 +866,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('project-list') }}">
+                            <a class="nav-link menu-link" href="{{ route('project.index') }}">
                                 <i class="ri-pages-line"></i> <span data-key="t-dự-án">Dự án</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('project-create') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-dự-án-thêm">Dự án thêm</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('project-list') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-dự-án">Dự án</span>
-                            </a>
-                        </li>
-
-
                     </ul>
                 </div>
                 <!-- Sidebar -->

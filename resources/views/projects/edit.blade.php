@@ -1,12 +1,20 @@
 @extends('layouts.admin')
 @section('content')
+<style>
+    .table .sort::after {
+        display: none !important;
+    }      
+    .table .sort::before {
+        display: none !important;
+    }
+</style>
 <div class="container-fluid">
 
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Create Project</h4>
+                <h4 class="mb-sm-0">Update Project</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -19,7 +27,7 @@
         </div>
     </div>
     <!-- end page title -->
-    <form action="{{route('project-update.update',$project)}}" method="POST" enctype="multipart/form-data">  
+    <form action="{{route('project.update',$project)}}" method="POST" enctype="multipart/form-data">  
         @csrf
         @method('PUT')
         <div class="row">
@@ -142,7 +150,7 @@
                 </div> --}}
                 <!-- end card -->
                 <div class="text-end mb-4">
-                    <button type="submit" class="btn btn-success w-sm">Create</button>
+                    <button type="submit" class="btn btn-success w-sm">Update</button>
                 </div>
             </div>
             <!-- end col -->

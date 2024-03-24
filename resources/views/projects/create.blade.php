@@ -18,7 +18,7 @@
         </div>
     </div>
     <!-- end page title -->
-    <form action="{{route('project-create',$project)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('project.store',$project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-8">
