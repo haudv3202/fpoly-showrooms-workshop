@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Directory;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class DirectoryController extends Controller
@@ -33,7 +33,7 @@ class DirectoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Directory $directory)
+    public function show(Level $directory)
     {
         //
     }
@@ -41,11 +41,11 @@ class DirectoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Directory $directory)
+    public function edit(Level $directory)
     {
         return view("directorys.edit");
     }
-    public function details(Directory $directory)
+    public function details(Level $directory)
     {
         return view("directorys.details");
     }
@@ -53,7 +53,7 @@ class DirectoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Directory $directory)
+    public function update(Request $request, Level $directory)
     {
         //
     }
@@ -61,7 +61,7 @@ class DirectoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Directory $directory)
+    public function destroy(Level $directory)
     {
         //
     }

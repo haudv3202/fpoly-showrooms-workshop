@@ -92,6 +92,7 @@ class ProjectController extends Controller
             'project_id' =>  $newProjectID,
             'technical_id' => $newTechnicalID
         ]);
+        return redirect()->route('project.index');
     }
 
     /**
@@ -145,7 +146,7 @@ class ProjectController extends Controller
             'updated_at' => $requestData['updated_at']
         ]);
 
-        return redirect()->route('project-list');
+        return redirect()->route('project.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -157,7 +158,8 @@ class ProjectController extends Controller
         Project_domain::query()->where('project_id', $project->id)->delete();
         Images::query()->where('project_id', $project->id)->delete();
         $project->delete();
-        return redirect()->route('project-list');
+
+        return redirect()->route('project.index');
     }
     public function destroyImage($id)
     {
@@ -166,6 +168,6 @@ class ProjectController extends Controller
 
         $image->delete();
 
-        return redirect()->route('project-edit', ['project' => $projectId]);
+        return redirect()->route('project.edit', ['project' => $projectId]);
     }
 }
