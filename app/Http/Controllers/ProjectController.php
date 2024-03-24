@@ -10,7 +10,10 @@ use App\Models\Technical_project;
 use App\Models\Domain;
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Technical;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -30,11 +33,11 @@ class ProjectController extends Controller
         return view('projects.projectDetail', compact('id'));
     }
 
-    public function create()
+    public function create(Project $project)
     {
         $levels = Level::query()->select('name', 'id')->get();
         $users = User::query()->select('name', 'id')->get();
-        return view('projects.create', compact('levels', 'users'));
+        return view('projects.create', compact('levels', 'users', 'project'));
     }
 
     /**
@@ -42,7 +45,53 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        // project
+        $query = Project::create($requestData);
+        $newProjectID = $query->id;
+        // img
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                $extension = $image->getClientOriginalExtension();
+                $pathFile = $image->storeAs('storage/projects', $image->getClientOriginalName(), 'public');
+                $image->move(\public_path("storage/projects/"), $image->getClientOriginalName());
+                if ($pathFile) {
+                    $path =  $pathFile;
+
+                    Images::create([
+                        'image' => $path,
+                        'type' => $extension,
+                        'project_id' => $newProjectID,
+                        'created_at' => $requestData['create_at'],
+                        'updated_at' => $requestData['updated_at'],
+                    ]);
+                }
+            }
+        }
+        //domain
+        $newDomainID = Domain::create([
+            'name' => $requestData['domain_link'],
+            'created_at' => $requestData['create_at'],
+            'updated_at' => $requestData['updated_at'],
+        ]);
+        $newDomainID = $newDomainID->id;
+        // technical
+        $newTechnicalID = Technical::create([
+            'name' => $requestData['technical'],
+            'created_at' => $requestData['create_at'],
+            'updated_at' => $requestData['updated_at'],
+        ]);
+        $newTechnicalID = $newTechnicalID->id;
+        // domain_projects
+        Project_domain::create([
+            'project_id' =>  $newProjectID,
+            'subject_id' =>  $newDomainID
+        ]);
+        // technical_projects
+        Technical_project::create([
+            'project_id' =>  $newProjectID,
+            'technical_id' => $newTechnicalID
+        ]);
     }
 
     /**
@@ -50,9 +99,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -61,17 +108,45 @@ class ProjectController extends Controller
         $levels = Level::query()->select('name', 'id')->get();
         $users = User::query()->select('name', 'id')->get();
         $info = Project::select()->where('id', $project->id)->get();
-        return view('projects.edit', compact('levels', 'users', 'info'));
+        $images = Images::query()->select()->where('project_id', $project->id)->get();
+        return view('projects.edit', compact('levels', 'users', 'info', 'project', 'images'));
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Project $project)
     {
-        var_dump($request);
-    }
+        $requestData = $request->all();
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                $extension = $image->getClientOriginalExtension();
+                $pathFile = $image->storeAs('storage/projects', $image->getClientOriginalName(), 'public');
+                $image->move(\public_path("storage/projects/"), $image->getClientOriginalName());
+                if ($pathFile) {
+                    $path =  $pathFile;
 
+                    Images::create([
+                        'image' => $path,
+                        'type' => $extension,
+                        'project_id' => $requestData['id'],
+                        'created_at' => $requestData['updated_at'],
+                        'updated_at' => $requestData['updated_at'],
+                    ]);
+                }
+            }
+        }
+        $project->newQuery()->where('id', $requestData['id'])->update([
+            'name' => $requestData['name'],
+            'is_active' => $requestData['is_active'],
+            'is_highlight' => $requestData['is_highlight'],
+            'deploy_link' => $requestData['deploy_link'],
+            'level_id' => $requestData['level_id'],
+            'added_by' => $requestData['added_by'],
+            'updated_at' => $requestData['updated_at']
+        ]);
+
+        return redirect()->route('project-list');
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -83,5 +158,14 @@ class ProjectController extends Controller
         Images::query()->where('project_id', $project->id)->delete();
         $project->delete();
         return redirect()->route('project-list');
+    }
+    public function destroyImage($id)
+    {
+        $image = Images::findOrFail($id);
+        $projectId = $image->project_id;
+
+        $image->delete();
+
+        return redirect()->route('project-edit', ['project' => $projectId]);
     }
 }

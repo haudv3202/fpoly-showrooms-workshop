@@ -18,24 +18,27 @@
         </div>
     </div>
     <!-- end page title -->
-    <form action="{{route('project-create')}}" method="POST">
+    <form action="{{route('project-create',$project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    
                     <div class="card-body">
-                        <div class="mb-3">
+                        <div class="mb-3"> 
                             <label class="form-label" for="project-title-input">Project Title</label>
-                            <input type="text" class="form-control" name="id" id="project-title-input" placeholder="Enter project title">
+                            <input type="hidden" name="id"  id="">
+                            <input type="text" class="form-control" name="name" id="project-title-input" placeholder="Enter project title">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="project-thumbnail-img">Thumbnail Image</label>
-                            <input class="form-control" id="project-thumbnail-img" name="img[]" type="file" accept="image/png, image/gif, image/jpeg">
+                            <input class="form-control" id="project-thumbnail-img" name="img[]" type="file" accept="image/png, image/gif, image/jpeg" multiple>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Project Description</label>
                             <div>
-                                <textarea style="height: 200px; width: 100%;">
+                                <textarea name="description" style="height: 200px; width: 100%;">
+                                 
                                 </textarea>
                             </div>
                             
@@ -45,17 +48,21 @@
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-priority-input" class="form-label">Active</label>
-                                    <select class="form-select" data-choices="" name="Active" data-choices-search-false="" id="choices-priority-input">
-                                        <option value="1" selected="">Hoạt động</option>
+                                    <select class="form-select" data-choices="" name="is_active" data-choices-search-0="" id="choices-priority-input">
+                                       
+                                        <option value="1" >Hoạt động</option>
                                         <option value="0" >Dừng hoạt động</option>
+                                    
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-status-input" class="form-label">highlight</label>
-                                    <select class="form-select" data-choices="" name="highlight" data-choices-search-false="" id="choices-status-input"> <option value="1" selected="">Nổi bật</option>
-                                        <option value="0" >Không nổi bật</option>
+                                    <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input"> 
+                                       
+                                        <option value="1" >Nổi bật</option>
+                                        <option value="0" >Không nổi bật</option>   
                                     </select>
                                 </div>
                             </div>
@@ -64,7 +71,42 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 mb-lg-0 mt-3">
                                     <label for="datepicker-deadline-input" class="form-label">Deploy link</label>
-                                    <input type="text" class="form-control" name="link" id="datepicker-deadline-input" placeholder="Enter Deploy link" >
+                                    <input type="text" class="form-control" name="deploy_link" id="datepicker-deadline-input" placeholder="Enter Deploy link" >
+                                </div>
+                            </div>
+                        </div>
+                        
+                      
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3 mb-lg-0 mt-3">
+                                    <label for="datepicker-deadline-input" class="form-label">Domain link</label>
+                                    <input type="text" class="form-control" name="domain_link" id="datepicker-deadline-input" placeholder="Enter Domain link" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3 mb-lg-0 mt-3">
+                                    <label for="datepicker-deadline-input" class="form-label">Technical</label>
+                                    <input type="text" class="form-control" name="technical" id="datepicker-deadline-input" placeholder="Enter Technical" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3 mb-lg-0 mt-3">
+                                    <label for="datepicker-deadline-input" class="form-label">Create at</label>
+                                    <input type="datetime-local" class="form-control" name="create_at" id="datepicker-deadline-input" value="<?php echo now()->timezone('Asia/Ho_Chi_Minh')->format('Y-m-d\TH:i'); ?>" placeholder="Enter Deploy link">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3 mb-lg-0 mt-3">
+                                    <label for="datepicker-deadline-input" class="form-label">Update at</label>
+                                    <input type="datetime-local" class="form-control" name="updated_at" id="datepicker-deadline-input" value="<?php echo now()->timezone('Asia/Ho_Chi_Minh')->format('Y-m-d\TH:i'); ?>" placeholder="Enter Deploy link">
                                 </div>
                             </div>
                         </div>
@@ -113,9 +155,12 @@
                     <div class="card-body">
                         <div> 
                             <label for="choices-privacy-status-input" class="form-label">Levels</label>
-                            <select class="form-select" name="level" >
+                            <select class="form-select" name="level_id" >
                                 @foreach($levels as $level)
+                                
                                 <option value="{{$level->id}}" >{{$level->name}}</option>
+                            
+                                <
                                 @endforeach
                             </select>
                         </div>
@@ -129,9 +174,12 @@
                     <div class="card-body">
                         <div>
                             <label for="choices-privacy-status-input" class="form-label">Users</label>
-                            <select class="form-select" name="user" id="choices-privacy-status-input">
+                            <select class="form-select" name="added_by" id="choices-privacy-status-input">
                                 @foreach($users as $user)
-                                <option value="{{$user->id}}" >{{$user->name}}</option>
+                                
+                                <option  value="{{$user->id}}" >{{$user->name}}</option>
+                              
+                                
                                 @endforeach
                             </select>
                         </div>
@@ -147,7 +195,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="choices-categories-input" class="form-label">Categories</label>
-                            <select class="form-select" data-choices="" data-choices-search-false="" id="choices-categories-input">
+                            <select class="form-select" data-choices="" data-choices-search-0="" id="choices-categories-input">
                                 <option value="Designing" selected="">Designing</option>
                                 <option value="Development">Development</option>
                             </select>
@@ -169,7 +217,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="choices-lead-input" class="form-label">Team Lead</label>
-                            <select class="form-select" data-choices="" data-choices-search-false="" id="choices-lead-input">
+                            <select class="form-select" data-choices="" data-choices-search-0="" id="choices-lead-input">
                                 <option value="Brent Gonzalez" selected="">Brent Gonzalez</option>
                                 <option value="Darline Williams">Darline Williams</option>
                                 <option value="Sylvia Wright">Sylvia Wright</option>
@@ -214,7 +262,7 @@
                 <!-- end card -->
             </div>
             <!-- end col -->
-        </div>     
+        </div> 
     </form>
     
     <!-- end row -->

@@ -42,11 +42,12 @@ Route::get('directorys-list', [App\Http\Controllers\DirectoryController::class, 
 // });
 Route::get('project-list', [App\Http\Controllers\ProjectController::class, 'index'])->name('project-list');
 Route::get('project-edit/{project}', [App\Http\Controllers\ProjectController::class, 'edit'])->name('project-edit');
-Route::get('project-update', [App\Http\Controllers\ProjectController::class, 'update'])->name('project-update');
+Route::resource('project-update', App\Http\Controllers\ProjectController::class);
 Route::post('project-update', [App\Http\Controllers\ProjectController::class, 'update']);
 Route::get('project-create', [App\Http\Controllers\ProjectController::class, 'create'])->name('project-create');
-Route::post('project-create', [App\Http\Controllers\ProjectController::class, 'create']);
+Route::post('project-create', [App\Http\Controllers\ProjectController::class, 'store']);
 Route::get('project-delete/{project}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('project-delete');
+Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');
 
 Route::get('account-list', [App\Http\Controllers\AccountController::class, 'index'])->name('account-list');
 Route::get('account-edit', [App\Http\Controllers\AccountController::class, 'edit'])->name('account-edit');
