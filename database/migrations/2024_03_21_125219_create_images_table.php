@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->boolean('is_active');
-            $table->string('type',20);
-            $table->foreignIdFor(\App\Models\Project::class)->constrained()->index('fk_image_project');
+            $table->string('type', 20);
+            $table->unsignedInteger('project_id')->nullable();
             $table->timestamps();
         });
     }
