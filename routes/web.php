@@ -31,8 +31,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('directory', App\Http\Controllers\DirectoryController::class);
 Route::get('directory-update', [App\Http\Controllers\DirectoryController::class, 'update'])->name('directory-update');
 Route::post('directory-update',  [App\Http\Controllers\DirectoryController::class, 'update']);
+
+
 Route::resource('project', App\Http\Controllers\ProjectController::class);
 Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');;
+
+Route::resource('banner', App\Http\Controllers\BannerController::class);
 // Route::get('directorys-details', [App\Http\Controllers\DirectoryController::class, 'details'])->name('directorys-details');
 // Route::get('directorys-edit', [App\Http\Controllers\DirectoryController::class, 'edit'])->name('directorys-edit');
 // Route::get('directorys-create', [App\Http\Controllers\DirectoryController::class, 'create'])->name('directorys-create');
@@ -53,9 +57,6 @@ Route::get('contact-list', [App\Http\Controllers\ContactController::class, 'inde
 Route::get('contact-edit', [App\Http\Controllers\ContactController::class, 'edit'])->name('contact-edit');
 Route::get('contact-create', [App\Http\Controllers\ContactController::class, 'create'])->name('contact-create');
 
-Route::get('banner-list', [App\Http\Controllers\BannerController::class, 'index'])->name('banner-list');
-Route::get('banner-edit', [App\Http\Controllers\BannerController::class, 'edit'])->name('banner-edit');
-Route::get('banner-create', [App\Http\Controllers\BannerController::class, 'create'])->name('banner-create');
 
 Route::get('ourteam-list', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam-list');
 Route::get('ourteam-edit', [App\Http\Controllers\OurTeamController::class, 'edit'])->name('ourteam-edit');

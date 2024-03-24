@@ -856,13 +856,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('banner-list') }}">
+                            <a class="nav-link menu-link" href="{{ route('banner.index') }}">
                                 <i class="ri-pages-line"></i> <span data-key="t-banner">banner</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('banner-create') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-banner-create">banner create</span>
                             </a>
                         </li>
                         <li class="nav-item">
