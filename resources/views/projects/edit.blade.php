@@ -150,7 +150,7 @@
                 </div> --}}
                 <!-- end card -->
                 <div class="text-end mb-4">
-                    <button type="submit" class="btn btn-success w-sm">Update</button>
+                    <button type="submit" class="btn btn-success w-sm">Create</button>
                 </div>
             </div>
             <!-- end col -->
