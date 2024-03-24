@@ -27,8 +27,9 @@
                         <h5 class="card-title mb-0">Create New File</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('accounts.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('accounts.update',$account)}}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row g-3">
                                 <div class="col-lg-12">
                                     <h5 class="fw-semibold mb-3">Image, Video, Audio, or 3D Model</h5>
@@ -36,25 +37,26 @@
                                 </div><!--end col-->
                                 <div class="col-lg-12">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter user name">
+                                    <input type="text" class="form-control" id="name" value="{{$account->name}}" name="name" placeholder="Enter user name">
                                 </div><!--end col-->
                                 <div class="col-lg-12">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter user email">
+                                    <input type="email" class="form-control" id="email" value="{{$account->email}}" name="email" placeholder="Enter user email">
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="externalLink" class="form-label">Role</label>
                                     <select class="form-select" name="role" aria-label="Default select example">
-                                        <option value="author" selected>author</option>
-                                        <option value="admin">admin</option>
+                                        <option value="author" {{ $account->role == 'author' ? 'selected' : '' }}>author</option>
+                                        <option value="admin" {{ $account->role == 'admin' ? 'selected' : '' }}>admin</option>
                                     </select>
-                                </div><!--end col-->
+                                </div>
+                                <input type="hidden" name="img_old" value="{{$account->avatar}}">
+                                <!--end col-->
                                 <!--end col-->
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-primary">Create Item</button>
                                     </div>
                                 </div>
-                            </div><!--end row-->
                         </form>
                     </div>
                 </div>
