@@ -822,10 +822,10 @@
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="{{ route('ourteam-list') }}" class="nav-link" data-key="t-danh-sách"> Danh sách </a>
+                                        <a href="{{ route('ourteams.index') }}" class="nav-link" data-key="t-danh-sách"> Danh sách </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('ourteam-create') }}" class="nav-link" data-key="t-thêm-mới"> Thêm mới </a>
+                                        <a href="{{ route('ourteams.create') }}" class="nav-link" data-key="t-thêm-mới"> Thêm mới </a>
                                     </li>
                                 </ul>
                             </div>

@@ -56,7 +56,10 @@ Route::get('contact-edit', [App\Http\Controllers\ContactController::class, 'edit
 Route::get('contact-create', [App\Http\Controllers\ContactController::class, 'create'])->name('contact-create');
 
 
-Route::get('ourteam-list', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam-list');
-Route::get('ourteam-edit', [App\Http\Controllers\OurTeamController::class, 'edit'])->name('ourteam-edit');
-Route::get('ourteam-create', [App\Http\Controllers\OurTeamController::class, 'create'])->name('ourteam-create');
-Route::get('ourteam-details', [App\Http\Controllers\OurTeamController::class, 'details'])->name('ourteam-details');
+//Route::get('ourteam-list', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam-list');
+//Route::get('ourteam-edit/{id}', [App\Http\Controllers\OurTeamController::class, 'edit'])->name('ourteam-edit');
+//Route::get('ourteam-create', [App\Http\Controllers\OurTeamController::class, 'create'])->name('ourteam-create');
+//Route::get('ourteam-details', [App\Http\Controllers\OurTeamController::class, 'details'])->name('ourteam-details');
+Route::resource("ourteams",\App\Http\Controllers\OurTeamController::class);
+Route::post('ourteams/addMembers', [\App\Http\Controllers\OurTeamController::class, 'addMembers'])->name('ourteams.addMembers');
+Route::post('ourteams/deleteMembers', [\App\Http\Controllers\OurTeamController::class, 'deleteMembers'])->name('ourteams.deleteMembers');
