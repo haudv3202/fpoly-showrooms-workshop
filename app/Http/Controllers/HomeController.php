@@ -33,7 +33,6 @@ class HomeController extends Controller
             ->where([
                 ['projects.is_active', '=', 1],
                 ['projects.is_highlight', '=', 1],
-
             ])
             ->groupBy('projects.id')
             ->get();
