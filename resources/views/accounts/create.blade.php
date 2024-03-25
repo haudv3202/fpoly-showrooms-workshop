@@ -54,7 +54,6 @@
                                         <button type="submit" class="btn btn-primary">Create Item</button>
                                     </div>
                                 </div>
-                            </div><!--end row-->
                         </form>
                     </div>
                 </div>
