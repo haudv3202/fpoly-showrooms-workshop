@@ -22,7 +22,6 @@ Route::get('/register', [App\Http\Controllers\LoginController::class, 'register'
 Route::post('/register', [App\Http\Controllers\LoginController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/danhmuc', [App\Http\Controllers\ProjectController::class, 'index'])->name('product');
-Route::get('/projectDetail/{id}', [App\Http\Controllers\ProjectController::class, 'projectDetail'])->name('projectDetail');
 Route::get('/ourteam', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam');
 
 
@@ -49,7 +48,7 @@ Route::resource('banner', App\Http\Controllers\BannerController::class);
 // });
 
 
-Route::resource("accounts",\App\Http\Controllers\AccountController::class);
+Route::resource("accounts", \App\Http\Controllers\AccountController::class);
 Route::post('accounts/{account}', [\App\Http\Controllers\AccountController::class, 'update'])->name('accounts.update');
 
 Route::get('contact-list', [App\Http\Controllers\ContactController::class, 'index'])->name('contact-list');

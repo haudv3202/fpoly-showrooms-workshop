@@ -28,10 +28,6 @@ class ProjectController extends Controller
             ->get();
         return view('projects.list', compact('projects'));
     }
-    public function projectDetail($id)
-    {
-        return view('projects.projectDetail', compact('id'));
-    }
 
     public function create(Project $project)
     {
@@ -98,8 +94,50 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show($id)
     {
+
+        $views = Project::query()
+            ->select('views')
+            ->where('id', $id)
+            ->get();
+
+
+        Project::query()
+            ->where('id', $id)
+            ->update([
+                'views' => $views[0]->views + 1
+            ]);
+
+        $projectDetails = Project::query()->select(
+            'projects.name',
+            'projects.description',
+            'projects.views',
+            'projects.created_at',
+            'projects.updated_at',
+            'domains.name AS domain_name',
+            'technicals.name AS technical_name',
+            'levels.name AS level_name'
+        )
+            ->leftJoin('project_domains', 'project_domains.project_id', '=', 'projects.id')
+            ->leftJoin('domains', 'domains.id', '=', 'project_domains.subject_id')
+            ->leftJoin('technical_projects', 'technical_projects.project_id', '=', 'projects.id')
+            ->leftJoin('technicals', 'technicals.id', '=', 'technical_projects.technical_id')
+            ->leftJoin('levels', 'levels.id', '=', 'projects.level_id')
+            ->where('projects.id', '=', $id)
+            ->get();
+
+        $images = Images::query()->where('project_id', '=', $id)->get();
+        $projects = Project::query()->select('projects.*', DB::raw('MIN(images.image) AS image'))
+            ->join('images', 'images.project_id', '=', 'projects.id')
+            ->where([
+                ['projects.is_active', '=', 1],
+                ['projects.is_highlight', '=', 1],
+
+            ])
+            ->groupBy('projects.id')
+            ->get();
+        return view('projects.projectDetail', compact('projects', 'projectDetails', 'images', 'views'));
     }
     /**
      * Show the form for editing the specified resource.
