@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProjectController;
 /*
@@ -20,6 +21,13 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->na
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'index']);
 Route::get('/register', [App\Http\Controllers\LoginController::class, 'register'])->name('register');
 Route::post('/register', [App\Http\Controllers\LoginController::class, 'register']);
+
+
+// Route::get('/loginGoogle', function () {
+//     return Socialite::driver('google')->redirect();
+// })->name('loginGoogle');
+Route::get('/auth/callback', [App\Http\Controllers\LoginController::class, 'show']);
+
 
 Route::get('/ourteam', [App\Http\Controllers\OurTeamController::class, 'index'])->name('ourteam');
 
