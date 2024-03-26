@@ -8,6 +8,7 @@ use App\Models\Technical;
 use App\Models\Technical_project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OurTeamController extends Controller
 {
@@ -18,11 +19,21 @@ class OurTeamController extends Controller
     {
         $role = config('app.role');
 
-        if (isset($role) && $role == "admin"){
+        if (isset($role) && $role == "admin") {
             $ourteam = Technical::query()->latest('id')->paginate(12);
-            return view('ourteams.list',compact('ourteam'));
-        }else{
-            return view('ourteams.ourteam');
+            return view('ourteams.list', compact('ourteam'));
+        } else {
+            $ourteam = Technical::query()
+                ->latest('id')
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('technical_projects')
+                        ->whereColumn('technicals.id', 'technical_projects.technical_id');
+                })
+                ->paginate(12);
+
+
+            return view('ourteams.ourteam', compact('ourteam'));
         }
     }
 
@@ -32,7 +43,7 @@ class OurTeamController extends Controller
     public function create()
     {
         $project = Project::query()->latest('id')->paginate();
-        return view('ourteams.create',compact('project'));
+        return view('ourteams.create', compact('project'));
     }
     public function details()
     {
@@ -66,7 +77,7 @@ class OurTeamController extends Controller
             ->join('users', 'project_users.author_id', '=', 'users.id')
             ->select('users.id', 'users.name', 'users.email', 'users.avatar', 'users.role')
             ->latest('id')->paginate();
-        return view('ourteams.details',compact('project_users','project_id'));
+        return view('ourteams.details', compact('project_users', 'project_id'));
     }
     public function deleteMembers(Request $request)
     {
@@ -155,5 +166,32 @@ class OurTeamController extends Controller
     public function destroy(Technical $ourTeam)
     {
         dd($ourTeam);
+    }
+
+    public function viewMore($id)
+    {
+
+        $technicalProject = Technical_project::where('technical_id', $id)->firstOrFail();
+
+        $project_id = $technicalProject->project_id;
+
+        $project_users = Project_user::where('project_id', $technicalProject->project_id)
+            ->join('users', 'project_users.author_id', '=', 'users.id')
+            ->select('users.id', 'users.name', 'users.email', 'users.avatar', 'users.role')
+            ->latest('id')->paginate();
+        $project = Project::query()->select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'users.name as added_by_name', 'projects.is_highlight', 'projects.views', 'projects.is_active', 'projects.created_at', 'projects.updated_at', DB::raw('MIN(images.image) AS image'))
+            ->join('levels', 'projects.level_id', '=', 'levels.id')
+            ->join('users', 'projects.added_by', '=', 'users.id')
+            ->join('images', 'images.project_id', '=', 'projects.id')
+            ->where('projects.id', '=', $project_id)
+            ->groupBy('projects.id')
+            ->get();
+        $domain = Project::query()->select('domains.name')
+            ->join('project_domains', 'project_domains.project_id', '=', 'projects.id')
+            ->join('domains', 'domains.id', '=', 'project_domains.subject_id')
+            ->where('projects.id', '=', $project_id)
+            ->get();
+
+        return view('ourteams.ourteamDetail', compact('project_users', 'project_id', 'project', 'domain'));
     }
 }
