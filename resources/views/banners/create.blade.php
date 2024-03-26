@@ -10,7 +10,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{route('banner.index')}}">Banner</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('banner.index')}}">Banners</a></li>
                         <li class="breadcrumb-item active">Create banner</li>
                     </ol>
                 </div>

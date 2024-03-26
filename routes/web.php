@@ -18,6 +18,8 @@ use App\Http\Controllers\ProjectController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::get('/loginGoogle', [App\Http\Controllers\LoginController::class, 'loginGoogle'])->name('loginGoogle');
+Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'index']);
 Route::get('/register', [App\Http\Controllers\LoginController::class, 'register'])->name('register');
 Route::post('/register', [App\Http\Controllers\LoginController::class, 'register']);

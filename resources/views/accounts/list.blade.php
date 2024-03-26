@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Leads</h4>
+                <h4 class="mb-sm-0">Accounts list</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                        <li class="breadcrumb-item active">Leads</li>
+                        <li class="breadcrumb-item"><a href="{{route('accounts.index')}}">Accounts</a></li>
+                        <li class="breadcrumb-item active">Accounts list</li>
                     </ol>
                 </div>
 
@@ -35,7 +35,7 @@
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
                                 <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{route('accounts.create')}}"><button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Leads</button></a>
+                                <a href="{{route('accounts.create')}}"><button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><i class="ri-add-line align-bottom me-1"></i> Add Accounts</button></a>
 
                             </div>
                         </div>

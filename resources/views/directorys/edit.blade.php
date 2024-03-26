@@ -9,8 +9,8 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                        <li class="breadcrumb-item active">Create Project</li>
+                        <li class="breadcrumb-item"><a href="{{route('directory.index')}}">Directorys</a></li>
+                        <li class="breadcrumb-item active">Update directory</li>
                     </ol>
                 </div>
 
