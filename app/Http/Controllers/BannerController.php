@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
+use App\Models\Images;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -12,8 +14,11 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('banners.list');
+        $banners = Images::query()->where('project_id', null)->get();
+        $bannerCount = Images::query()->where('project_id', null)->count();
+        return view('banners.list', compact('banners', 'bannerCount'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -26,40 +31,78 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Images $images)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $requestData = $request->all();
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $extension = $image->getClientOriginalExtension();
+                $pathFile = $image->storeAs('storage/banners', $image->getClientOriginalName(), 'public');
+                $image->move(\public_path("storage/banners/"), $image->getClientOriginalName());
+                Images::query()->create(
+                    [
+                        'image' => $pathFile,
+                        'is_active' => 0,
+                        'type' => $extension,
+                        'created_at' => $requestData['create_at'],
+                        'updated_at' => $requestData['updated_at'],
+                    ]
+                );
+                return redirect()->route('banner.index');
+            } else {
+                return redirect()->route('banner.create');
+            }
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Banner $banner)
-    {
-        return view('banners.edit');
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update($id)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $active = Images::query()->where('id', $id)->value('is_active');
+            if ($active == 1) {
+
+                Images::query()->where('id', $id)->update([
+                    'is_active' => 0
+                ]);
+            } else {
+
+                Images::query()->where('id', $id)->update([
+                    'is_active' => 1
+                ]);
+            }
+            return redirect()->route('banner.index');
+        } else {
+            return redirect()->route('login');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Banner $banner)
+    public function destroy($image)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            Images::query()->where('id', $image)->delete();
+            return redirect()->route('banner.index');
+        } else {
+            return redirect()->route('login');
+        }
     }
 }
