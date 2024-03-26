@@ -596,7 +596,7 @@
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="ri-dashboard-2-line"></i> <span data-key="t-our-team">Our Team</span>
+                                <i class="ri-team-line"></i> <span data-key="t-our-team">Our Team</span>
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
                                 <ul class="nav nav-sm flex-column">
@@ -614,14 +614,14 @@
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('accounts.index') }}">
-                                <i class="ri-account-circle-line"></i> <span data-key="t-tài-khoản">Tài khoản</span>
+                                <i class="ri-account-circle-line"></i> <span data-key="t-tài-khoản">Accounts</span>
                             </a>
 
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('directory.index') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-danh-mục">Danh mục</span>
+                                <i class="ri-pages-line"></i> <span data-key="t-danh-mục">Diectorys</span>
                             </a>
                         </li>
                         {{-- <li class="nav-item">
@@ -636,12 +636,12 @@
                         </li> --}}
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('banner.index') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-banner">banner</span>
+                                <i class="bx bx-images"></i> <span data-key="t-banner">Banners</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('project.index') }}">
-                                <i class="ri-pages-line"></i> <span data-key="t-dự-án">Dự án</span>
+                                <i class="las la-folder-open"></i> <span data-key="t-dự-án">Projects</span>
                             </a>
                         </li>
                     </ul>

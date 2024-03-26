@@ -64,8 +64,8 @@
         <header>
             <div class="container">
                 <div class="top-bar">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 order-md-last">
+                    <div class="row align-items-center p-3" >
+                        {{-- <div class="col-md-6 order-md-last">
                             <div class="social-icons">
                                 <ul class="list-unstyled">
                                     <li>
@@ -103,7 +103,7 @@
                                 <a href="/support">Support</a>
                                 <a href="/login">Login</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -118,12 +118,13 @@
                         <a href="#" id="search_home"
                             ><i class="srn-search"></i> </a
                         ><a
+                        href="login"
                             class="signup-btn btn btn-outline-primary text-nowrap"
                             data-trigger="#signup"
                             ><span class="d-none d-sm-inline-block"
                                 ><span class="outer-wrap"
-                                    ><span data-text="Sing Up"
-                                        >Sing Up</span
+                                    ><span data-text="Sing In"
+                                        >Sing In</span
                                     ></span
                                 ></span
                             >

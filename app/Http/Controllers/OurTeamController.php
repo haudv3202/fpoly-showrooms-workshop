@@ -75,6 +75,7 @@ class OurTeamController extends Controller
     public function show(Request $request, $id)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            // thêm điều khien khi rong  Technical_project va Project_user
             $technical = Technical::findOrFail($id);
             $technicalProject = Technical_project::where('technical_id', $technical->id)->firstOrFail();
             $project_id = $technicalProject->project_id;
@@ -189,32 +190,31 @@ class OurTeamController extends Controller
 
     public function viewMore($id)
     {
+        $technicalProject = Technical_project::where('technical_id', $id)
+            ->orderByDesc('project_id')
+            ->firstOrFail();
 
-        if (Auth::check() && Auth::user()->role == 'admin') {
-            $technicalProject = Technical_project::where('technical_id', $id)->firstOrFail();
+        $project_id = $technicalProject->project_id;
+        // DB::enableQueryLog();
+        $project_users = Project_user::where('project_id', $technicalProject->project_id)
+            ->join('users', 'project_users.author_id', '=', 'users.id')
+            ->select('users.id', 'users.name', 'users.email', 'users.avatar', 'users.role')
+            ->latest('id')->paginate();
+        // $queries = DB::getQueryLog();
+        // dd($technicalProject);
+        $project = Project::query()->select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'users.name as added_by_name', 'projects.is_highlight', 'projects.views', 'projects.is_active', 'projects.created_at', 'projects.updated_at', DB::raw('MIN(images.image) AS image'))
+            ->join('levels', 'projects.level_id', '=', 'levels.id')
+            ->join('users', 'projects.added_by', '=', 'users.id')
+            ->join('images', 'images.project_id', '=', 'projects.id')
+            ->where('projects.id', '=', $project_id)
+            ->groupBy('projects.id')
+            ->get();
+        $domain = Project::query()->select('domains.name')
+            ->join('project_domains', 'project_domains.project_id', '=', 'projects.id')
+            ->join('domains', 'domains.id', '=', 'project_domains.subject_id')
+            ->where('projects.id', '=', $project_id)
+            ->get();
 
-            $project_id = $technicalProject->project_id;
-
-            $project_users = Project_user::where('project_id', $technicalProject->project_id)
-                ->join('users', 'project_users.author_id', '=', 'users.id')
-                ->select('users.id', 'users.name', 'users.email', 'users.avatar', 'users.role')
-                ->latest('id')->paginate();
-            $project = Project::query()->select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'users.name as added_by_name', 'projects.is_highlight', 'projects.views', 'projects.is_active', 'projects.created_at', 'projects.updated_at', DB::raw('MIN(images.image) AS image'))
-                ->join('levels', 'projects.level_id', '=', 'levels.id')
-                ->join('users', 'projects.added_by', '=', 'users.id')
-                ->join('images', 'images.project_id', '=', 'projects.id')
-                ->where('projects.id', '=', $project_id)
-                ->groupBy('projects.id')
-                ->get();
-            $domain = Project::query()->select('domains.name')
-                ->join('project_domains', 'project_domains.project_id', '=', 'projects.id')
-                ->join('domains', 'domains.id', '=', 'project_domains.subject_id')
-                ->where('projects.id', '=', $project_id)
-                ->get();
-
-            return view('ourteams.ourteamDetail', compact('project_users', 'project_id', 'project', 'domain'));
-        } else {
-            return redirect()->route('login');
-        }
+        return view('ourteams.ourteamDetail', compact('project_users', 'project_id', 'project', 'domain'));
     }
 }
