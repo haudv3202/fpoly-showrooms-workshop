@@ -104,20 +104,20 @@
                         id="testimonials-slider-shadow"
                     >
                     @foreach ($project_users as $project_user)
-                        
-                    @endforeach
-                        <div class="item">
-                            <div class="testimonial-shadow">
-                                <div class="thumb-img">
-                                    <img src="{{asset($project_user->avatar)}}" alt />
-                                </div>
-                                <h6 class="name">{{$project_user->name}}</h6>
-                                <div class="post">
-                                    {{$project_user->email}}
-                                </div>
-                                
+                    <div class="item">
+                        <div class="testimonial-shadow">
+                            <div class="thumb-img">
+                                <img src="{{asset($project_user->avatar)}}" alt />
                             </div>
+                            <h6 class="name">{{$project_user->name}}</h6>
+                            <div class="post">
+                                {{$project_user->email}}
+                            </div>
+                            
                         </div>
+                    </div>
+                    @endforeach
+                       
                         {{-- <div class="item">
                             <div class="testimonial-shadow">
                                 <div class="thumb-img">
