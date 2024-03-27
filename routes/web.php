@@ -40,7 +40,7 @@ Route::resource('directory', App\Http\Controllers\DirectoryController::class);
 Route::get('directory-update', [App\Http\Controllers\DirectoryController::class, 'update'])->name('directory-update');
 Route::post('directory-update',  [App\Http\Controllers\DirectoryController::class, 'update']);
 Route::get('/danhmuc', [App\Http\Controllers\DirectoryController::class, 'directory'])->name('directory');
-
+Route::post('search',  [App\Http\Controllers\ProjectController::class, 'search'])->name('search');
 
 Route::resource('project', App\Http\Controllers\ProjectController::class);
 Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');;
