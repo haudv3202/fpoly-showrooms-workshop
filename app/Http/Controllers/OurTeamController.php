@@ -19,7 +19,13 @@ class OurTeamController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $ourteam = Technical::query()->latest('id')->paginate(12);
+            $ourteam = Technical::whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('technical_projects')
+                    ->whereColumn('technical_projects.technical_id', 'technicals.id');
+            })
+                ->latest('id')
+                ->paginate(12);
             return view('ourteams.list', compact('ourteam'));
         } else {
             $ourteam = Technical::query()
