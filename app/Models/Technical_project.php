@@ -14,11 +14,11 @@ class Technical_project extends Model
         'project_id',
         'technical_id',
     ];
-    public function leve()
+    public function project()
     {
         return $this->belongsTo(Project::class);
     }
-    public function user()
+    public function technical()
     {
         return $this->belongsTo(Technical::class);
     }

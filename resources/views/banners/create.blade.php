@@ -37,7 +37,7 @@
                                     <a class="filepond--credits" aria-hidden="true" href="https://pqina.nl/" target="_blank" rel="noopener noreferrer" style="transform: translateY(68px);">Powered by PQINA</a>
                                     <div class="filepond--drop-label" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">
                                         <label for="filepond--browser-y69agen2a" id="filepond--drop-label-y69agen2a" aria-hidden="true">
-                                            Drag &amp; Drop your files or 
+                                            Drag &amp; Drop your files or
                                             <span class="filepond--label-action" tabindex="0">Browse</span>
                                         </label>
                                     </div>
@@ -76,6 +76,15 @@
                                 </div>
                             </div>
                         </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="col-lg-12">
                                 <div class="text-end">
                                     <button class="btn btn-primary">Create Item</button>

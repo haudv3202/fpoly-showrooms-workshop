@@ -7,14 +7,14 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">Ourteeams create</h4>
-    
+
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('ourteams.index')}}">Ourteeams</a></li>
                             <li class="breadcrumb-item active">Ourteeams create</li>
                         </ol>
                     </div>
-    
+
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter user name">
                                 </div><!--end col-->
                                 <div class="col-lg-12">
-                                    <label for="externalLink" class="form-label">Role</label>
+                                    <label for="externalLink" class="form-label">Project</label>
                                     <select class="form-select" name="project_id" aria-label="Default select example">
                                         @foreach($project as $pro)
                                             <option value="{{$pro->id}}">{{$pro->name}}</option>
@@ -44,11 +44,21 @@
                                     </select>
                                 </div><!--end col-->
                                 <!--end col-->
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="text-end">
                                     <button type="submit" class="btn btn-primary">Create Item</button>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div><!--end col-->

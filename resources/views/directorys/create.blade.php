@@ -23,25 +23,34 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
-                    
+
                     <div class="card-body">
-                        <div class="mb-3"> 
+                        <div class="mb-3">
                             <label class="form-label" for="project-title-input">Directory Title</label>
                             <input type="hidden" name="id"  id="">
                             <input type="text" class="form-control" name="name" id="project-title-input" placeholder="Enter project title">
                         </div>
-                      
+
                         <div class="mb-3">
                             <label class="form-label">Directory Description</label>
                             <div>
                                 <textarea name="description" style="height: 200px; width: 100%;">
-                                 
+
                                 </textarea>
                             </div>
                         </div>
                     </div>
                     <!-- end card body -->
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- end card -->
                 <!-- end card -->
                 <div class="text-end mb-4">
@@ -69,9 +78,9 @@
                 </div>
             </div>
             <!-- end col -->
-        </div> 
+        </div>
     </form>
-    
+
     <!-- end row -->
 
 </div>

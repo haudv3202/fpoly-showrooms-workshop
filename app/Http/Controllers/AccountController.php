@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AccountRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,14 +38,9 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-            ]);
-
             $data = $request->except('avatar');
 
             if ($request->hasFile('image')) {

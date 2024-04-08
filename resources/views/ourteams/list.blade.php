@@ -83,10 +83,10 @@
                                     <div class="mt-auto">
                                         <div class="d-flex mb-2">
                                             <div class="flex-grow-1">
-                                                <div>Amount</div>
+                                                <div></div>
                                             </div>
                                             <div class="flex-shrink-0">
-                                                <div><i class="ri-list-check align-bottom me-1 text-muted"></i> 42</div>
+                                                <div><i class="ri-list-check align-bottom me-1 text-muted"></i></div>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm animated-progress">
@@ -103,14 +103,11 @@
                                         <div class="avatar-group">
                                             <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Darline Williams" data-bs-original-title="Darline Williams">
                                                 <div class="avatar-xxs">
-                                                    <img src="{{ asset('theme/admin/assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle img-fluid">
                                                 </div>
                                             </a>
                                             <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" data-bs-original-title="Add Members">
                                                 <div class="avatar-xxs">
-                                                    <div class="avatar-title fs-16 rounded-circle bg-light border-dashed border text-primary">
-                                                        +
-                                                    </div>
+
                                                 </div>
                                             </a>
                                         </div>

@@ -34,6 +34,9 @@ class BannerController extends Controller
     public function store(Request $request, Images $images)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'image' => 'required|image',
+            ]);
             $requestData = $request->all();
             if ($request->hasFile('image')) {
                 $image = $request->file('image');

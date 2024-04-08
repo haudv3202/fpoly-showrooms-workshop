@@ -7,14 +7,14 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">Accounts edit</h4>
-    
+
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('accounts.index')}}">Accounts</a></li>
                             <li class="breadcrumb-item active">Accounts edit</li>
                         </ol>
                     </div>
-    
+
                 </div>
             </div>
         </div>
@@ -26,6 +26,15 @@
                     <div class="card-header">
                         <h5 class="card-title mb-0">Edit account</h5>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <form action="{{route('accounts.update',$account)}}" method="post" enctype="multipart/form-data">
                             @csrf
