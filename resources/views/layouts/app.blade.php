@@ -112,12 +112,13 @@
                     <a class="navbar-brand" href="/"
                         ><img src="{{asset('theme/client/assets/images/logo_purple.svg')}}" alt
                     /></a>
-                    <form
+                    <form action="" method="POST" enctype="multipart/form"
                         class="d-flex order-lg-last ms-3 align-items-center"
                     >
                         <a href="#" id="search_home"
                             ><i class="srn-search"></i> </a
-                        ><a
+                        >
+                        <a
                         href="login"
                             class="signup-btn btn btn-outline-primary text-nowrap"
                             data-trigger="#signup"
@@ -518,7 +519,8 @@
         ><i class="bi bi-chevron-up"></i
     ></a>
     <div class="overlay overlay-hugeinc">
-        <form class="form-inline mt-2 mt-md-0">
+        <form action="{{route('search')}}" method="POST" enctype="multipart/form-data" class="form-inline mt-2 mt-md-0">
+            @csrf
             <div class="form-inner">
                 <div class="form-inner-div hstack">
                     <i class="srn-search"></i>
@@ -526,6 +528,7 @@
                         <input
                             class="form-control form-light"
                             type="text"
+                            name="search"
                             placeholder="Search"
                             aria-label="Search"
                         />
