@@ -253,4 +253,33 @@ class ProjectController extends Controller
             return redirect()->route('login');
         }
     }
+    public function search(Request $request)
+    {
+        $requestData = $request->all();
+
+
+        $searchQuery = isset($requestData['search']) ? $requestData['search'] : '';
+
+        $directorys = Level::query()
+            ->whereExists(function ($query) use ($searchQuery) {
+                $query->select(DB::raw(1))
+                    ->from('projects')
+                    ->whereColumn('level_id', 'levels.id')
+                    ->where(function ($query) use ($searchQuery) {
+                        $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+                    });
+            })
+            ->get();
+
+        $projects = Project::select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'projects.views', DB::raw('MIN(images.image) AS image'))
+            ->join('levels', 'levels.id', '=', 'projects.level_id')
+            ->join('images', 'images.project_id', '=', 'projects.id')
+            ->where(function ($query) use ($searchQuery) {
+                $query->where('projects.name', 'LIKE', '%' . $searchQuery . '%');
+            })
+            ->groupBy('projects.id')
+            ->get();
+
+        return view("directorys.directory", compact('directorys', 'projects'));
+    }
 }

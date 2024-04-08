@@ -49,7 +49,6 @@
         </div>        
     </div>
 </div>
-
 </div>
 </div>
 <style>
@@ -102,7 +101,7 @@
         </div>
         @endforeach
     </div>
-    
+
 </section>
 <section class="section-spacing pt-0">
     <div class="container">
@@ -111,16 +110,16 @@
                 <div class="section-title">
                     <h2 class="wow">
                         <strong
-                            >Website design and development</strong
+                            >Teams project: {{$technical->name}}</strong
                         >
                     </h2>
-                    <p>
+                    {{-- <p>
                         We help transform your brand into a visual
                         story. We turn your website into a powerful
                         way to engage with your audience and a
                         high-performing marketing tool for your
                         enterprise.
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>
@@ -128,7 +127,7 @@
             <div class="col-lg-6 mb-0">
                 <div class="img-gradient">
                     <img
-                        src="{{ asset('theme/client/assets/images/services_single_img.jpg') }}"
+                        src="{{ asset($project->image) }}"
                         alt
                     />
                 </div>
@@ -137,36 +136,23 @@
                 <h3
                     class="txt-secondary mb-4 fw-7 text-capitalize wow fadeInUp"
                 >
-                    About our web services
+                {{$project->name}}
                 </h3>
                 <p>
-                    Web design is a Web development process for
-                    creating a website that focuses on aesthetic
-                    factors like layout, user interface and other
-                    visual imagery in order to make the website more
-                    visually appealing and easy to use.
+                    {{$project->description}}
                 </p>
+                <h5>Members of the team</h5>
                 <ul
                     class="list-unstyled icons-listing theme-dark check w-half"
                 >
-                    <li>Improve productivity and performance</li>
-                    <li>
-                        Get peace of mind knowing your services are
-                        in trusted hands
-                    </li>
-                    <li>Reduce your service costs</li>
-                    <li>Hassle-free setup & management</li>
-                    <li>
-                        Lifetime license, No monthly or yearly fee
-                    </li>
-                    <li>
-                        User-friendly admin & reporting features
-                    </li>
+                @foreach ($project_users as $project_user)
+                        <li>{{$project_user->name}}</li>
+                @endforeach
                 </ul>
-                <a href="contact.html" class="btn btn-default mt-3"
+                <a href="{{$domain[0]->name}}" class="btn btn-default mt-3"
                     ><span class="outer-wrap"
                         ><span data-text="Get a quote"
-                            >Get a quote</span
+                            >To the project</span
                         ></span
                     ></a
                 >
