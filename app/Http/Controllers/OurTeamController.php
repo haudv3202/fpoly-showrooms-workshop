@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OurTeamRequest;
 use App\Models\Project;
 use App\Models\Project_user;
 use App\Models\Technical;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OurTeamController extends Controller
 {
@@ -42,7 +44,9 @@ class OurTeamController extends Controller
     public function create()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $project = Project::query()->latest('id')->paginate();
+
+            $project = Project::whereDoesntHave('technical_project')->get();
+
             return view('ourteams.create', compact('project'));
         } else {
             return redirect()->route('login');
@@ -53,7 +57,7 @@ class OurTeamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OurTeamRequest $request)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
             $technical = Technical::create(['name' => $request->name]);
@@ -114,9 +118,10 @@ class OurTeamController extends Controller
             $request->validate([
                 'email' => 'required|email',
             ]);
+
             $user = User::where('email', $request->email)->first();
             if (!$user) {
-                $_SESSION['err'] = "Người dùng không tồn tại";
+                Session::flash('error', 'User does not exist');
                 return back();
             }
 
@@ -124,7 +129,7 @@ class OurTeamController extends Controller
                 ->where('author_id', $user->id)
                 ->exists();
             if ($isExist) {
-                $_SESSION['err'] = "Người dùng đã có trong Our Team";
+                Session::flash('error', 'User already exists in Our Team');
                 return back();
             }
 
@@ -136,7 +141,7 @@ class OurTeamController extends Controller
                 Project_user::create($data);
                 return back();
             } catch (\Exception $e) {
-                $_SESSION['err'] = "Đã xảy ra lỗi khi thêm người dùng vào Our Team";
+                Session::flash('error', 'An error occurred while adding the user to Our Team');
                 return back();
             }
         } else {
@@ -152,27 +157,34 @@ class OurTeamController extends Controller
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
             $technical = Technical::findOrFail($id);
-            $project = Project::query()->latest('id')->paginate();
-            return view('ourteams.edit', compact('technical', 'project', 'technical'));
+            $technical_project = Technical_project::where('technical_id', $id)->get();
+            $projectIds = $technical_project->pluck('project_id');
+            $projectsInTechnical = Project::whereIn('id', $projectIds)->get();
+
+            $project = Project::whereDoesntHave('technical_project')->get();
+//            dd($projectsInTechnical);
+            return view('ourteams.edit', compact('technical', 'project', 'projectsInTechnical'));
         } else {
             return redirect()->route('login');
         }
     }
 
 
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(OurTeamRequest $request, $id)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+
             $technical = Technical::findOrFail($id);
 
             $technical->update(['name' => $request->name]);
 
             $technicalProject = Technical_project::where('technical_id', $technical->id)->firstOrFail();
 
-            $technicalProject->update(['project_id' => $request->project_id]);
+            $technicalProject->where('technical_id', $technical->id)->update(['project_id' => $request->project_id]);
 
             return redirect()->route('ourteams.index');
         } else {

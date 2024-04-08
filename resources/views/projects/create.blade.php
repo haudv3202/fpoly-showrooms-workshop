@@ -23,9 +23,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
-                    
+
                     <div class="card-body">
-                        <div class="mb-3"> 
+                        <div class="mb-3">
                             <label class="form-label" for="project-title-input">Project Title</label>
                             <input type="hidden" name="id"  id="">
                             <input type="text" class="form-control" name="name" id="project-title-input" placeholder="Enter project title">
@@ -38,31 +38,31 @@
                             <label class="form-label">Project Description</label>
                             <div>
                                 <textarea name="description" style="height: 200px; width: 100%;">
-                                 
+
                                 </textarea>
                             </div>
-                            
+
                         </div>
-    
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-priority-input" class="form-label">Active</label>
                                     <select class="form-select" data-choices="" name="is_active" data-choices-search-0="" id="choices-priority-input">
-                                       
+
                                         <option value="1" >Hoạt động</option>
                                         <option value="0" >Dừng hoạt động</option>
-                                    
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-status-input" class="form-label">highlight</label>
-                                    <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input"> 
-                                       
+                                    <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input">
+
                                         <option value="1" >Nổi bật</option>
-                                        <option value="0" >Không nổi bật</option>   
+                                        <option value="0" >Không nổi bật</option>
                                     </select>
                                 </div>
                             </div>
@@ -75,8 +75,8 @@
                                 </div>
                             </div>
                         </div>
-                        
-                      
+
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3 mb-lg-0 mt-3">
@@ -114,7 +114,7 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Attached files</h5>
@@ -122,26 +122,35 @@
                     <div class="card-body">
                         <div>
                             <p class="text-muted">Add Attached files here.</p>
-    
+
                             <div class="dropzone dz-clickable">
-    
+
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
                                         <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
                                     </div>
-    
+
                                     <h5>Drop files here or click to upload.</h5>
                                 </div>
                             </div>
-    
+
                             <ul class="list-unstyled mb-0" id="dropzone-preview">
-    
+
                             </ul>
                             <!-- end dropzon-preview -->
                         </div>
                     </div>
                 </div> --}}
                 <!-- end card -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="text-end mb-4">
                     <button type="submit" class="btn btn-success w-sm">Create</button>
                 </div>
@@ -153,13 +162,13 @@
                         <h5 class="card-title mb-0">Level project</h5>
                     </div>
                     <div class="card-body">
-                        <div> 
+                        <div>
                             <label for="choices-privacy-status-input" class="form-label">Levels</label>
                             <select class="form-select" name="level_id" >
                                 @foreach($levels as $level)
-                                
+
                                 <option value="{{$level->id}}" >{{$level->name}}</option>
-                            
+
                                 <
                                 @endforeach
                             </select>
@@ -176,10 +185,10 @@
                             <label for="choices-privacy-status-input" class="form-label">Users</label>
                             <select class="form-select" name="added_by" id="choices-privacy-status-input">
                                 @foreach($users as $user)
-                                
+
                                 <option  value="{{$user->id}}" >{{$user->name}}</option>
-                              
-                                
+
+
                                 @endforeach
                             </select>
                         </div>
@@ -187,7 +196,7 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Tags</h5>
@@ -200,7 +209,7 @@
                                 <option value="Development">Development</option>
                             </select>
                         </div>
-    
+
                         <div>
                             <label for="choices-text-input" class="form-label">Skills</label>
                             <input class="form-control" id="choices-text-input" data-choices="" data-choices-limit="Required Limit" placeholder="Enter Skills" type="text" value="UI/UX, Figma, HTML, CSS, Javascript, C#, Nodejs">
@@ -209,7 +218,7 @@
                     <!-- end card body -->
                 </div> --}}
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Members</h5>
@@ -226,7 +235,7 @@
                                 <option value="Mark Williams">Mark Williams</option>
                             </select>
                         </div>
-    
+
                         <div>
                             <label class="form-label">Team Members</label>
                             <div class="avatar-group">
@@ -262,9 +271,9 @@
                 <!-- end card -->
             </div>
             <!-- end col -->
-        </div> 
+        </div>
     </form>
-    
+
     <!-- end row -->
 
 </div>

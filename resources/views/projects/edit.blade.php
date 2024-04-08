@@ -3,7 +3,7 @@
 <style>
     .table .sort::after {
         display: none !important;
-    }      
+    }
     .table .sort::before {
         display: none !important;
     }
@@ -27,15 +27,15 @@
         </div>
     </div>
     <!-- end page title -->
-    <form action="{{route('project.update',$project)}}" method="POST" enctype="multipart/form-data">  
+    <form action="{{route('project.update',$project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
-                    
+
                     <div class="card-body">
-                        <div class="mb-3"> 
+                        <div class="mb-3">
                             <label class="form-label" for="project-title-input">Project Title</label>
                             <input type="hidden" value="{{$info[0]->id}}" name="id"  id="">
                             <input type="text" class="form-control" name="name" id="project-title-input" value="{{$info[0]->name}}" placeholder="Enter project title">
@@ -51,9 +51,9 @@
                                     {{$info[0]->description}}
                                 </textarea>
                             </div>
-                            
+
                         </div>
-    
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
@@ -72,7 +72,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-status-input" class="form-label">highlight</label>
-                                    <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input"> 
+                                    <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input">
                                         @if($info[0]->is_highlight==1)
                                         <option value="1" selected="">Nổi bật</option>
                                         <option value="0" >Không nổi bật</option>
@@ -80,7 +80,7 @@
                                         <option value="1" >Nổi bật</option>
                                         <option value="0" selected="">Không nổi bật</option>
                                         @endif
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Attached files</h5>
@@ -129,26 +129,35 @@
                     <div class="card-body">
                         <div>
                             <p class="text-muted">Add Attached files here.</p>
-    
+
                             <div class="dropzone dz-clickable">
-    
+
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
                                         <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
                                     </div>
-    
+
                                     <h5>Drop files here or click to upload.</h5>
                                 </div>
                             </div>
-    
+
                             <ul class="list-unstyled mb-0" id="dropzone-preview">
-    
+
                             </ul>
                             <!-- end dropzon-preview -->
                         </div>
                     </div>
                 </div> --}}
                 <!-- end card -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="text-end mb-4">
                     <button type="submit" class="btn btn-success w-sm">Create</button>
                 </div>
@@ -160,7 +169,7 @@
                         <h5 class="card-title mb-0">Level project</h5>
                     </div>
                     <div class="card-body">
-                        <div> 
+                        <div>
                             <label for="choices-privacy-status-input" class="form-label">Levels</label>
                             <select class="form-select" name="level_id" >
                                 @foreach($levels as $level)
@@ -197,7 +206,7 @@
                     <div class="card-header">
                         <h5 class="card-title mb-0">Image project</h5>
                     </div>
-                    
+
                     <div class="card-body">
                         <div>
                             <table class="table align-middle" id="customerTable">
@@ -205,7 +214,7 @@
                                     <tr>
                                         <th class="sort" data-sort="date_update">Updated</th>
                                         <th class="sort" data-sort="action">Action</th>
-                                    </tr>   
+                                    </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
                                     @foreach($images as $image)
@@ -214,12 +223,12 @@
                                             <img src="{{ asset($image->image) }}" width="20%" alt="">
                                         </td>
                                         <td>
-                                            <ul class="list-inline hstack gap-2 mb-0"> 
+                                            <ul class="list-inline hstack gap-2 mb-0">
                                                 <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
                                                     <a class="remove-item-btn" href="{{route('project-deleteImage',$image->id)}}" onclick="return confirm('Xác nhận xoá project ?');">
                                                         <i class="ri-delete-bin-fill align-bottom text-muted"></i>
                                                     </a>
-                                                </li> 
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -231,7 +240,7 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Tags</h5>
@@ -244,7 +253,7 @@
                                 <option value="Development">Development</option>
                             </select>
                         </div>
-    
+
                         <div>
                             <label for="choices-text-input" class="form-label">Skills</label>
                             <input class="form-control" id="choices-text-input" data-choices="" data-choices-limit="Required Limit" placeholder="Enter Skills" type="text" value="UI/UX, Figma, HTML, CSS, Javascript, C#, Nodejs">
@@ -253,7 +262,7 @@
                     <!-- end card body -->
                 </div> --}}
                 <!-- end card -->
-    
+
                 {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Members</h5>
@@ -270,7 +279,7 @@
                                 <option value="Mark Williams">Mark Williams</option>
                             </select>
                         </div>
-    
+
                         <div>
                             <label class="form-label">Team Members</label>
                             <div class="avatar-group">
@@ -306,9 +315,9 @@
                 <!-- end card -->
             </div>
             <!-- end col -->
-        </div>        
+        </div>
     </form>
-    
+
     <!-- end row -->
 
 </div>

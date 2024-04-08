@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',50)->nullable();
             $table->string('email');
             $table->string('avatar')->nullable();
-            $table->enum('role',['admin','author']);
+            $table->enum('role', ['author', 'admin'])->default('author');
         });
     }
 

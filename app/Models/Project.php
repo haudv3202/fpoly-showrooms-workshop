@@ -27,4 +27,10 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function technical_project()
+    {
+        return $this->hasOne(Technical_project::class);
+    }
+
 }

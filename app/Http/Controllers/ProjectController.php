@@ -51,6 +51,14 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'img' => 'required|image',
+                'deploy_link' => 'required',
+                'domain_link' => 'required',
+                'technical' => 'required',
+            ]);
             $requestData = $request->all();
             // project
             $query = Project::create($requestData);
@@ -173,6 +181,14 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+//                'img' => 'required|image',
+                'deploy_link' => 'required',
+                'domain_link' => 'required',
+                'technical' => 'required',
+            ]);
             $requestData = $request->all();
             if ($request->hasFile('img')) {
                 foreach ($request->file('img') as $image) {

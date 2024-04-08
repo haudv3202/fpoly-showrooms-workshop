@@ -57,6 +57,10 @@ class DirectoryController extends Controller
     public function store(Request $request)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
             $requestData = $request->all();
             Level::query()->create($requestData);
             return redirect()->route('directory.index');
@@ -87,6 +91,10 @@ class DirectoryController extends Controller
     public function update(Request $request, Level $level)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
             $requestData = $request->all();
 
             // DB::enableQueryLog();
