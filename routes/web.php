@@ -37,6 +37,7 @@ Route::get('/ourteam', [App\Http\Controllers\OurTeamController::class, 'index'])
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('directory', App\Http\Controllers\DirectoryController::class);
+
 Route::get('directory-update', [App\Http\Controllers\DirectoryController::class, 'update'])->name('directory-update');
 Route::post('directory-update',  [App\Http\Controllers\DirectoryController::class, 'update']);
 Route::get('/danhmuc', [App\Http\Controllers\DirectoryController::class, 'directory'])->name('directory');
@@ -74,3 +75,8 @@ Route::resource("ourteams", \App\Http\Controllers\OurTeamController::class);
 Route::post('ourteams/addMembers', [\App\Http\Controllers\OurTeamController::class, 'addMembers'])->name('ourteams.addMembers');
 Route::post('ourteams/deleteMembers', [\App\Http\Controllers\OurTeamController::class, 'deleteMembers'])->name('ourteams.deleteMembers');
 Route::get('viewMore/{id}', [\App\Http\Controllers\OurTeamController::class, 'viewMore'])->name('viewMore');
+
+Route::resource('history', App\Http\Controllers\HistoryController::class);
+
+
+Route::resource('layout', App\Http\Controllers\LayoutController::class);

@@ -32,8 +32,17 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="project-thumbnail-img">Thumbnail Image</label>
-                            <input class="form-control" id="project-thumbnail-img" name="img[]" type="file" accept="image/png, image/gif, image/jpeg" multiple>
-                        </div>
+                            <input
+                              class="form-control"
+                              id="project-thumbnail-img"
+                              name="img[]"
+                              type="file"
+                              accept="image/png, image/gif, image/jpeg"
+                              multiple
+                            />
+                          </div>
+                          <div id="imagePreview" class="row mb-3"></div>
+                          
                         <div class="mb-3">
                             <label class="form-label">Project Description</label>
                             <div>
