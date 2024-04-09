@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TechnicalProjectSeeder::class,
             ProjectUserSeeder::class,
             ImageSeeder::class,
+            LayoutSeeder::class,
         ]);
     }
 }
