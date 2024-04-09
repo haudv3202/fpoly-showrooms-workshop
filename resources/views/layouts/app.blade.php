@@ -44,7 +44,7 @@
         rel="stylesheet"
     />
     <script src="{{asset('theme/client/assets/js/scripts.min.js')}}"></script>
-   
+
     {{-- <!-- Scripts -->
     @vite(['resources/sass/app.scss','resources/css/styles.min.css','resources/css/home-default.css'])
     @vite(['resources/js/scripts.min.js']) --}}
@@ -173,19 +173,19 @@
                                     <a
                                         class="nav-link"
                                         href="/">Trang chủ</a
-                                    > 
+                                    >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
                                         href="/danhmuc">Danh mục</a
-                                    > 
+                                    >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
                                         href="/ourteam">Our team</a
-                                    > 
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -203,7 +203,7 @@
                     <img src="{{asset('theme/client/assets/images/rectangle_small.svg')}}"
                     alt />
                 </div> --}}
-                
+
             @yield('content')
         </main>
     <div class="footer-wrap home-default">
@@ -239,276 +239,53 @@
             </div>
         </div>
         <footer>
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-xxl-5 col-lg-5">
-                        <div class="row">
-                            <div class="col-xxl-6 col-sm-6">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">About Us</h4>
-                                    <p class="footer-text">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit. In urna
-                                        lectus, mattis non accumsan in,
-                                        tempor dictum neque.
-                                    </p>
-                                    <div class="social-icons">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-facebook"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-twitter-x"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-instagram"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-linkedin"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-youtube"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                        </ul>
+            <div class="footer-widgets">
+                <div class="fpoly-container">
+                    <div class="row">
+                        <div class="column col-md-4 footer">
+                            <div class="widgets">
+                                <div id="text-6" class="widget widget_text"> <div class="textwidget"><p><img decoding="async" src="//i.imgur.com/5EK1lFm.png"></p>
+                                        <div style="clear: both; color: #f7941d; font-size: 20px; text-transform: uppercase; margin-top: 20px; display: block; padding-top: 15px;">THÔNG TIN LIÊN HỆ</div>
+                                        <div class="hiden-xs">
+                                            <p>Điện thoại: (024) 7300 1955</p>
+                                            <p>Email: caodang@fpt.edu.vn</p>
+                                        </div>
+                                        <style>
+                                            @media (max-width: 992px){<br />.footer-xs{<br /> padding-top:20px  !important;<br />margin: 0 !important;<br />}<br />}<br /></style>
                                     </div>
-                                    <div
-                                        class="footer-widget-contact d-none"
-                                    >
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-geo-alt"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    Envato Pty Ltd, 13/2
-                                                    Elizabeth St Melbourne
-                                                    VIC 3000, Australia
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-phone"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="tel:+1234567899"
-                                                        >(+01) 123 456
-                                                        7890</a
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-envelope"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="https://mannatstudio.com/cdn-cgi/l/email-protection#3f575a534f7f4c5a4d5a51564b5a4b115c5052"
-                                                        ><span
-                                                            class="__cf_email__"
-                                                            data-cfemail="563e333a261625332433383f2233227835393b"
-                                                            >[email&#160;protected]</span
-                                                        ></a
-                                                    >
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xxl-5 col-sm-6 ms-auto">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Company</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Contact Us</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Culture</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Jobs</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                </div> </div>
                         </div>
-                    </div>
-                    <div class="col-xxl-7 col-lg-7 mr-top-footer">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Support</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:"
-                                                >Getting started</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Chat our support</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Help center</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Services status</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Report a bug</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Services</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:"
-                                                >Pricing</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Support</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Sales and Refunds</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Legal</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Testimonials & Faq’s</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4 ol-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Contact Us</h4>
-                                    <div class="footer-widget-contact">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-geo-alt"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    4789 Melmorn
-                                                    Street,Zakila Ton
-                                                    Mashintron Town
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-phone"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="tel:+1234567899"
-                                                        >(+01) 123 456
-                                                        7890</a
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-envelope"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="https://mannatstudio.com/cdn-cgi/l/email-protection#4e262b223e0e3d2b3c2b20273a2b3a602d2123"
-                                                        ><span
-                                                            class="__cf_email__"
-                                                            data-cfemail="d0b8b5bca090a3b5a2b5beb9a4b5a4feb3bfbd"
-                                                            >[email&#160;protected]</span
-                                                        ></a
-                                                    >
-                                                </div>
-                                            </li>
-                                        </ul>
+                        @php
+                            use App\Models\Layout;
+                            $footer1 = Layout::where('col', '1')->get();
+                            $footer2 = Layout::where('col', '2')->get();
+                        @endphp
+                        <div class="column col-md-4 footer-2">
+                            <div class="widgets">
+                                <div id="text-7" class="widget widget_text"> <div class="textwidget">
+                                        <div style="color: #f7941d; margin-bottom: 10px; font-size: 20px;"><strong>HỆ THỐNG VĂN PHÒNG TUYỂN SINH</strong></div>
+                                        @foreach($footer1 as $ft1)
+                                            <div class="footer-xs" style="text-decoration: underline; padding-top: 10px;">{!! $ft1->name !!}</div>
+                                            <p>{!! $ft1->address1 !!}<br>{!! $ft1->address2 !!}<br>{!! $ft1->numberPhone !!}</p>
+                                            <br>
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="tiny-footer">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 mb-0">
-                            Copyright &copy; <span id="yearText"></span>
-                            <strong>Serenite</strong> Theme All rights
-                            reserved.
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tiny-footer-links">
-                                <ul class="list-unstyled list-inline">
-                                    <li><a href="#">Terms of Use</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                            </div>
+                        <div class="column col-md-4 footer-3">
+                            <div class="widgets">
+                                <div id="text-8" class="widget widget_text"> <div class="textwidget">
+                                        @foreach($footer2 as $ft2)
+                                            <div class="footer-xs" style="text-decoration: underline; padding-top: 40px;">{!! $ft2->name !!}</div>
+                                            <p>T{!! $ft2->address1 !!}<br>
+                                                {!! $ft2->address2 !!}<br>
+                                                {!! $ft2->numberPhone !!}</p>
+                                        @endforeach
+
+                                    </div>
+                                </div> </div>
                         </div>
                     </div>
                 </div>

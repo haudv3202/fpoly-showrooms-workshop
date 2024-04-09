@@ -9,8 +9,10 @@ class Layout extends Model
 {
     use HasFactory;
     public $fillable = [
+        'col',
         'name',
-        'html',
-        'context',
+        'address1',
+        'address2',
+        'numberPhone',
     ];
 }

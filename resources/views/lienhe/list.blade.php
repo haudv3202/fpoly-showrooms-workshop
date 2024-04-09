@@ -48,20 +48,41 @@
                                 <table class="table align-middle" id="customerTable">
                                     <thead class="table-light">
                                         <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll" value="option">
-                                                </div>
-                                            </th>
-                                            <th class="sort"  data-sort="name">Name</th>
-                                            <th class="sort" data-sort="description">DOM element html</th>
-                                            <th class="sort" data-sort="deploy_link">context</th>
-                                            <th class="sort" data-sort="date_create">Create</th>
-                                            <th class="sort" data-sort="date_update">Updated</th>
+                                            <th class="sort"  data-sort="name">Column</th>
+                                            <th class="sort" data-sort="description">Name</th>
+                                            <th class="sort" data-sort="deploy_link">Address1</th>
+                                            <th class="sort" data-sort="date_create">Address2</th>
+                                            <th class="sort" data-sort="date_update">Number Phone</th>
                                             <th class="sort" data-sort="action">Action</th>
                                         </tr>
                                     </thead>
-                             
+                                    <tbody>
+                                        @foreach($layouts as $lo)
+                                            <tr>
+                                                <td>{{$lo->col}}</td>
+                                                <td>{{$lo->name}}</td>
+                                                <td>{{$lo->address1}}</td>
+                                                <td>{{$lo->address1}}</td>
+                                                <td>{{$lo->numberPhone}}</td>
+                                                <td>
+                                                    <ul class="list-inline hstack gap-2 mb-0">
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                                            <a class="edit-item-btn" href="http://fpoly-showrooms-workshop.com/directory/1/edit"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
+                                                        </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
+                                                            <form action="http://fpoly-showrooms-workshop.com/directory/1" method="POST" style="display: inline-block;" onsubmit="return confirm('Xác nhận xoá directory ?');">
+                                                                <input type="hidden" name="_token" value="NqWyZEzlsUTLwQeOolEhVBeXH5YA0a8XKa5JcCXB" autocomplete="off">                                                        <input type="hidden" name="_method" value="DELETE">                                                        <button type="submit" class="remove-item-btn" style="background: none; border: none; cursor: pointer;">
+                                                                    <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                                </button>
+                                                            </form>
+
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
                                 </table>
                                 <div class="noresult" style="display: none">
                                     <div class="text-center">
@@ -84,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-               
+
             </div><!-- end card -->
         </div>
         <!-- end col -->

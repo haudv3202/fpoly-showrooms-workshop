@@ -17,9 +17,11 @@ class LayoutFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'html' => $this->faker->text(30),
-            'context' => $this->faker->realText(30),
+            'col'=>rand(0,3),
+            'name'=>fake()->name(),
+            'address1'=>fake()->address(),
+            'address2'=>fake()->address(),
+            'numberPhone'=>fake()->phoneNumber(),
         ];
     }
 }
