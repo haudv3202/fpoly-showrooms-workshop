@@ -644,6 +644,16 @@
                                 <i class="las la-folder-open"></i> <span data-key="t-dự-án">Projects</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('history.index') }}">
+                                <i class="las la-folder-open"></i> <span data-key="t-dự-án">History</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('layout.index') }}">
+                                <i class="las la-folder-open"></i> <span data-key="t-dự-án">Layout</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -1534,6 +1544,8 @@
 
     <!-- App js -->
     <script src="{{ asset('theme/admin/assets/js/app.js') }}"></script>
+    <script src="{{ asset('theme/admin/assets/js/image.js') }}"></script>
+
 </body>
 
 </html>
