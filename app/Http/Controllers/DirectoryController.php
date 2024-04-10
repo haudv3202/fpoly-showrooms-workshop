@@ -25,19 +25,28 @@ class DirectoryController extends Controller
     public function directory()
     {
 
-        $directorys = Level::query()
-            ->whereExists(function ($query) {
-                $query->select(DB::raw(1))
-                    ->from('projects')
-                    ->whereColumn('level_id', 'levels.id');
-            })
-            ->get();
-        $projects = Project::select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'projects.views', DB::raw('MIN(images.image) AS image'))
-            ->join('levels', 'levels.id', '=', 'projects.level_id')
-            ->join('images', 'images.project_id', '=', 'projects.id')
-            ->groupBy('projects.id')
-            ->get();
-        return view("directorys.directory", compact('directorys', 'projects'));
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $directorys = Level::query()->get();
+            return view("directorys.list", compact('directorys'));
+        } else {
+            $directorys = Level::query()
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('projects')
+                        ->whereColumn('level_id', 'levels.id')
+                        ->where('projects.is_active', true);
+                })
+                ->get();
+
+            $projects = Project::select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'projects.views', DB::raw('MIN(images.image) AS image'))
+                ->join('levels', 'levels.id', '=', 'projects.level_id')
+                ->join('images', 'images.project_id', '=', 'projects.id')
+                ->where('projects.is_active', true)
+                ->groupBy('projects.id')
+                ->get();
+
+            return view("directorys.directory", compact('directorys', 'projects'));
+        }
     }
     /**
      * Show the form for creating a new resource.

@@ -24,20 +24,27 @@ class OurTeamController extends Controller
             $ourteam = Technical::whereExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('technical_projects')
-                    ->whereColumn('technical_projects.technical_id', 'technicals.id');
+                    ->join('projects', 'technical_projects.project_id', '=', 'projects.id')
+                    ->whereColumn('technical_projects.technical_id', 'technicals.id')
+                    ->where('projects.is_active', true);
             })
-                ->latest('id')
+                ->latest('technicals.id')
                 ->paginate(12);
+
             return view('ourteams.list', compact('ourteam'));
         } else {
             $ourteam = Technical::query()
-                ->latest('id')
+                ->latest('technicals.id')
                 ->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('technical_projects')
                         ->whereColumn('technicals.id', 'technical_projects.technical_id');
                 })
+                ->join('technical_projects', 'technical_projects.technical_id', '=', 'technicals.id')
+                ->join('projects', 'projects.id', '=', 'technical_projects.project_id')
+                ->where('projects.is_active', true)
                 ->paginate(12);
+
 
 
             return view('ourteams.ourteam', compact('ourteam'));
@@ -168,7 +175,7 @@ class OurTeamController extends Controller
             $projectsInTechnical = Project::whereIn('id', $projectIds)->get();
 
             $project = Project::whereDoesntHave('technical_project')->get();
-//            dd($projectsInTechnical);
+            //            dd($projectsInTechnical);
             return view('ourteams.edit', compact('technical', 'project', 'projectsInTechnical'));
         } else {
             return redirect()->route('login');

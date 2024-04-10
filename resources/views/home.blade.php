@@ -127,7 +127,7 @@
             <div class="col-lg-6 mb-0">
                 <div class="img-gradient">
                     <img
-                        src="{{ asset($project->image) }}"
+                        src="{{ asset($projectForTeam->image) }}"
                         alt
                     />
                 </div>
@@ -136,10 +136,10 @@
                 <h3
                     class="txt-secondary mb-4 fw-7 text-capitalize wow fadeInUp"
                 >
-                {{$project->name}}
+                {{$projectForTeam->name}}
                 </h3>
                 <p>
-                    {{$project->description}}
+                    {{$projectForTeam->description}}
                 </p>
                 <h5>Members of the team</h5>
                 <ul
