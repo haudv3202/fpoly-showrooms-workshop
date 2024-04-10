@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-priority-input" class="form-label">Active</label>
                                     <select class="form-select" data-choices="" name="is_active" data-choices-search-0="" id="choices-priority-input">
@@ -64,8 +64,8 @@
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
+                            </div> --}}
+                            <div class="col-lg-12">
                                 <div class="mb-3 mb-lg-0">
                                     <label for="choices-status-input" class="form-label">highlight</label>
                                     <select class="form-select" data-choices="" name="is_highlight" data-choices-search-0="" id="choices-status-input">

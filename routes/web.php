@@ -44,7 +44,7 @@ Route::get('/danhmuc', [App\Http\Controllers\DirectoryController::class, 'direct
 Route::post('search',  [App\Http\Controllers\ProjectController::class, 'search'])->name('search');
 
 Route::resource('project', App\Http\Controllers\ProjectController::class);
-Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');;
+Route::get('project-deleteImage/{id}', [App\Http\Controllers\ProjectController::class, 'destroyImage'])->name('project-deleteImage');
 
 Route::resource('banner', App\Http\Controllers\BannerController::class);
 // Route::get('directorys-details', [App\Http\Controllers\DirectoryController::class, 'details'])->name('directorys-details');
@@ -77,8 +77,8 @@ Route::post('ourteams/deleteMembers', [\App\Http\Controllers\OurTeamController::
 Route::get('viewMore/{id}', [\App\Http\Controllers\OurTeamController::class, 'viewMore'])->name('viewMore');
 
 Route::resource('history', App\Http\Controllers\HistoryController::class);
-
-
+Route::get('redirect/{id}', [App\Http\Controllers\HistoryController::class, 'redirect'])->name('redirect');
+Route::get('redirect_image/{id}', [App\Http\Controllers\HistoryController::class, 'redirect_image'])->name('redirect_image');
 Route::resource('layout', App\Http\Controllers\LayoutController::class);
 
 Route::get('layout-update', [App\Http\Controllers\LayoutController::class, 'update'])->name('layout-update');
