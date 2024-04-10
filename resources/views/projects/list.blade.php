@@ -78,7 +78,7 @@
                                         <th class="sort" data-sort="level">Level</th>
                                         <th class="sort" data-sort="added_by">Added</th>
                                         <th class="sort" data-sort="is_highlight">Highlight</th>
-                                        <th class="sort" data-sort="is_active">Active</th>
+                                     
                                         <th class="sort" data-sort="date_create">Create</th>
                                         <th class="sort" data-sort="date_update">Updated</th>
                                         <th class="sort" data-sort="action">Action</th>
@@ -109,9 +109,7 @@
                                         <td class="is_highlight">
                                             {{$project->is_highlight}}
                                         </td>
-                                        <td class="is_active">
-                                            {{$project->is_active}}
-                                        </td>
+                                       
                                         <td class="date_create">{{$project->created_at}}
                                         </td>
                                         <td class="date_update">{{$project->updated_at}}

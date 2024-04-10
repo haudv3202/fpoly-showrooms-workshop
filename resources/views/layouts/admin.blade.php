@@ -646,12 +646,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('history.index') }}">
-                                <i class="las la-folder-open"></i> <span data-key="t-dự-án">History</span>
+                                <i class=" ri-folder-history-line"></i> <span data-key="t-dự-án">History</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('layout.index') }}">
-                                <i class="las la-folder-open"></i> <span data-key="t-dự-án">Layout</span>
+                                <i class=" ri-layout-line"></i> <span data-key="t-dự-án">Layout</span>
                             </a>
                         </li>
                     </ul>

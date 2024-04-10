@@ -24,15 +24,18 @@ class ProjectController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $projects = Project::query()->select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'users.name as added_by_name', 'projects.is_highlight', 'projects.views', 'projects.is_active', 'projects.created_at', 'projects.updated_at')
+            $projects = Project::query()
+                ->select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'users.name as added_by_name', 'projects.is_highlight', 'projects.views', 'projects.is_active', 'projects.created_at', 'projects.updated_at')
                 ->join('levels', 'projects.level_id', '=', 'levels.id')
                 ->join('users', 'projects.added_by', '=', 'users.id')
+                ->where('projects.is_active', true)
                 ->get();
             return view('projects.list', compact('projects'));
         } else {
             return redirect()->route('login');
         }
     }
+
 
     public function create(Project $project)
     {
@@ -112,9 +115,6 @@ class ProjectController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
 
@@ -148,7 +148,10 @@ class ProjectController extends Controller
             ->where('projects.id', '=', $id)
             ->get();
 
-        $images = Images::query()->where('project_id', '=', $id)->get();
+        $images = Images::query()
+            ->where('project_id', '=', $id)
+            ->where('is_active', true)
+            ->get();
         $projects = Project::query()->select('projects.*', DB::raw('MIN(images.image) AS image'))
             ->join('images', 'images.project_id', '=', 'projects.id')
             ->where([
@@ -169,7 +172,7 @@ class ProjectController extends Controller
             $levels = Level::query()->select('name', 'id')->get();
             $users = User::query()->select('name', 'id')->get();
             $info = Project::select()->where('id', $project->id)->get();
-            $images = Images::query()->select()->where('project_id', $project->id)->get();
+            $images = Images::query()->select()->where('project_id', $project->id)->where('is_active', true)->get();
             return view('projects.edit', compact('levels', 'users', 'info', 'project', 'images'));
         } else {
             return redirect()->route('login');
@@ -184,7 +187,7 @@ class ProjectController extends Controller
             $request->validate([
                 'name' => 'required',
                 'description' => 'required',
-//                'img' => 'required|image',
+                //                'img' => 'required|image',
                 'deploy_link' => 'required',
                 'domain_link' => 'required',
                 'technical' => 'required',
@@ -229,34 +232,41 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            Technical_project::query()->where('project_id', $project->id)->delete();
-            Project_user::query()->where('project_id', $project->id)->delete();
-            Project_domain::query()->where('project_id', $project->id)->delete();
-            Images::query()->where('project_id', $project->id)->delete();
-            $project->delete();
+            $project->is_active = false;
+            $project->save();
+            // Cập nhật thời gian updated_at của project
+            $project->touch();
+            // Technical_project::query()->where('project_id', $project->id)->update(['is_active' => false]);
+            // Project_user::query()->where('project_id', $project->id)->update(['is_active' => false]);
+            // Project_domain::query()->where('project_id', $project->id)->update(['is_active' => false]);
+            //Images::query()->where('project_id', $project->id)->update(['is_active' => false]);
+            // Tiếp tục với các thao tác khác nếu cần
 
             return redirect()->route('project.index');
         } else {
             return redirect()->route('login');
         }
     }
+
     public function destroyImage($id)
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
             $image = Images::findOrFail($id);
-            $projectId = $image->project_id;
+            $image->is_active = false;
+            $image->save();
+            // Cập nhật thời gian updated_at của ảnh
+            $image->touch();
 
-            $image->delete();
-
-            return redirect()->route('project.edit', ['project' => $projectId]);
+            return redirect()->back();
         } else {
             return redirect()->route('login');
         }
     }
+
+
     public function search(Request $request)
     {
         $requestData = $request->all();
-
 
         $searchQuery = isset($requestData['search']) ? $requestData['search'] : '';
 
@@ -266,7 +276,8 @@ class ProjectController extends Controller
                     ->from('projects')
                     ->whereColumn('level_id', 'levels.id')
                     ->where(function ($query) use ($searchQuery) {
-                        $query->where('name', 'LIKE', '%' . $searchQuery . '%');
+                        $query->where('name', 'LIKE', '%' . $searchQuery . '%')
+                            ->where('is_active', true); // Thêm điều kiện projects.is_active = true
                     });
             })
             ->get();
@@ -275,7 +286,8 @@ class ProjectController extends Controller
             ->join('levels', 'levels.id', '=', 'projects.level_id')
             ->join('images', 'images.project_id', '=', 'projects.id')
             ->where(function ($query) use ($searchQuery) {
-                $query->where('projects.name', 'LIKE', '%' . $searchQuery . '%');
+                $query->where('projects.name', 'LIKE', '%' . $searchQuery . '%')
+                    ->where('projects.is_active', true); // Thêm điều kiện projects.is_active = true
             })
             ->groupBy('projects.id')
             ->get();
