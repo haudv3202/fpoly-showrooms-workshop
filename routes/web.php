@@ -80,3 +80,6 @@ Route::resource('history', App\Http\Controllers\HistoryController::class);
 Route::get('redirect/{id}', [App\Http\Controllers\HistoryController::class, 'redirect'])->name('redirect');
 Route::get('redirect_image/{id}', [App\Http\Controllers\HistoryController::class, 'redirect_image'])->name('redirect_image');
 Route::resource('layout', App\Http\Controllers\LayoutController::class);
+
+Route::get('layout-update', [App\Http\Controllers\LayoutController::class, 'update'])->name('layout-update');
+Route::post('layout-update',  [App\Http\Controllers\LayoutController::class, 'update']);

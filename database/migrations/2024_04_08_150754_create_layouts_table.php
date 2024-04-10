@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('layouts', function (Blueprint $table) {
             $table->id();
+            $table->enum('col', ['0', '1', '2'])->default('0');
             $table->string('name')->nullable();
-            $table->string('html')->nullable();
-            $table->string('context')->nullable();
+            $table->string('address1')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('numberPhone')->nullable();
             $table->timestamps();
         });
     }

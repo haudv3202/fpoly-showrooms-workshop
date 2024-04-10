@@ -1,7 +1,14 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid">
-
+    <style>
+        .table .sort::after {
+            display: none !important;
+        }      
+        .table .sort::before {
+            display: none !important;
+        }
+    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -48,20 +55,33 @@
                                 <table class="table align-middle" id="customerTable">
                                     <thead class="table-light">
                                         <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll" value="option">
-                                                </div>
-                                            </th>
-                                            <th class="sort"  data-sort="name">Name</th>
-                                            <th class="sort" data-sort="description">DOM element html</th>
-                                            <th class="sort" data-sort="deploy_link">context</th>
-                                            <th class="sort" data-sort="date_create">Create</th>
-                                            <th class="sort" data-sort="date_update">Updated</th>
+                                            <th class="sort"  data-sort="name">Column</th>
+                                            <th class="sort" data-sort="description">Name</th>
+                                            <th class="sort" data-sort="deploy_link">Address1</th>
+                                            <th class="sort" data-sort="date_create">Address2</th>
+                                            <th class="sort" data-sort="date_update">Number Phone</th>
                                             <th class="sort" data-sort="action">Action</th>
                                         </tr>
                                     </thead>
-                             
+                                    <tbody>
+                                        @foreach($layouts as $lo)
+                                            <tr>
+                                                <td>{{$lo->col}}</td>
+                                                <td>{{$lo->name}}</td>
+                                                <td>{{$lo->address1}}</td>
+                                                <td>{{$lo->address1}}</td>
+                                                <td>{{$lo->numberPhone}}</td>
+                                                <td>
+                                                    <ul class="list-inline hstack gap-2 mb-0">
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                                            <a class="edit-item-btn" href="{{route('layout.edit',$lo->id)}}"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
                                 </table>
                                 <div class="noresult" style="display: none">
                                     <div class="text-center">
@@ -84,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-               
+
             </div><!-- end card -->
         </div>
         <!-- end col -->

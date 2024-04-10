@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Images;
+use App\Models\Layout;
 use App\Models\Project;
 use App\Models\Project_user;
 use App\Models\Technical;
@@ -57,11 +58,20 @@ class HomeController extends Controller
                 ->join('projects', 'projects.id', '=', 'technical_projects.project_id')
                 ->where('projects.is_active', true)
                 ->first();
+
+            $tieude = Layout::where('col', '0')->get();
+            $technicalProject = Technical_project::where('technical_id', $technical->id)
+                ->orderByDesc('project_id')
+                ->firstOrFail();
+
+            $project_id = $technicalProject->project_id;
+
             // $technicalProject = Technical_project::where('technical_id', $technical->id)
             //     ->orderByDesc('project_id')
             //     ->firstOrFail();
             $project_id = $technical->project_id;
             // dd($project_id);
+
             // DB::enableQueryLog();
             $project_users = Project_user::where('project_id', $project_id)
                 ->join('users', 'project_users.author_id', '=', 'users.id')
@@ -84,7 +94,16 @@ class HomeController extends Controller
                 ->join('domains', 'domains.id', '=', 'project_domains.subject_id')
                 ->where('projects.id', '=', $project_id)
                 ->get();
-            return view('home', compact('banners', 'projects', 'technical', 'project_users', 'projectForTeam', 'domain'));
+
+            $chuoi = $tieude[1]->address1;
+            $vi_tri = strpos($chuoi, ':');
+            if ($vi_tri !== false) {
+                $phan1 = substr($chuoi, 0, $vi_tri + 1);
+                $phan2 = substr($chuoi, $vi_tri + 1);
+            }
+
+            return view('home', compact('banners', 'projects', 'technical', 'tieude', 'phan1', 'phan2', 'project_users', 'project', 'domain'));
+
         }
     }
 }
