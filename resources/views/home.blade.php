@@ -107,7 +107,7 @@
                 <div class="section-title">
                   
                     {!! html_entity_decode($phan1) !!}
-                    {{$project->name}}
+                    {{$projectForTeam->name}}
                    {!! html_entity_decode($phan2) !!}
                     {{-- <p>
                         We help transform your brand into a visual

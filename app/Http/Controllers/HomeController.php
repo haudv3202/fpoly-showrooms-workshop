@@ -60,11 +60,11 @@ class HomeController extends Controller
                 ->first();
 
             $tieude = Layout::where('col', '0')->get();
-            $technicalProject = Technical_project::where('technical_id', $technical->id)
-                ->orderByDesc('project_id')
-                ->firstOrFail();
+            // $technicalProject = Technical_project::where('technical_id', $technical->id)
+            //     ->orderByDesc('project_id')
+            //     ->firstOrFail();
 
-            $project_id = $technicalProject->project_id;
+            // $project_id = $technicalProject->project_id;
 
             // $technicalProject = Technical_project::where('technical_id', $technical->id)
             //     ->orderByDesc('project_id')
@@ -102,8 +102,7 @@ class HomeController extends Controller
                 $phan2 = substr($chuoi, $vi_tri + 1);
             }
 
-            return view('home', compact('banners', 'projects', 'technical', 'tieude', 'phan1', 'phan2', 'project_users', 'project', 'domain'));
-
+            return view('home', compact('banners', 'projects', 'technical', 'tieude', 'phan1', 'phan2', 'project_users', 'projectForTeam', 'domain'));
         }
     }
 }
