@@ -1,7 +1,14 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid">
-
+    <style>
+        .table .sort::after {
+            display: none !important;
+        }      
+        .table .sort::before {
+            display: none !important;
+        }
+    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -67,15 +74,7 @@
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
-                                                            <a class="edit-item-btn" href="http://fpoly-showrooms-workshop.com/directory/1/edit"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
-                                                        </li>
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
-                                                            <form action="http://fpoly-showrooms-workshop.com/directory/1" method="POST" style="display: inline-block;" onsubmit="return confirm('Xác nhận xoá directory ?');">
-                                                                <input type="hidden" name="_token" value="NqWyZEzlsUTLwQeOolEhVBeXH5YA0a8XKa5JcCXB" autocomplete="off">                                                        <input type="hidden" name="_method" value="DELETE">                                                        <button type="submit" class="remove-item-btn" style="background: none; border: none; cursor: pointer;">
-                                                                    <i class="ri-delete-bin-fill align-bottom text-muted"></i>
-                                                                </button>
-                                                            </form>
-
+                                                            <a class="edit-item-btn" href="{{route('layout.edit',$lo->id)}}"><i class="ri-pencil-fill align-bottom text-muted"></i></a>
                                                         </li>
                                                     </ul>
                                                 </td>

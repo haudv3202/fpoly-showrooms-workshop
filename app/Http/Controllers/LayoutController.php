@@ -12,7 +12,42 @@ class LayoutController extends Controller
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
             $layouts = Layout::query()->get();
-            return view("lienhe.list",compact('layouts'));
+            return view("lienhe.list", compact('layouts'));
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function edit($level)
+    {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $directorys = Layout::query()->select()->where('id', $level)->get();
+
+            return view("lienhe.edit", compact('directorys', 'level'));
+        } else {
+            return redirect()->route('login');
+        }
+    }
+    public function update(Request $request, Layout $level)
+    {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+
+            ]);
+            $requestData = $request->all();
+
+            // DB::enableQueryLog();
+            Layout::query()->where('id', $requestData['id'])->update([
+                'name' => $requestData['name'],
+                'numberPhone' => $requestData['numberPhone'],
+                'address1' => $requestData['address1'],
+                'address2' => $requestData['address2'],
+                'updated_at' => $requestData['updated_at']
+            ]);
+            // $queries = DB::getQueryLog();
+            // dd($queries);
+            return redirect()->route('directory.index');
         } else {
             return redirect()->route('login');
         }

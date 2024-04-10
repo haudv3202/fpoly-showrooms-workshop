@@ -279,7 +279,7 @@
                                 <div id="text-8" class="widget widget_text"> <div class="textwidget">
                                         @foreach($footer2 as $ft2)
                                             <div class="footer-xs" style="text-decoration: underline; padding-top: 40px;">{!! $ft2->name !!}</div>
-                                            <p>T{!! $ft2->address1 !!}<br>
+                                            <p>{!! $ft2->address1 !!}<br>
                                                 {!! $ft2->address2 !!}<br>
                                                 {!! $ft2->numberPhone !!}</p>
                                         @endforeach

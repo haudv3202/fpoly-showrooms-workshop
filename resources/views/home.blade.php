@@ -72,10 +72,7 @@
 <section class="section-spacing section-padding bg-light-blue services-related-slider">
     <div class="container">
         <div class="section-title text-start">
-            
-            <h2 class="mb-0 wow">
-                Project heightligh
-            </h2>
+            {!! html_entity_decode($tieude[0]->address1) !!}
         </div>
     </div>
     <div class="owl-carousel container owl-theme top-right-arrow" id="services-related-slider">
@@ -108,11 +105,10 @@
         <div class="row">
             <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-12">
                 <div class="section-title">
-                    <h2 class="wow">
-                        <strong
-                            >Teams project: {{$technical->name}}</strong
-                        >
-                    </h2>
+                  
+                    {!! html_entity_decode($phan1) !!}
+                    {{$project->name}}
+                   {!! html_entity_decode($phan2) !!}
                     {{-- <p>
                         We help transform your brand into a visual
                         story. We turn your website into a powerful

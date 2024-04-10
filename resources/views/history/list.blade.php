@@ -128,7 +128,6 @@
                                                     <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                 </div>
                                             </th>
-    
                                             <th class="sort"  data-sort="name">Name</th>
                                             <th class="sort" data-sort="description">Description</th>
                                             <th class="sort" data-sort="deploy_link">Deploy link</th>

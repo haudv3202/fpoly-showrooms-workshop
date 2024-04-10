@@ -80,3 +80,6 @@ Route::resource('history', App\Http\Controllers\HistoryController::class);
 
 
 Route::resource('layout', App\Http\Controllers\LayoutController::class);
+
+Route::get('layout-update', [App\Http\Controllers\LayoutController::class, 'update'])->name('layout-update');
+Route::post('layout-update',  [App\Http\Controllers\LayoutController::class, 'update']);
