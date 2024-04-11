@@ -11,7 +11,7 @@ class LayoutController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $layouts = Layout::query()->get();
+            $layouts = Layout::query()->paginate(12);
             return view("lienhe.list", compact('layouts'));
         } else {
             return redirect()->route('login');
@@ -47,7 +47,7 @@ class LayoutController extends Controller
             ]);
             // $queries = DB::getQueryLog();
             // dd($queries);
-            return redirect()->route('directory.index');
+            return redirect()->route('lienhe.index');
         } else {
             return redirect()->route('login');
         }

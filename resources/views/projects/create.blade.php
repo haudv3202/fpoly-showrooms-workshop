@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3 mb-lg-0 mt-3">
-                                    <label for="datepicker-deadline-input" class="form-label">Deploy link</label>
+                                    <label for="datepicker-deadline-input" class="form-label">Deploy</label>
                                     <input type="text" class="form-control" name="deploy_link" id="datepicker-deadline-input" placeholder="Enter Deploy link" >
                                 </div>
                             </div>

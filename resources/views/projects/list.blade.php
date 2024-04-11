@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
-                                <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                {{-- <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button> --}}
                                 {{-- <button type="button" class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasExample"><i class="ri-filter-3-line align-bottom me-1"></i> Fliters</button> --}}
                                 <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><a class="text-white" href="{{route('project.create')}}">
                                     <i class="ri-add-line align-bottom me-1"></i> Add Projects</a></button>
@@ -149,17 +149,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-3">
-                            <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-prev disabled" href="#">
-                                    Previous
-                                </a>
-                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li></ul>
-                                <a class="page-item pagination-next" href="#">
-                                    Next
-                                </a>
-                            </div>
-                        </div>
+                        <div class="mt-3">
+                            {{$projects->links()}}
+                    </div>
                     </div>
 
                     {{-- <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-sm-auto ms-auto">
                                 <div class="hstack gap-2">
-                                    <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                    {{-- <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button> --}}
                                 </div>
                             </div>
                         </div>

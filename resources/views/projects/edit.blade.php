@@ -105,7 +105,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3 mb-lg-0 mt-3">
-                                    <label for="datepicker-deadline-input" class="form-label">Domain link</label>
+                                    <label for="datepicker-deadline-input" class="form-label">Domain</label>
                                     <input type="text" class="form-control" name="domain_link" id="datepicker-deadline-input" placeholder="Enter Domain link" >
                                 </div>
                             </div>

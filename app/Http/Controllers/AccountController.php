@@ -16,7 +16,7 @@ class AccountController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $accounts = User::query()->latest('id')->get();
+            $accounts = User::query()->latest('id')->paginate(12);
             return view("accounts.list", compact('accounts'));
         } else {
             return redirect()->route('login');

@@ -82,18 +82,20 @@
                 >
                     <li>Technical: {{$projectDetails[0]->technical_name}}</li>
                     <li>
-                       Create at:  {{$projectDetails[0]->created_at}}
-                    </li>
+                        View: {{$projectDetails[0]->views}}
+                     </li>
                     <li> Level: {{$projectDetails[0]->level_name}}</li>
-                    <li>Update at: {{$projectDetails[0]->updated_at}}</li>
                     <li>
-                       View: {{$projectDetails[0]->views}}
-                    </li>
-                    
+                        Create at:  {{$projectDetails[0]->created_at}}
+                     </li>
+                    <li>
+                        Domain: {{$projectDetails[0]->domain_name}}
+                     </li>
+                     <li>Update at: {{$projectDetails[0]->updated_at}}</li>
                 </ul>
-                <a href="{{$projectDetails[0]->domain_name}}" class="btn btn-default mt-3"
+                <a href="{{$projectDetails[0]->deploy_link}}" class="btn btn-default mt-3"
                     ><span class="outer-wrap"
-                        ><span data-text="Get a quote"
+                        ><span data-text="View project"
                             >View project</span
                         ></span
                     ></a
