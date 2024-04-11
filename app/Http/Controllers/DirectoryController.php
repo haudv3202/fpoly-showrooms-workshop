@@ -72,7 +72,7 @@ class DirectoryController extends Controller
             ]);
             $requestData = $request->all();
             Level::query()->create($requestData);
-            return redirect()->route('directory.index');
+            return redirect()->route('directory.index')->with('success', 'Add new success');
         } else {
             return redirect()->route('login');
         }
@@ -114,7 +114,7 @@ class DirectoryController extends Controller
             ]);
             // $queries = DB::getQueryLog();
             // dd($queries);
-            return redirect()->route('directory.index');
+            return redirect()->route('directory.index')->with('update', 'Successful update');
         } else {
             return redirect()->route('login');
         }
@@ -133,7 +133,7 @@ class DirectoryController extends Controller
                 return redirect()->route('directory.index');
             } else {
                 Level::query()->where('id', $level)->delete();
-                return redirect()->route('directory.index');
+                return redirect()->route('directory.index')->with('delete', 'Successful deletion');
             }
         } else {
             return redirect()->route('login');

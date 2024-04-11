@@ -4,7 +4,7 @@
     <style>
         .table .sort::after {
             display: none !important;
-        }      
+        }
         .table .sort::before {
             display: none !important;
         }
@@ -60,6 +60,21 @@
                         </div>
                     </div>
                 </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('update'))
+                    <div class="alert alert-success">
+                        {{ session('update') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-success">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                 <div class="card-body">
                     <div>
                         <div class="table-responsive table-card">
@@ -78,7 +93,7 @@
                                         <th class="sort" data-sort="level">Level</th>
                                         <th class="sort" data-sort="added_by">Added</th>
                                         <th class="sort" data-sort="is_highlight">Highlight</th>
-                                     
+
                                         <th class="sort" data-sort="date_create">Create</th>
                                         <th class="sort" data-sort="date_update">Updated</th>
                                         <th class="sort" data-sort="action">Action</th>
@@ -86,7 +101,7 @@
                                 </thead>
                                 <tbody class="list form-check-all">
                                     @foreach($projects as $project)
-                                  
+
                                     <tr>
                                         <th scope="row">
                                             <div class="form-check">
@@ -109,13 +124,13 @@
                                         <td class="is_highlight">
                                             {{$project->is_highlight}}
                                         </td>
-                                       
+
                                         <td class="date_create">{{$project->created_at}}
                                         </td>
                                         <td class="date_update">{{$project->updated_at}}
                                         </td>
                                         <td>
-                                            <ul class="list-inline hstack gap-2 mb-0"> 
+                                            <ul class="list-inline hstack gap-2 mb-0">
                                                 {{-- <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
                                                     <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
                                                 </li> --}}
@@ -123,7 +138,7 @@
                                                     <a class="edit-item-btn" href="{{ route('project.edit',$project ) }}">
                                                         <i class="ri-pencil-fill align-bottom text-muted"></i>
                                                     </a>
-                                                    
+
                                                 </li>
                                                 <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
                                                     <form action="{{ route('project.destroy',$project) }}" method="POST" onsubmit="return confirm('Xác nhận xoá project ?');">
@@ -132,9 +147,9 @@
                                                         <button type="submit" class="remove-item-btn" style="background: none; border: none; cursor: pointer;">
                                                             <i class="ri-delete-bin-fill align-bottom text-muted"></i>
                                                         </button>
-                                                    </form> 
+                                                    </form>
                                                 </li>
-                                                
+
                                             </ul>
                                         </td>
                                     </tr>

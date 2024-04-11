@@ -52,7 +52,7 @@ class BannerController extends Controller
                         'updated_at' => $requestData['updated_at'],
                     ]
                 );
-                return redirect()->route('banner.index');
+                return redirect()->route('banner.index')->with('success', 'Add new success');
             } else {
                 return redirect()->route('banner.create');
             }
@@ -89,7 +89,7 @@ class BannerController extends Controller
                     'is_active' => 1
                 ]);
             }
-            return redirect()->route('banner.index');
+            return redirect()->route('banner.index')->with('update', 'Successful update');
         } else {
             return redirect()->route('login');
         }
@@ -103,7 +103,7 @@ class BannerController extends Controller
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
             Images::query()->where('id', $image)->delete();
-            return redirect()->route('banner.index');
+            return redirect()->route('banner.index')->with('delete', 'Successful deletion');
         } else {
             return redirect()->route('login');
         }

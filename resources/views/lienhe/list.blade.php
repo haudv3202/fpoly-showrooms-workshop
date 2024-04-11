@@ -4,7 +4,7 @@
     <style>
         .table .sort::after {
             display: none !important;
-        }      
+        }
         .table .sort::before {
             display: none !important;
         }
@@ -49,6 +49,21 @@
                             </div>
                         </div>
                     </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('update'))
+                    <div class="alert alert-success">
+                        {{ session('update') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-success">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                     <div class="card-body">
                         <div>
                             <div class="table-responsive table-card">

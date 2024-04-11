@@ -105,7 +105,7 @@ class AccountController extends Controller
 
             try {
                 $account->update($data);
-                return redirect()->route('accounts.index')->with('success', 'Thông tin người dùng đã được cập nhật.');
+                return redirect()->route('accounts.index')->with('update', 'Successful update');
             } catch (\Exception $e) {
                 return back()->with('error', 'Đã xảy ra lỗi khi cập nhật thông tin người dùng. Vui lòng thử lại.');
             }
