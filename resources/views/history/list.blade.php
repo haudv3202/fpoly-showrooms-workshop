@@ -41,6 +41,21 @@
                             </div>
                         </div>
                     </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('update'))
+                    <div class="alert alert-success">
+                        {{ session('update') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-success">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                     <div class="card-body">
                         <div>
                             <div class="table-responsive table-card">
@@ -52,7 +67,7 @@
                                                     <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                 </div>
                                             </th>
-    
+
                                             <th class="sort"  data-sort="name">Name</th>
                                             <th class="sort" data-sort="description">Description</th>
                                             <th class="sort" data-sort="deploy_link">Deploy link</th>
@@ -65,7 +80,7 @@
                                     </thead>
                                     <tbody class="list form-check-all">
                                         @foreach($projects as $project)
-                                      
+
                                         <tr>
                                             <th scope="row">
                                                 <div class="form-check">
@@ -90,7 +105,7 @@
                                             <td class="date_update">{{$project->updated_at}}
                                             </td>
                                             <td>
-                                                <ul class="list-inline hstack gap-2 mb-0"> 
+                                                <ul class="list-inline hstack gap-2 mb-0">
                                                     {{-- <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
                                                         <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
                                                     </li> --}}
@@ -98,7 +113,7 @@
                                                         <a class="edit-item-btn" href="{{ route('project.edit',$project ) }}">
                                                             <i class="ri-pencil-fill align-bottom text-muted"></i>
                                                         </a>
-                                                        
+
                                                     </li> --}}
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Redirect">
                                                         <a class="edit-item-btn" href="{{ route('redirect', $project->id ) }}"
@@ -127,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-               
+
             </div><!-- end card -->
         </div>
         <!-- end col -->
@@ -167,7 +182,7 @@
                                                     <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                 </div>
                                             </th>
-    
+
                                             <th class="sort"  data-sort="name">Name Project</th>
                                             <th class="sort" data-sort="description">image</th>
                                             <th class="sort" data-sort="date_create">Create</th>
@@ -177,7 +192,7 @@
                                     </thead>
                                     <tbody class="list form-check-all">
                                         @foreach($images as $image)
-                                      
+
                                         <tr>
                                             <th scope="row">
                                                 <div class="form-check">
@@ -194,13 +209,13 @@
                                                 </div>
                                             </td>
                                             <td class="description">{{$image->image}}</td>
-                                            
+
                                             <td class="date_create">{{$image->created_at}}
                                             </td>
                                             <td class="date_update">{{$image->updated_at}}
                                             </td>
                                             <td>
-                                                <ul class="list-inline hstack gap-2 mb-0"> 
+                                                <ul class="list-inline hstack gap-2 mb-0">
                                                     {{-- <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="View" data-bs-original-title="View">
                                                         <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
                                                     </li> --}}
@@ -208,7 +223,7 @@
                                                         <a class="edit-item-btn" href="{{ route('project.edit',$project ) }}">
                                                             <i class="ri-pencil-fill align-bottom text-muted"></i>
                                                         </a>
-                                                        
+
                                                     </li> --}}
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Redirect">
                                                         <a class="edit-item-btn" href="{{ route('redirect_image', $image->id ) }}"
@@ -221,7 +236,7 @@
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                   
+
                                 </table>
                                 <div class="noresult" style="display: none">
                                     <div class="text-center">
@@ -238,12 +253,12 @@
                             </div>
                         </div>
                     </div>
-               
+
             </div><!-- end card -->
         </div>
         <!-- end col -->
     </div>
-    
+
     <!-- end row -->
 </div>
 @endsection

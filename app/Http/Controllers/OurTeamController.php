@@ -79,7 +79,8 @@ class OurTeamController extends Controller
                 'technical_id' => $technical->id,
             ];
             Technical_project::create($data);
-            return redirect()->route('ourteams.index');
+
+            return redirect()->route('ourteams.index')->with('success', 'Add new success');
         } else {
             return redirect()->route('login');
         }
@@ -116,7 +117,7 @@ class OurTeamController extends Controller
                     ->where('author_id', $authorId)
                     ->delete();
                 // Xóa thành công, redirect hoặc trả về response phù hợp
-                return redirect()->back()->with('success', 'Record deleted successfully.');
+                return redirect()->back()->with('delete', 'Successful deletion');
             } catch (\Exception $e) {
                 // Xảy ra lỗi trong quá trình xóa, xử lý và thông báo lỗi
                 return redirect()->back()->with('error', 'Error deleting record: ' . $e->getMessage());
@@ -152,7 +153,7 @@ class OurTeamController extends Controller
                     'author_id' => $user->id,
                 ];
                 Project_user::create($data);
-                return back();
+                return back()->with('success', 'Add new success');
             } catch (\Exception $e) {
                 Session::flash('error', 'An error occurred while adding the user to Our Team');
                 return back();
@@ -199,7 +200,7 @@ class OurTeamController extends Controller
 
             $technicalProject->where('technical_id', $technical->id)->update(['project_id' => $request->project_id]);
 
-            return redirect()->route('ourteams.index');
+            return redirect()->route('ourteams.index')->with('update', 'Successful update');
         } else {
             return redirect()->route('login');
         }

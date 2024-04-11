@@ -43,7 +43,7 @@ class HistoryController extends Controller
 
             $project->touch();
 
-            return redirect()->back();
+            return redirect()->back()->with('update', 'Successful recovery');
         } else {
             return redirect()->route('login');
         }
@@ -55,7 +55,7 @@ class HistoryController extends Controller
             $image->is_active = true;
             $image->save();
             $image->touch();
-            return redirect()->back();
+            return redirect()->back()->with('update', 'Successful recovery');
         } else {
             return redirect()->route('login');
         }

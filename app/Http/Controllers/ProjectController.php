@@ -57,7 +57,7 @@ class ProjectController extends Controller
             $request->validate([
                 'name' => 'required',
                 'description' => 'required',
-                'img' => 'required|image',
+                'img' => 'required',
                 'deploy_link' => 'required',
                 'domain_link' => 'required',
                 'technical' => 'required',
@@ -109,7 +109,7 @@ class ProjectController extends Controller
                 'project_id' =>  $newProjectID,
                 'technical_id' => $newTechnicalID
             ]);
-            return redirect()->route('project.index');
+            return redirect()->route('project.index')->with('success', 'Add new success');
         } else {
             return redirect()->route('login');
         }
@@ -213,7 +213,6 @@ class ProjectController extends Controller
             }
             $project->newQuery()->where('id', $requestData['id'])->update([
                 'name' => $requestData['name'],
-                'is_active' => $requestData['is_active'],
                 'is_highlight' => $requestData['is_highlight'],
                 'deploy_link' => $requestData['deploy_link'],
                 'level_id' => $requestData['level_id'],
@@ -221,7 +220,7 @@ class ProjectController extends Controller
                 'updated_at' => $requestData['updated_at']
             ]);
 
-            return redirect()->route('project.index');
+            return redirect()->route('project.index')->with('update', 'Successful update');
         } else {
             return redirect()->route('login');
         }
@@ -242,7 +241,7 @@ class ProjectController extends Controller
             //Images::query()->where('project_id', $project->id)->update(['is_active' => false]);
             // Tiếp tục với các thao tác khác nếu cần
 
-            return redirect()->route('project.index');
+            return redirect()->route('project.index')->with('delete', 'Successful deletion');
         } else {
             return redirect()->route('login');
         }

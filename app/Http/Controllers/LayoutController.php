@@ -47,7 +47,7 @@ class LayoutController extends Controller
             ]);
             // $queries = DB::getQueryLog();
             // dd($queries);
-            return redirect()->route('directory.index');
+            return redirect()->route('layout.index')->with('update', 'Successful update');
         } else {
             return redirect()->route('login');
         }

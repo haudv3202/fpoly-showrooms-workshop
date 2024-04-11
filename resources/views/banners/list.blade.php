@@ -7,14 +7,14 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">Banners</h4>
-    
+
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{route('banner.index')}}">Banners</a></li>
                             <li class="breadcrumb-item active">List banners</li>
                         </ol>
                     </div>
-    
+
                 </div>
             </div>
         </div>
@@ -34,14 +34,28 @@
             </div>
         </div>
         <!-- end row -->
-
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session('update'))
+            <div class="alert alert-success">
+                {{ session('update') }}
+            </div>
+        @endif
+        @if(session('delete'))
+            <div class="alert alert-success">
+                {{ session('delete') }}
+            </div>
+        @endif
         <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1">
             @foreach ($banners as $banner)
             <div class="col list-element w-100 h-50">
                 <div class="card explore-box card-animate ">
-                    <div class="explore-place-bid-img "> 
+                    <div class="explore-place-bid-img ">
                         <input type="hidden" class="form-control" id="1">
-                        <div class="d-none">undefined</div> 
+                        <div class="d-none">undefined</div>
                         <img src="{{ asset($banner->image) }}" alt="" class="card-img-top explore-img">
 
                         <div class="bg-overlay"></div>
@@ -59,7 +73,7 @@
                                     </button>
                                 </form>
                             </div>
-                            
+
                             <div class="ms-2">
                                 <form action="{{ route('banner.destroy', $banner->id) }}" method="POST">
                                     @csrf
@@ -67,14 +81,14 @@
                                     <button type="submit" class="btn btn-success">Xoá banner</button>
                                 </form>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             @endforeach
-           
+
         </div>
         <!-- end row -->
         <div class="py-4 text-center" id="noresult" style="display: none;">
@@ -82,6 +96,6 @@
                 colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px"></lord-icon>
             <h5 class="mt-4">Sorry! No Result Found</h5>
         </div>
-        
+
     </div>
 @endsection

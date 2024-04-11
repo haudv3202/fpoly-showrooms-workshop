@@ -3,7 +3,7 @@
 <style>
     .table .sort::after {
         display: none !important;
-    }      
+    }
     .table .sort::before {
         display: none !important;
     }
@@ -43,7 +43,7 @@
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
                                 <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                               
+
                                 <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><a class="text-white" href="{{route('directory.create')}}">
                                     <i class="ri-add-line align-bottom me-1"></i> Add directorys</a></button>
                                 {{-- <span class="dropdown">
@@ -62,6 +62,21 @@
                         </div>
                     </div>
                 </div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('update'))
+                    <div class="alert alert-success">
+                        {{ session('update') }}
+                    </div>
+                @endif
+                @if(session('delete'))
+                    <div class="alert alert-success">
+                        {{ session('delete') }}
+                    </div>
+                @endif
                 <div class="card-body">
                     <div>
                         <div class="table-responsive table-card">
@@ -79,7 +94,7 @@
                                         </th>
                                         <th class="sort" data-sort="leads_score">Created at</th>
                                         <th class="sort" data-sort="phone">Updated at</th>
-                                       
+
                                         <th class="sort" data-sort="action">Action</th>
                                     </tr>
                                 </thead>
@@ -98,7 +113,7 @@
                                         </td>
                                         <td class="company_name">{{$directory->description}}</td>
                                         <td class="leads_score">{{$directory->created_at}}</td>
-                                        <td class="phone">{{$directory->updated_at}}</td> 
+                                        <td class="phone">{{$directory->updated_at}}</td>
                                         <td>
                                             <ul class="list-inline hstack gap-2 mb-0">
                                                 <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
@@ -112,7 +127,7 @@
                                                             <i class="ri-delete-bin-fill align-bottom text-muted"></i>
                                                         </button>
                                                     </form>
-                                                    
+
                                                 </li>
                                             </ul>
                                         </td>
