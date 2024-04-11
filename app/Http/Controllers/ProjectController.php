@@ -29,7 +29,7 @@ class ProjectController extends Controller
                 ->join('levels', 'projects.level_id', '=', 'levels.id')
                 ->join('users', 'projects.added_by', '=', 'users.id')
                 ->where('projects.is_active', true)
-                ->get();
+                ->paginate(12);
             return view('projects.list', compact('projects'));
         } else {
             return redirect()->route('login');
@@ -123,7 +123,6 @@ class ProjectController extends Controller
             ->where('id', $id)
             ->get();
 
-
         Project::query()
             ->where('id', $id)
             ->update([
@@ -134,6 +133,7 @@ class ProjectController extends Controller
             'projects.name',
             'projects.description',
             'projects.views',
+            'projects.deploy_link',
             'projects.created_at',
             'projects.updated_at',
             'domains.name AS domain_name',
@@ -152,15 +152,17 @@ class ProjectController extends Controller
             ->where('project_id', '=', $id)
             ->where('is_active', true)
             ->get();
-        $projects = Project::query()->select('projects.*', DB::raw('MIN(images.image) AS image'))
+        $projects = Project::query()
+            ->select('projects.*', DB::raw('MIN(images.image) AS image'))
             ->join('images', 'images.project_id', '=', 'projects.id')
             ->where([
                 ['projects.is_active', '=', 1],
                 ['projects.is_highlight', '=', 1],
-
             ])
+            ->where('projects.id', '!=', $id)
             ->groupBy('projects.id')
             ->get();
+
         return view('projects.projectDetail', compact('projects', 'projectDetails', 'images', 'views'));
     }
     /**

@@ -34,8 +34,8 @@
                         </div>
                         <div class="col-sm-auto ms-auto">
                             <div class="hstack gap-2">
-                                <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <a href="{{route('accounts.create')}}"><button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><i class="ri-add-line align-bottom me-1"></i> Add Accounts</button></a>
+                                {{-- <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button> --}}
+                                {{-- <a href="{{route('accounts.create')}}"><button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" ><i class="ri-add-line align-bottom me-1"></i> Add Accounts</button></a> --}}
 
                             </div>
                         </div>
@@ -67,7 +67,6 @@
                                                 <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                             </div>
                                         </th>
-
                                         <th class="sort" data-sort="name">Name</th>
                                         <th class="sort" data-sort="company_name">Id</th>
                                         <th class="sort" data-sort="leads_score">Email</th>
@@ -130,16 +129,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-3">
-                            <div class="pagination-wrap hstack gap-2">
-                                <a class="page-item pagination-prev disabled" href="#">
-                                    Previous
-                                </a>
-                                <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li></ul>
-                                <a class="page-item pagination-next" href="#">
-                                    Next
-                                </a>
-                            </div>
+                        <div class="mt-3">
+                                {{$accounts->links()}}
                         </div>
                     </div>
 

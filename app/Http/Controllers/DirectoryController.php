@@ -16,7 +16,7 @@ class DirectoryController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->role == 'admin') {
-            $directorys = Level::query()->get();
+            $directorys = Level::query()->paginate(12);
             return view("directorys.list", compact('directorys'));
         } else {
             return redirect()->route('login');

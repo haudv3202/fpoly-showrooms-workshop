@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-sm-auto ms-auto">
                                 <div class="hstack gap-2">
-                                    <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                    {{-- <button class="btn btn-soft-danger" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button> --}}
                                 </div>
                             </div>
                         </div>
@@ -107,15 +107,9 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mt-3">
-                                <div class="pagination-wrap hstack gap-2">
-                                    <a class="page-item pagination-prev disabled" href="#">
-                                        Previous
-                                    </a>
-                                    <ul class="pagination listjs-pagination mb-0"><li class="active"><a class="page" href="#" data-i="1" data-page="8">1</a></li></ul>
-                                    <a class="page-item pagination-next" href="#">
-                                        Next
-                                    </a>
-                                </div>
+                                <div class="mt-3">
+                                    {{$layouts->links()}}
+                            </div>
                             </div>
                         </div>
                     </div>
