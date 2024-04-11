@@ -55,8 +55,7 @@
         <div class="isotope-gallery row four-column mb-5">
             @foreach ($projects as $project)
             
-            <div class="gallery-item col-xl-3 col-lg-4 col-md-6 col-12 {{$project->level_name}}"
-        >
+            <div class="gallery-item col-xl-3 col-lg-4 col-md-6 col-12 {{$project->level_name}}">
             <div class="portfolio-gallery-item">
                 <div class="item-img">
                     <div class="portfolio-img-gallery">

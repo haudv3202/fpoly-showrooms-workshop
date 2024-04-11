@@ -46,8 +46,10 @@
                             <h6>{{$project[0]->level_name}}</h6>
                         </div>
                         <div class="client-details">
-                            <div class="head">Added by</div>
-                            <h6>{{$project[0]->added_by_name}}</h6>
+                            <div class="client-details">
+                                <div class="head">Domain</div>
+                                <h6>{{$domain[0]->name}}</h6>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -66,9 +68,10 @@
                                 <h6>{{$project[0]->updated_at}}</h6>
                             </div>
                         </div>
+                        
                         <div class="client-details">
                             <a
-                                href="{{$domain[0]->name}}"
+                                href="{{$project[0]->deploy_link}}"
                                 class="btn btn-outline-light"
                                 ><span class="outer-wrap"
                                     ><span data-text="Contact Me"

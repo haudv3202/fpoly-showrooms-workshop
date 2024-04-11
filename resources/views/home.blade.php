@@ -137,6 +137,12 @@
                 <p>
                     {{$projectForTeam->description}}
                 </p>
+                <h5>Project domain</h5>
+                <ul
+                    class="list-unstyled icons-listing theme-dark check w-half"
+                >
+                <li>{{$domain[0]->name}}</li>
+                </ul>
                 <h5>Members of the team</h5>
                 <ul
                     class="list-unstyled icons-listing theme-dark check w-half"
@@ -145,9 +151,9 @@
                         <li>{{$project_user->name}}</li>
                 @endforeach
                 </ul>
-                <a href="{{$domain[0]->name}}" class="btn btn-default mt-3"
+                <a href="{{$projectForTeam->deploy_link}}" class="btn btn-default mt-3"
                     ><span class="outer-wrap"
-                        ><span data-text="Get a quote"
+                        ><span data-text="To the project"
                             >To the project</span
                         ></span
                     ></a
