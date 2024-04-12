@@ -81,7 +81,7 @@
                     <div class="col-lg-12">
                         <div class="mb-3 mb-lg-0 mt-3">
                             <label for="datepicker-deadline-input" class="form-label">Update at</label>
-                            <input type="datetime-local" class="form-control" name="updated_at" id="datepicker-deadline-input" value="<?php echo now()->timezone('Asia/Ho_Chi_Minh')->format('Y-m-d\TH:i'); ?>" placeholder="Enter Deploy link">
+                            <input type="datetime-local" readonly="readonly" class="form-control" name="updated_at" id="datepicker-deadline-input" value="<?php echo now()->timezone('Asia/Ho_Chi_Minh')->format('Y-m-d\TH:i'); ?>" placeholder="Enter Deploy link">
                         </div>
                     </div>
                 </div>
