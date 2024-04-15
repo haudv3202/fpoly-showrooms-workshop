@@ -102,57 +102,57 @@ var checkAll = document.getElementById("checkAll"),
                       "noresult"
                   )[0].style.display = "block");
     });
-const xhttp = new XMLHttpRequest();
-(xhttp.onload = function () {
-    var e = JSON.parse(this.responseText);
-    Array.from(e).forEach(function (e) {
-        var t = e.tags,
-            a = "";
-        Array.from(t).forEach((e, t) => {
-            a +=
-                '<span class="badge bg-primary-subtle text-primary me-1">' +
-                e +
-                "</span>";
-        }),
-            leadsList.add({
-                id:
-                    '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ' +
-                    e.id +
-                    "</a>",
-                image_src: e.image_src,
-                name: e.name,
-                company_name: e.company_name,
-                date: formatDate(e.date),
-                leads_score: e.leads_score,
-                phone: e.phone,
-                location: e.location,
-                tags: a,
-            }),
-            leadsList.sort("id", { order: "desc" }),
-            refreshCallbacks();
-    }),
-        leadsList.remove(
-            "id",
-            '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a>'
-        );
-}),
-    xhttp.open("GET", "theme/admin/assets/json/leads-list.json"),
-    xhttp.send(),
-    document
-        .querySelector("#lead-image-input")
-        .addEventListener("change", function () {
-            var e = document.querySelector("#lead-img"),
-                t = document.querySelector("#lead-image-input").files[0],
-                a = new FileReader();
-            a.addEventListener(
-                "load",
-                function () {
-                    e.src = a.result;
-                },
-                !1
-            ),
-                t && a.readAsDataURL(t);
-        });
+// const xhttp = new XMLHttpRequest();
+// (xhttp.onload = function () {
+//     var e = JSON.parse(this.responseText);
+//     Array.from(e).forEach(function (e) {
+//         var t = e.tags,
+//             a = "";
+//         Array.from(t).forEach((e, t) => {
+//             a +=
+//                 '<span class="badge bg-primary-subtle text-primary me-1">' +
+//                 e +
+//                 "</span>";
+//         }),
+//             leadsList.add({
+//                 id:
+//                     '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ' +
+//                     e.id +
+//                     "</a>",
+//                 image_src: e.image_src,
+//                 name: e.name,
+//                 company_name: e.company_name,
+//                 date: formatDate(e.date),
+//                 leads_score: e.leads_score,
+//                 phone: e.phone,
+//                 location: e.location,
+//                 tags: a,
+//             }),
+//             leadsList.sort("id", { order: "desc" }),
+//             refreshCallbacks();
+//     }),
+//         leadsList.remove(
+//             "id",
+//             '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a>'
+//         );
+// }),
+//     xhttp.open("GET", "theme/admin/assets/json/leads-list.json"),
+//     xhttp.send(),
+//     document
+//         .querySelector("#lead-image-input")
+//         .addEventListener("change", function () {
+//             var e = document.querySelector("#lead-img"),
+//                 t = document.querySelector("#lead-image-input").files[0],
+//                 a = new FileReader();
+//             a.addEventListener(
+//                 "load",
+//                 function () {
+//                     e.src = a.result;
+//                 },
+//                 !1
+//             ),
+//                 t && a.readAsDataURL(t);
+//         });
 var isValue = (isCount = new DOMParser().parseFromString(
         leadsList.items.slice(-1)[0]._values.id,
         "text/html"

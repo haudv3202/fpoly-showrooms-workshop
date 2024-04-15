@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Directory;
+use App\Models\Level;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DirectoryController extends Controller
 {
@@ -12,14 +15,49 @@ class DirectoryController extends Controller
      */
     public function index()
     {
-        return view("directorys.list");
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $directorys = Level::query()->paginate(12);
+            return view("directorys.list", compact('directorys'));
+        } else {
+            return redirect()->route('login');
+        }
+    }
+    public function directory()
+    {
+
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $directorys = Level::query()->get();
+            return view("directorys.list", compact('directorys'));
+        } else {
+            $directorys = Level::query()
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('projects')
+                        ->whereColumn('level_id', 'levels.id')
+                        ->where('projects.is_active', true);
+                })
+                ->get();
+
+            $projects = Project::select('projects.id', 'projects.name', 'projects.description', 'projects.deploy_link', 'levels.name as level_name', 'projects.views', DB::raw('MIN(images.image) AS image'))
+                ->join('levels', 'levels.id', '=', 'projects.level_id')
+                ->join('images', 'images.project_id', '=', 'projects.id')
+                ->where('projects.is_active', true)
+                ->groupBy('projects.id')
+                ->get();
+
+            return view("directorys.directory", compact('directorys', 'projects'));
+        }
     }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Level $level)
     {
-        return view("directorys.create");
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            return view("directorys.create", compact('level'));
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -27,42 +65,78 @@ class DirectoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
+            $requestData = $request->all();
+            Level::query()->create($requestData);
+            return redirect()->route('directory.index')->with('success', 'Add new success');
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Directory $directory)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Directory $directory)
+    public function edit($level)
     {
-        return view("directorys.edit");
-    }
-    public function details(Directory $directory)
-    {
-        return view("directorys.details");
-    }
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $directorys = Level::query()->select()->where('id', $level)->get();
 
+            return view("directorys.edit", compact('directorys', 'level'));
+        } else {
+            return redirect()->route('login');
+        }
+    }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Directory $directory)
+    public function update(Request $request, Level $level)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
+            $requestData = $request->all();
+
+            // DB::enableQueryLog();
+            Level::query()->where('id', $requestData['id'])->update([
+                'name' => $requestData['name'],
+                'description' => $requestData['description'],
+                'updated_at' => $requestData['updated_at'],
+            ]);
+            // $queries = DB::getQueryLog();
+            // dd($queries);
+            return redirect()->route('directory.index')->with('update', 'Successful update');
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Directory $directory)
+    public function destroy($level)
     {
-        //
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $count = Project::query()
+                ->where('id', $level)
+                ->count();
+            if ($count > 0) {
+                return redirect()->route('directory.index');
+            } else {
+                Level::query()->where('id', $level)->delete();
+                return redirect()->route('directory.index')->with('delete', 'Successful deletion');
+            }
+        } else {
+            return redirect()->route('login');
+        }
     }
 }

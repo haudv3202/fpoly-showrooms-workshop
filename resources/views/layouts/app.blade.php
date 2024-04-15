@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,6 +32,10 @@
         rel="stylesheet"
     />
     <link
+        href="{{asset('bootstrap/css/bootstrap.min.css')}}"
+        rel="stylesheet"
+    />
+    <link
         href="{{asset('theme/client/assets/css/styles.min.css')}}"
         rel="stylesheet"
     />
@@ -39,11 +44,16 @@
         rel="stylesheet"
     />
     <script src="{{asset('theme/client/assets/js/scripts.min.js')}}"></script>
-   
+
     {{-- <!-- Scripts -->
     @vite(['resources/sass/app.scss','resources/css/styles.min.css','resources/css/home-default.css'])
     @vite(['resources/js/scripts.min.js']) --}}
 </head>
+<style>
+    /* .home-default{
+        background: #fff !important;
+    } */
+</style>
 <body>
     <div id="pageloader">
         <div class="loader-item">
@@ -54,8 +64,8 @@
         <header>
             <div class="container">
                 <div class="top-bar">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 order-md-last">
+                    <div class="row align-items-center p-3" >
+                        {{-- <div class="col-md-6 order-md-last">
                             <div class="social-icons">
                                 <ul class="list-unstyled">
                                     <li>
@@ -93,7 +103,7 @@
                                 <a href="/support">Support</a>
                                 <a href="/login">Login</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -102,18 +112,20 @@
                     <a class="navbar-brand" href="/"
                         ><img src="{{asset('theme/client/assets/images/logo_purple.svg')}}" alt
                     /></a>
-                    <form
+                    <form action="" method="POST" enctype="multipart/form"
                         class="d-flex order-lg-last ms-3 align-items-center"
                     >
                         <a href="#" id="search_home"
                             ><i class="srn-search"></i> </a
-                        ><a
+                        >
+                        <a
+                        href="login"
                             class="signup-btn btn btn-outline-primary text-nowrap"
                             data-trigger="#signup"
                             ><span class="d-none d-sm-inline-block"
                                 ><span class="outer-wrap"
-                                    ><span data-text="Sing Up"
-                                        >Sing Up</span
+                                    ><span data-text="Sing In"
+                                        >Sing In</span
                                     ></span
                                 ></span
                             >
@@ -161,19 +173,19 @@
                                     <a
                                         class="nav-link"
                                         href="/">Trang chủ</a
-                                    > 
+                                    >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
                                         href="/danhmuc">Danh mục</a
-                                    > 
+                                    >
                                 </li>
                                 <li class="nav-item">
                                     <a
                                         class="nav-link"
                                         href="/ourteam">Our team</a
-                                    > 
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -183,140 +195,15 @@
         </header>
         <div class="home-default-banner">
             <div class="container pos-rel">
-                <div class="banner-abstract-shape"></div>
+                {{-- <div class="banner-abstract-shape"></div>
                 <div class="matrix-vertical">
                     <img src="{{asset('theme/client/assets/images/matrix_vertical.svg')}}" alt />
                 </div>
                 <div class="rectangle-small">
                     <img src="{{asset('theme/client/assets/images/rectangle_small.svg')}}"
                     alt />
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="marketing-banner">
-                            <div class="title">
-                                <span
-                                    >For Marketing and Creative Teams</span
-                                >
-                                <h1 class="wow">
-                                    We create digitals
-                                    <strong>products that matters</strong>
-                                </h1>
-                                <p class="lead">
-                                    Contented continued any happiness
-                                    instantly objection yet her allowance.
-                                    Use correct day new brought tedious.
-                                    Kept easy or sons my it done.
-                                </p>
-                                <div class="cta-group">
-                                    <a
-                                        href="javascript:"
-                                        class="btn btn-primary"
-                                        data-trigger="#signup"
-                                        ><span class="outer-wrap"
-                                            ><span data-text="Try for free"
-                                                >Try for free</span
-                                            ></span
-                                        ></a
-                                    >
-                                    <a
-                                        href="about-us.html"
-                                        class="btn btn-secondary"
-                                        ><span class="outer-wrap"
-                                            ><span data-text="Learn More"
-                                                >Learn More</span
-                                            ></span
-                                        ></a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="banner-img">
-                            <img
-                                src="{{asset('theme/client/assets/images/home-default-banner-img.png')}}"
-                                alt
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <b class="screen-overlay"></b>
-        <article class="mobile-offcanvas offcanvas-right" id="signup">
-            <button class="btn-close"><i class="bi bi-x"></i></button>
-            <div class="popup-wrapper">
-                <div class="content">
-                    <h3>Create an account</h3>
-                    <div class="social-login-btn">
-                        <a href="javascript:" class="gm"
-                            ><i class="bi bi-google"></i> With Google </a
-                        ><a href="javascript:" class="fb"
-                            ><i class="bi bi-facebook"></i> With Facebook</a
-                        >
-                    </div>
-                    <div class="or-text">
-                        <span>Or Signup with your email</span>
-                    </div>
-                </div>
-                <div class="form-wrap">
-                    <div class>
-                        <div class="mb-4">
-                            <input
-                                type="text"
-                                class="form-control bordered bottom-only"
-                                placeholder="Mobile Number or Email"
-                            />
-                        </div>
-                        <div class="mb-4">
-                            <input
-                                type="text"
-                                class="form-control bordered bottom-only"
-                                placeholder="Full Name"
-                            />
-                        </div>
-                        <div class="mb-4">
-                            <input
-                                type="text"
-                                class="form-control bordered bottom-only"
-                                placeholder="Username"
-                            />
-                        </div>
-                        <div class="mb-4">
-                            <input
-                                type="text"
-                                class="form-control bordered bottom-only"
-                                placeholder="Password"
-                            />
-                        </div>
-                        <div class="mb-4 info-form">
-                            <small
-                                >By signing up, you agree to our
-                                <a href="javscript:">Terms</a> ,
-                                <a href="javscript:">Data Policy</a> and
-                                <a href="javscript:">Cookies Policy</a
-                                >.</small
-                            >
-                        </div>
-                        <div class="d-grid">
-                            <button
-                                type="button"
-                                class="btn btn-outline-primary btn-sm"
-                            >
-                                <span class="outer-wrap"
-                                    ><span data-text="Singup"
-                                        >Singup</span
-                                    ></span
-                                >
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
-    <main class="py-4" id="body-content">
+                </div> --}}
+
             @yield('content')
         </main>
     <div class="footer-wrap home-default">
@@ -352,276 +239,53 @@
             </div>
         </div>
         <footer>
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-xxl-5 col-lg-5">
-                        <div class="row">
-                            <div class="col-xxl-6 col-sm-6">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">About Us</h4>
-                                    <p class="footer-text">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit. In urna
-                                        lectus, mattis non accumsan in,
-                                        tempor dictum neque.
-                                    </p>
-                                    <div class="social-icons">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-facebook"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-twitter-x"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-instagram"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-linkedin"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:"
-                                                    ><i
-                                                        class="bi bi-youtube"
-                                                    ></i
-                                                ></a>
-                                            </li>
-                                        </ul>
+            <div class="footer-widgets">
+                <div class="fpoly-container">
+                    <div class="row">
+                        <div class="column col-md-4 footer">
+                            <div class="widgets">
+                                <div id="text-6" class="widget widget_text"> <div class="textwidget"><p><img decoding="async" src="//i.imgur.com/5EK1lFm.png"></p>
+                                        <div style="clear: both; color: #f7941d; font-size: 20px; text-transform: uppercase; margin-top: 20px; display: block; padding-top: 15px;">THÔNG TIN LIÊN HỆ</div>
+                                        <div class="hiden-xs">
+                                            <p>Điện thoại: (024) 7300 1955</p>
+                                            <p>Email: caodang@fpt.edu.vn</p>
+                                        </div>
+                                        <style>
+                                            @media (max-width: 992px){<br />.footer-xs{<br /> padding-top:20px  !important;<br />margin: 0 !important;<br />}<br />}<br /></style>
                                     </div>
-                                    <div
-                                        class="footer-widget-contact d-none"
-                                    >
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-geo-alt"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    Envato Pty Ltd, 13/2
-                                                    Elizabeth St Melbourne
-                                                    VIC 3000, Australia
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-phone"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="tel:+1234567899"
-                                                        >(+01) 123 456
-                                                        7890</a
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-envelope"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="https://mannatstudio.com/cdn-cgi/l/email-protection#3f575a534f7f4c5a4d5a51564b5a4b115c5052"
-                                                        ><span
-                                                            class="__cf_email__"
-                                                            data-cfemail="563e333a261625332433383f2233227835393b"
-                                                            >[email&#160;protected]</span
-                                                        ></a
-                                                    >
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xxl-5 col-sm-6 ms-auto">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Company</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Contact Us</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Culture</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Jobs</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                </div> </div>
                         </div>
-                    </div>
-                    <div class="col-xxl-7 col-lg-7 mr-top-footer">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Support</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:"
-                                                >Getting started</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Chat our support</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Help center</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Services status</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Report a bug</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Services</h4>
-                                    <ul
-                                        class="list-unstyled icons-listing mb-0 widget-listing"
-                                    >
-                                        <li>
-                                            <a href="javascript:"
-                                                >Pricing</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Support</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Sales and Refunds</a
-                                            >
-                                        </li>
-                                        <li>
-                                            <a href="javascript:">Legal</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:"
-                                                >Testimonials & Faq’s</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4 ol-12">
-                                <div class="footer-widget">
-                                    <h4 class="widget-title">Contact Us</h4>
-                                    <div class="footer-widget-contact">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-geo-alt"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    4789 Melmorn
-                                                    Street,Zakila Ton
-                                                    Mashintron Town
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-phone"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="tel:+1234567899"
-                                                        >(+01) 123 456
-                                                        7890</a
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div>
-                                                    <i
-                                                        class="bi bi-envelope"
-                                                    ></i>
-                                                </div>
-                                                <div>
-                                                    <a
-                                                        href="https://mannatstudio.com/cdn-cgi/l/email-protection#4e262b223e0e3d2b3c2b20273a2b3a602d2123"
-                                                        ><span
-                                                            class="__cf_email__"
-                                                            data-cfemail="d0b8b5bca090a3b5a2b5beb9a4b5a4feb3bfbd"
-                                                            >[email&#160;protected]</span
-                                                        ></a
-                                                    >
-                                                </div>
-                                            </li>
-                                        </ul>
+                        @php
+                            use App\Models\Layout;
+                            $footer1 = Layout::where('col', '1')->get();
+                            $footer2 = Layout::where('col', '2')->get();
+                        @endphp
+                        <div class="column col-md-4 footer-2">
+                            <div class="widgets">
+                                <div id="text-7" class="widget widget_text"> <div class="textwidget">
+                                        <div style="color: #f7941d; margin-bottom: 10px; font-size: 20px;"><strong>HỆ THỐNG VĂN PHÒNG TUYỂN SINH</strong></div>
+                                        @foreach($footer1 as $ft1)
+                                            <div class="footer-xs" style="text-decoration: underline; padding-top: 10px;">{!! $ft1->name !!}</div>
+                                            <p>{!! $ft1->address1 !!}<br>{!! $ft1->address2 !!}<br>{!! $ft1->numberPhone !!}</p>
+                                            <br>
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="tiny-footer">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 mb-0">
-                            Copyright &copy; <span id="yearText"></span>
-                            <strong>Serenite</strong> Theme All rights
-                            reserved.
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tiny-footer-links">
-                                <ul class="list-unstyled list-inline">
-                                    <li><a href="#">Terms of Use</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                            </div>
+                        <div class="column col-md-4 footer-3">
+                            <div class="widgets">
+                                <div id="text-8" class="widget widget_text"> <div class="textwidget">
+                                        @foreach($footer2 as $ft2)
+                                            <div class="footer-xs" style="text-decoration: underline; padding-top: 40px;">{!! $ft2->name !!}</div>
+                                            <p>{!! $ft2->address1 !!}<br>
+                                                {!! $ft2->address2 !!}<br>
+                                                {!! $ft2->numberPhone !!}</p>
+                                        @endforeach
+
+                                    </div>
+                                </div> </div>
                         </div>
                     </div>
                 </div>
@@ -632,7 +296,8 @@
         ><i class="bi bi-chevron-up"></i
     ></a>
     <div class="overlay overlay-hugeinc">
-        <form class="form-inline mt-2 mt-md-0">
+        <form action="{{route('search')}}" method="POST" enctype="multipart/form-data" class="form-inline mt-2 mt-md-0">
+            @csrf
             <div class="form-inner">
                 <div class="form-inner-div hstack">
                     <i class="srn-search"></i>
@@ -640,6 +305,7 @@
                         <input
                             class="form-control form-light"
                             type="text"
+                            name="search"
                             placeholder="Search"
                             aria-label="Search"
                         />
@@ -657,5 +323,6 @@
      integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
             data-cf-beacon='{"rayId":"85c6bfd12b229f68","version":"2024.2.1","r":1,"token":"64224fc8786846928480d180dfc466bd","b":1}'
             crossorigin="anonymous"></script>
+            <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 </body>
 </html>

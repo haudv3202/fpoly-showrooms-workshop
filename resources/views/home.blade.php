@@ -1,8 +1,170 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .carousel-image {
+    height: 400px; /* Chiều cao mặc định */
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    .carousel-image {
+        margin-top: 25px;
+        height: 300px; /* Chiều cao cho màn hình nhỏ hơn */
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-image {
+        margin-top: 15px;
+        height: 200px; /* Chiều cao cho màn hình rất nhỏ */
+    }
+}
+
+</style>
+<div class="row align-items-center mt-lg-5">
+    <div class="col-lg-12 border-1">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @foreach ($banners as $key => $banner)
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+                @endforeach
+            </ol>
+            <div class="carousel-inner">
+                @foreach ($banners as $k => $banner_)
+                    <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
+                        <div class="d-block w-100 carousel-image" style="background-image: url('{{ asset($banner_->image) }}');"></div>
+                    </div>
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>        
+    </div>
+</div>
+</div>
+</div>
+<style>
+    .owl-carousel .item {
+
+        min-height: 500px;
+        max-height: 500px; 
+        overflow: hidden;
+    }
+
+@media (max-width: 768px) {
+    .owl-carousel .item {
+        min-height: 340px;
+        max-height: 340px; 
+    }
+}
+
+</style>
+</div>
+<main class="py-4" id="body-content">
+<section class="section-spacing section-padding bg-light-blue services-related-slider">
+    <div class="container">
+        <div class="section-title text-start">
+            {!! html_entity_decode($tieude[0]->address1) !!}
+        </div>
+    </div>
+    <div class="owl-carousel container owl-theme top-right-arrow" id="services-related-slider">
+        @foreach ($projects as $project)
+        <div class="item">
+            <div class="icon-style-top-icon">
+                <div class="">
+                    <img width="20%" src="{{ asset($project->image) }}" alt="">
+                </div>
+                <div class="text-right">
+                    <p class="text-muted">{{$project->views}}</p>
+                </div> 
+                <div class="text">
+                    <h6>{{ substr($project->name, 0, 20) }}</h6> 
+                    <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $project->description }}</p> 
+                </div>
+                <div class="arrow-read-more">
+                    
+                    <a href="{{route('project.show',$project->id)}}">read more <i class="srn-arrow-right"></i></a>
+                </div>
+                               
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+</section>
+<section class="section-spacing pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-12">
+                <div class="section-title">
+                  
+                    {!! html_entity_decode($phan1) !!}
+                    {{$projectForTeam->name}}
+                   {!! html_entity_decode($phan2) !!}
+                    {{-- <p>
+                        We help transform your brand into a visual
+                        story. We turn your website into a powerful
+                        way to engage with your audience and a
+                        high-performing marketing tool for your
+                        enterprise.
+                    </p> --}}
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-0">
+                <div class="img-gradient">
+                    <img
+                        src="{{ asset($projectForTeam->image) }}"
+                        alt
+                    />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3
+                    class="txt-secondary mb-4 fw-7 text-capitalize wow fadeInUp"
+                >
+                {{$projectForTeam->name}}
+                </h3>
+                <p>
+                    {{$projectForTeam->description}}
+                </p>
+                <h5>Project domain</h5>
+                <ul
+                    class="list-unstyled icons-listing theme-dark check w-half"
+                >
+                <li>{{$domain[0]->name}}</li>
+                </ul>
+                <h5>Members of the team</h5>
+                <ul
+                    class="list-unstyled icons-listing theme-dark check w-half"
+                >
+                @foreach ($project_users as $project_user)
+                        <li>{{$project_user->name}}</li>
+                @endforeach
+                </ul>
+                <a href="{{$projectForTeam->deploy_link}}" class="btn btn-default mt-3"
+                    ><span class="outer-wrap"
+                        ><span data-text="To the project"
+                            >To the project</span
+                        ></span
+                    ></a
+                >
+            </div>
+        </div>
+    </div>
+</section>
+    
 {{-- lỗi --}}
-    <section class="section-spacing">
+    {{-- <section class="section-spacing">
         <div class="container">
             <div
                 class="owl-carousel owl-theme top-right-arrow"
@@ -58,8 +220,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="section-spacing home-ideas-wrap">
+    </section> --}}
+    {{-- <section class="section-spacing home-ideas-wrap">
         <div class="container pos-rel">
             <div class="square-top">
                 <img src="{{asset('theme/client/assets/images/square_large.svg')}}" alt />
@@ -297,7 +459,7 @@
             </div>
         </div>
     </section>
-    {{-- lỗi --}}
+
     <section
         class="txt-white section-padding pattern_abstract_bg pos-rel"
     >
@@ -1164,5 +1326,5 @@
             </div>
             <div class="img-abstract">&nbsp;</div>
         </div>
-    </section>
+    </section> --}}
 @endsection

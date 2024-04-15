@@ -1,69 +1,102 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row align-items-center mt-lg-5">
+    {{-- <div class="col-lg-12 h-20 border-1">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{asset('theme/client/assets/images/rectangle_small.svg')}}" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="{{asset('theme/client/assets/images/rectangle_small.svg')}}" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="{{asset('theme/client/assets/images/rectangle_small.svg')}}" alt="Third slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div> --}}
+</div>
+</div>
+</div>
+
+</div>
+<main class="py-4" id="body-content">
 <section class="section-spacing pt-0">
     <div class="container">
         <div class="row">
             <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-12">
                 <div class="section-title">
                     <h2 class="wow">
-                        <strong
-                            >Website design and development</strong
-                        >
+                        <strong>{{$projectDetails[0]->name}}</strong>
                     </h2>
-                    <p>
-                        We help transform your brand into a visual
-                        story. We turn your website into a powerful
-                        way to engage with your audience and a
-                        high-performing marketing tool for your
-                        enterprise.
-                    </p>
                 </div>
             </div>
         </div>
         <div class="row align-items-center">
-            <div class="col-lg-6 mb-0">
-                <div class="img-gradient">
-                    <img
-                        src="{{asset('theme/client/assets/images/services_single_img.jpg')}}"
-                        alt
-                    />
-                </div>
+            <div class="col-lg-6  portfolio-slider-wrap-outer">
+                <div class="portfolio-slider-wrap m-0">
+                    <div
+                        class="owl-carousel owl-theme"
+                        id="portfolio-slider-single"
+                    >
+                    @foreach ($images as $image)
+                    <div class="item">
+                        <img
+                            src="{{asset($image->image)}}"
+                            alt
+                        />
+                    </div>
+                    @endforeach
+                        
+                        
+                    </div>
+                </div> 
             </div>
+           
             <div class="col-lg-6">
                 <h3
                     class="txt-secondary mb-4 fw-7 text-capitalize wow fadeInUp"
                 >
-                    About our web services
+                {{$projectDetails[0]->name}}
                 </h3>
                 <p>
-                    Web design is a Web development process for
-                    creating a website that focuses on aesthetic
-                    factors like layout, user interface and other
-                    visual imagery in order to make the website more
-                    visually appealing and easy to use.
+                    {{$projectDetails[0]->description}}
                 </p>
                 <ul
                     class="list-unstyled icons-listing theme-dark check w-half"
                 >
-                    <li>Improve productivity and performance</li>
+                    <li>Technical: {{$projectDetails[0]->technical_name}}</li>
                     <li>
-                        Get peace of mind knowing your services are
-                        in trusted hands
-                    </li>
-                    <li>Reduce your service costs</li>
-                    <li>Hassle-free setup & management</li>
+                        View: {{$projectDetails[0]->views}}
+                     </li>
+                    <li> Level: {{$projectDetails[0]->level_name}}</li>
                     <li>
-                        Lifetime license, No monthly or yearly fee
-                    </li>
+                        Create at:  {{$projectDetails[0]->created_at}}
+                     </li>
                     <li>
-                        User-friendly admin & reporting features
-                    </li>
+                        Domain: {{$projectDetails[0]->domain_name}}
+                     </li>
+                     <li>Update at: {{$projectDetails[0]->updated_at}}</li>
                 </ul>
-                <a href="contact.html" class="btn btn-default mt-3"
+                <a href="{{$projectDetails[0]->deploy_link}}" class="btn btn-default mt-3"
                     ><span class="outer-wrap"
-                        ><span data-text="Get a quote"
-                            >Get a quote</span
+                        ><span data-text="View project"
+                            >View project</span
                         ></span
                     ></a
                 >
@@ -71,402 +104,43 @@
         </div>
     </div>
 </section>
-<section
-    class="section-spacing bg-primary pos-rel pb-0 video-bg-off-wrap section-padding"
->
-    <div class="container pos-rel">
-        <div class="row">
-            <div class="col-xl-7 col-lg-7">
-                <div class="video-bg-off">
-                    <img src="{{asset('theme/client/assets/images/video_bg_off.png')}}" alt />
-                    <div class="video-play-btn">
-                        <a
-                            class="popup-video"
-                            href="https://player.vimeo.com/video/7449107"
-                            target="_blank"
-                            role="button"
-                            ><i class="bi bi-play"></i
-                        ></a>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="col-xl-5 col-lg-5 mb-0 section-padding pt-0"
-            >
-                <div class="section-title text-start light">
-                    <span>Case Study Video</span>
-                    <h2 class="wow">
-                        Our Approach
-                        <strong>Research and Strategy</strong>
-                    </h2>
-                </div>
-                <div class="hstack gap-4">
-                    <div
-                        class="tick-icon-big wow fadeInUp"
-                        data-wow-delay="0.1s"
-                    >
-                        <div class="icon-space">
-                            <i class="bi bi-check2"></i>
-                        </div>
-                        <div class="text-space fun-fact">
-                            <h2>
-                                <span
-                                    class="timer"
-                                    data-to="99"
-                                    data-speed="2000"
-                                    >99</span
-                                >%
-                            </h2>
-                            <div>Satisfaction rate</div>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="tick-icon-big wow fadeInUp"
-                        data-wow-delay="0.2s"
-                    >
-                        <div class="icon-space">
-                            <i class="bi bi-check2"></i>
-                        </div>
-                        <div class="text-space fun-fact">
-                            <h2>
-                                $<span
-                                    class="timer"
-                                    data-to="9"
-                                    data-speed="2000"
-                                    >9</span
-                                >M
-                            </h2>
-                            <div>Global revenue</div>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5">
-                    <a
-                        href="contact.html"
-                        class="btn btn-outline-light"
-                        >Contact us</a
-                    >
-                    <a href="tel:+1234567899" class="link-light"
-                        >(+01) 123 456 7890</a
-                    >
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section-spacing">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <h6 class="txt-default mb-4 fw-4">
-                    Content Creation
-                </h6>
-                <p>
-                    At Serenite, the ambition is that you should
-                    always feel welcome both as an advertiser and a
-                    visitor. A modern and easy-to-manage page makes
-                    it easier for Users to maneuver forward. or then
-                    mised words which don't look even slightly
-                    believable you need to be sure there isn't
-                    anything embarrassing vestibu lum at eros.
-                </p>
-                <p>
-                    Pellentesque habitant morbi tristique senectus
-                    et netus et malesuada fames ac turpis egestas.
-                    Morbi est nibh, hendrerit bibendum enim eu,
-                    vehicula porta nisi. Donec at ligula sed turpis
-                    mollis commodo in convallis magna. Aliquam a mi
-                    mauris. Maecenas volutpat dui vel mauris tempus
-                    placerat. Proin blandit eu tortor vel
-                    pellentesque. Fusce laoreet ipsum lorem, at
-                    aliquet ipsum varius tempus.
-                </p>
-                <p>
-                    Yet remarkably appearance get him his
-                    projection. Diverted endeavor bed peculiar men
-                    the not desirous. Acuteness abilities ask can
-                    offending furnished fulfilled sex. Warrant
-                    fifteen exposed ye at mistake. Blush since so in
-                    noisy still built up an again. As young ye hopes
-                    no he place means. Partiality diminution gay yet
-                    entreaties admiration. In mention perhaps
-                    attempt pointed suppose. Unknown ye chamber of
-                    warrant of Norland arrived.
-                </p>
-                <section class="mt-5">
-                    <h6 class="txt-default mb-4 fw-4">
-                        Safety Standards are Included
-                    </h6>
-                    <p>
-                        Vestibulum ante ipsum primis in faucibus
-                        orci luctus et ultrices posuere id cubilia
-                        Curae; Maecenas nec tellus vehicula lorem
-                        ultricies condimentum. Sed consectetur urna
-                        eget et finibus posuere. Sed tempus orci
-                        erat, sit amet pretium lorem tincidunt eget.
-                        Maecenas porta risus on neque rhoncus, sed
-                        pharetra diam vulputate.
-                    </p>
-                </section>
-            </div>
-            <div class="col-lg-4 mt-4">
-                <div class="service-form">
-                    <h6>Request A Call Back</h6>
-                    <form action="#/">
-                        <div class="row g-3">
-                            <div class="col-md-12 mb-0">
-                                <input
-                                    type="text"
-                                    class="form-control bordered"
-                                    id="First_Name"
-                                    placeholder="First Name*"
-                                    required
-                                />
-                            </div>
-                            <div class="col-md-12 mb-0">
-                                <input
-                                    type="text"
-                                    class="form-control bordered"
-                                    id="Last_Name"
-                                    placeholder="Last Name*"
-                                    required
-                                />
-                            </div>
-                            <div class="col-md-12 mb-0">
-                                <input
-                                    type="email"
-                                    class="form-control bordered"
-                                    id="Email_Address"
-                                    placeholder="Email Address*"
-                                    required
-                                />
-                            </div>
-                            <div class="col-md-12 mb-0">
-                                <input
-                                    type="text"
-                                    class="form-control bordered"
-                                    id="Phone_Number"
-                                    placeholder="Phone Number*"
-                                    required
-                                />
-                            </div>
-                            <div class="col-md-12 mb-0">
-                                <select
-                                    class="select-light-bordered"
-                                    name="Combo_Box"
-                                    required
-                                >
-                                    <option value>
-                                        Select Subject
-                                    </option>
-                                    <option value>
-                                        Colibri Creative Project
-                                    </option>
-                                    <option value>
-                                        Colibri Project
-                                    </option>
-                                    <option value>
-                                        Happy Moments Photoset
-                                    </option>
-                                    <option value>
-                                        Luxury Car Website
-                                    </option>
-                                    <option value>Funny Dog</option>
-                                    <option value>
-                                        Creative Branding
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <div
-                                    class="form-check form-check-inline"
-                                >
-                                    <input
-                                        class="form-check-input bordered"
-                                        type="checkbox"
-                                        id="inlineCheckbox5"
-                                        value="option1"
-                                    />
-                                    <label
-                                        class="form-check-label"
-                                        for="inlineCheckbox5"
-                                        >By proceeding I accept the
-                                        <a
-                                            href="javascrip:"
-                                            class="link-dark"
-                                            >Terms & Conditions</a
-                                        ></label
-                                    >
-                                </div>
-                            </div>
-                            <div class="col-md-12 d-grid gap-2">
-                                <button
-                                    type="submit"
-                                    class="btn btn-secondary btn-block"
-                                >
-                                    <span class="outer-wrap"
-                                        ><span
-                                            data-text="Request A Call"
-                                            >Request A Call</span
-                                        ></span
-                                    >
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section
-    class="section-spacing section-padding bg-light-blue services-related-slider"
->
+<section class="section-spacing section-padding bg-light-blue services-related-slider">
     <div class="container">
         <div class="section-title text-start">
-            <span>What We Do For You?</span>
+            
             <h2 class="mb-0 wow">
-                Our <strong>Other Service</strong>
+                Project heightligh
             </h2>
         </div>
     </div>
-    <div
-        class="owl-carousel container owl-theme top-right-arrow"
-        id="services-related-slider"
-    >
+    <div class="owl-carousel container owl-theme top-right-arrow" id="services-related-slider">
+        @foreach ($projects as $project)
         <div class="item">
             <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i
-                        class="srn-icon-digital-analytics-monitor"
-                    ></i>
+                <div class="">
+                    <img width="20%" src="{{ asset($project->image) }}" alt="">
                 </div>
+                <div class="text-right">
+                    <p class="text-muted">{{$project->views}}</p>
+                </div> 
                 <div class="text">
-                    <h6>Digital Analytics</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
+                    <h6>{{ substr($project->name, 0, 20) }}</h6> 
+                    <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $project->description }}</p> 
                 </div>
                 <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
+                    
+                    <a href="{{route('project.show',$project->id)}}">read more <i class="srn-arrow-right"></i></a>
                 </div>
+                               
             </div>
         </div>
-        <div class="item">
-            <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i class="srn-icon-digital-marketing"></i>
-                </div>
-                <div class="text">
-                    <h6>Digital Marketing</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
-                </div>
-                <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i class="srn-icon-email-maketing"></i>
-                </div>
-                <div class="text">
-                    <h6>Email Marketing</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
-                </div>
-                <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i class="srn-icon-marketing-automation"></i>
-                </div>
-                <div class="text">
-                    <h6>Marketing Automation</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
-                </div>
-                <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i class="srn-icon-social-media-management"></i>
-                </div>
-                <div class="text">
-                    <h6>Social Media Management</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
-                </div>
-                <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="icon-style-top-icon">
-                <div class="icon">
-                    <i class="srn-icon-keyword-research-second"></i>
-                </div>
-                <div class="text">
-                    <h6>Keyword Research</h6>
-                    <p>
-                        We use the latest technologies it voluptatem
-                        accusantium do loremque laudantium.
-                    </p>
-                </div>
-                <div class="arrow-read-more">
-                    <a href="service-single.html"
-                        >read more <i class="srn-arrow-right"></i
-                    ></a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+    
 </section>
-<section class="faqs-bg section-spacing">
+
+
+{{-- <section class="faqs-bg section-spacing">
     <div class="container pos-rel">
         <div class="row align-items-center">
             <div
@@ -1060,5 +734,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 @endsection
